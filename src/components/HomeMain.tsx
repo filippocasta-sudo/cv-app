@@ -18,17 +18,25 @@ export function HomeMain({ cv }: { cv: CvData }) {
 
       <SkillsAccordionList hardSkills={cv.hardSkills} softSkills={cv.softSkills} />
 
-      {!formal && (
-        <>
-          <CapabilitiesAccordion canDo={cv.canDo} cannotDo={cv.cannotDo} />
-          <GoalsPanel goals={cv.goals} />
-        </>
-      )}
+      {!formal && <GoalsPanel goals={cv.goals} />}
 
-      <div className="mt-14 space-y-14">
-        <Timeline entries={cv.timeline} classicOnly={formal} />
+      <div
+        className={`mt-14 grid gap-8 ${!formal ? "lg:grid-cols-[minmax(0,1fr)_minmax(240px,300px)] lg:items-start" : ""}`}
+      >
+        <div className="min-w-0 space-y-14">
+          <Timeline entries={cv.timeline} classicOnly={formal} />
+          <ProfileDetails certifications={cv.certifications} />
+        </div>
 
-        <ProfileDetails certifications={cv.certifications} />
+        {!formal && (
+          <aside className="no-print lg:sticky lg:top-28 lg:self-start">
+            <CapabilitiesAccordion
+              canDo={cv.canDo}
+              cannotDo={cv.cannotDo}
+              layout="sidebar"
+            />
+          </aside>
+        )}
       </div>
     </main>
   );

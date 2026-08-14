@@ -102,7 +102,7 @@ export function SkillsAccordionList({ hardSkills, softSkills }: SkillsAccordionL
   const { formal } = useMode();
 
   return (
-    <section id="competenze" aria-label="Competenze" className="scroll-mt-28 mt-5 space-y-6">
+    <section id="competenze" aria-label="Competenze" className="scroll-mt-28 mt-5 grid gap-6 lg:grid-cols-2 lg:gap-8">
       <div>
         <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
           <Wrench className="size-3.5" aria-hidden />

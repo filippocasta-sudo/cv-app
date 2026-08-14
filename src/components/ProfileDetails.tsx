@@ -14,7 +14,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
   const secondaryCerts = certifications.filter((cert) => !cert.primary);
 
   return (
-    <aside className="mt-14 space-y-5 scroll-mt-24">
+    <aside className="scroll-mt-24 space-y-5">
       <motion.section
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
