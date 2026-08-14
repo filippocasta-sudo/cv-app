@@ -31,25 +31,39 @@ interface SidebarProps {
   compensation: Compensation;
 }
 
+const PANEL_ACCENTS = {
+  hard: { icon: "text-mint", ring: "from-mint/20" },
+  soft: { icon: "text-indigo", ring: "from-indigo/20" },
+  cert: { icon: "text-amber", ring: "from-amber/20" },
+  info: { icon: "text-coral", ring: "from-coral/20" },
+} as const;
+
 function Panel({
   icon,
   title,
   children,
+  accent = "hard",
 }: {
   icon: ReactNode;
   title: string;
   children: ReactNode;
+  accent?: keyof typeof PANEL_ACCENTS;
 }) {
+  const style = PANEL_ACCENTS[accent];
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="print-avoid-break rounded-2xl border border-border-subtle bg-surface p-5"
+      whileHover={{ y: -2 }}
+      className="print-avoid-break neu-card rounded-3xl p-5"
     >
       <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
-        <span className="text-sage">{icon}</span>
+        <span className={`neu-interactive grid size-8 place-items-center rounded-xl ${style.icon}`}>
+          {icon}
+        </span>
         {title}
       </h3>
       {children}
@@ -57,22 +71,23 @@ function Panel({
   );
 }
 
-function SkillList({ groups }: { groups: SkillGroup[] }) {
+function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" }) {
+  const titleClass = accent === "mint" ? "text-mint" : "text-indigo";
+  const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
+
   return (
     <ul className="space-y-3.5">
       {groups.map((group) => (
         <li
           key={group.id}
-          className="print-avoid-break border-b border-border-subtle pb-3.5 last:border-0 last:pb-0"
+          className="print-avoid-break border-b border-foreground-faint/10 pb-3.5 last:border-0 last:pb-0"
         >
-          <p className="font-display text-[15px] font-bold">{group.name}</p>
-          <p className="mt-1 text-[13px] leading-relaxed text-foreground-muted">
-            {group.summary}
-          </p>
+          <p className={`font-display text-[15px] font-bold ${titleClass}`}>{group.name}</p>
+          <p className="mt-1 text-[13px] leading-relaxed text-foreground-muted">{group.summary}</p>
           {group.details.length > 0 && (
             <div className="mt-1.5">
               <Disclosure label="Dettagli" openLabel="Nascondi dettagli">
-                <ul className="space-y-1.5 border-l-2 border-sage/30 pl-3">
+                <ul className={`space-y-1.5 border-l-2 ${borderClass} pl-3`}>
                   {group.details.map((detail) => (
                     <li key={detail} className="text-[13px] leading-relaxed text-foreground-muted">
                       {detail}
@@ -101,21 +116,21 @@ export function Sidebar({
 
   return (
     <aside id="competenze" className="scroll-mt-24 space-y-5">
-      <Panel icon={<Wrench className="size-4" aria-hidden />} title="Hard skills">
-        <SkillList groups={hardSkills} />
+      <Panel icon={<Wrench className="size-4" aria-hidden />} title="Hard skills" accent="hard">
+        <SkillList groups={hardSkills} accent="mint" />
       </Panel>
 
-      <Panel icon={<Sparkles className="size-4" aria-hidden />} title="Soft skills">
-        <SkillList groups={softSkills} />
+      <Panel icon={<Sparkles className="size-4" aria-hidden />} title="Soft skills" accent="soft">
+        <SkillList groups={softSkills} accent="indigo" />
       </Panel>
 
-      <Panel icon={<Award className="size-4" aria-hidden />} title="Certificazioni">
+      <Panel icon={<Award className="size-4" aria-hidden />} title="Certificazioni" accent="cert">
         <ul className="space-y-3">
           {primaryCerts.map((cert) => (
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
                 <p className="font-display text-[15px] font-bold">{cert.name}</p>
-                <span className="shrink-0 rounded-md bg-surface-muted px-1.5 py-0.5 text-xs font-semibold text-foreground-muted">
+                <span className="shrink-0 rounded-lg bg-amber-soft px-2 py-0.5 text-xs font-bold text-amber shadow-neumorphic-inset">
                   {cert.year}
                 </span>
               </div>
@@ -130,12 +145,12 @@ export function Sidebar({
         </ul>
 
         {secondaryCerts.length > 0 && (
-          <div className="mt-3 border-t border-border-subtle pt-2">
+          <div className="mt-3 border-t border-foreground-faint/10 pt-2">
             <Disclosure
               label={`Corsi e attestati passati (${secondaryCerts.length})`}
               openLabel="Nascondi corsi passati"
             >
-              <ul className="space-y-2.5 border-l-2 border-sage/30 pl-3">
+              <ul className="space-y-2.5 border-l-2 border-amber/30 pl-3">
                 {secondaryCerts.map((cert) => (
                   <li key={cert.id}>
                     <p className="text-sm font-semibold">{cert.name}</p>
@@ -155,12 +170,12 @@ export function Sidebar({
         )}
       </Panel>
 
-      <Panel icon={<MapPin className="size-4" aria-hidden />} title="Info e contatti">
+      <Panel icon={<MapPin className="size-4" aria-hidden />} title="Info e contatti" accent="info">
         <ul className="space-y-2.5 text-[13px]">
           <li>
             <a
               href={`mailto:${personal.email}`}
-              className="inline-flex items-center gap-2 transition hover:text-sage"
+              className="inline-flex items-center gap-2 transition hover:text-coral"
             >
               <Mail className="size-3.5 shrink-0 text-foreground-faint" aria-hidden />
               {personal.email}
@@ -169,7 +184,7 @@ export function Sidebar({
           <li>
             <a
               href={`tel:${personal.phone.replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-2 transition hover:text-sage"
+              className="inline-flex items-center gap-2 transition hover:text-coral"
             >
               <Phone className="size-3.5 shrink-0 text-foreground-faint" aria-hidden />
               {personal.phone}
@@ -180,7 +195,7 @@ export function Sidebar({
               href={personal.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 transition hover:text-sage"
+              className="inline-flex items-center gap-2 transition hover:text-coral"
             >
               <LinkedInIcon className="size-3.5 shrink-0 text-foreground-faint" />
               Profilo LinkedIn
@@ -196,7 +211,7 @@ export function Sidebar({
           </li>
         </ul>
 
-        <div className="mt-4 border-t border-border-subtle pt-3">
+        <div className="mt-4 border-t border-foreground-faint/10 pt-3">
           <p className="mb-2 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-foreground-muted uppercase">
             <Languages className="size-3.5" aria-hidden />
             Lingue
@@ -205,7 +220,7 @@ export function Sidebar({
             {personal.languages.map((language) => (
               <li key={language.name} className="flex justify-between gap-3 text-[13px]">
                 <span>{language.name}</span>
-                <span className="font-semibold text-sage">{language.level}</span>
+                <span className="font-bold text-mint">{language.level}</span>
               </li>
             ))}
           </ul>
@@ -217,19 +232,19 @@ export function Sidebar({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="print-avoid-break rounded-2xl border border-border-subtle bg-surface p-5"
+        className="print-avoid-break neu-card rounded-3xl p-5"
       >
         <Disclosure
           emphasis
           label={`Mostra ${compensation.label.toLowerCase()}`}
           openLabel={`Nascondi ${compensation.label.toLowerCase()}`}
         >
-          <div className="rounded-lg bg-surface-muted p-3.5">
+          <div className="rounded-2xl neu-surface-inset p-3.5">
             <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-foreground-muted uppercase">
               <BadgeEuro className="size-3.5" aria-hidden />
               {compensation.label}
             </p>
-            <p className="mt-1.5 font-display text-2xl font-extrabold text-sage">
+            <p className="mt-1.5 font-display text-2xl font-extrabold gradient-text-mint">
               {compensation.range}
             </p>
             <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">

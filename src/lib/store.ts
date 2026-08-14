@@ -102,6 +102,7 @@ export function normalizeCv(input: unknown): CvData {
       linkedin: str(personalSource.linkedin, fallbackPersonal.linkedin),
       location: str(personalSource.location, fallbackPersonal.location),
       license: str(personalSource.license, fallbackPersonal.license),
+      birthDate: str(personalSource.birthDate, fallbackPersonal.birthDate),
       languages,
     },
     goals: {

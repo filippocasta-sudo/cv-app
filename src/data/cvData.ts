@@ -11,9 +11,10 @@ export const cvData: CvData = {
       "Professionista IT con oltre cinque anni di esperienza nel coordinamento di progetti e servizi applicativi in ambito e-commerce omnicanale. Specializzato nella gestione di team distribuiti, nella governance di servizi AMS in ottica ITIL e nel raccordo tra esigenze di business e implementazione tecnica. Attualmente impiegato presso Calzedonia S.p.A. con responsabilità di delivery su piattaforme omnicanale.",
     email: "filippocasta@gmail.com",
     phone: "+39 349 000 0000",
-    linkedin: "https://www.linkedin.com/in/filippocastagna",
+    linkedin: "https://www.linkedin.com/in/filippo-castagna-9220/",
     location: "Tregnago (VR), Italia",
     license: "Patente B — automunito",
+    birthDate: "1992",
     languages: [
       { name: "Italiano", level: "Madrelingua" },
       { name: "Inglese", level: "B2" },
@@ -499,7 +500,7 @@ export const cvData: CvData = {
     {
       id: "soc-linkedin",
       label: "LinkedIn",
-      url: "https://www.linkedin.com/in/filippocastagna",
+      url: "https://www.linkedin.com/in/filippo-castagna-9220/",
     },
     { id: "soc-github", label: "GitHub", url: "https://github.com/filippocasta-sudo" },
     { id: "soc-email", label: "Email", url: "mailto:filippocasta@gmail.com" },

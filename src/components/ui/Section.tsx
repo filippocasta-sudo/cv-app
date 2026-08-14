@@ -19,9 +19,10 @@ export function Section({
 }: SectionProps) {
   return (
     <section id={id} className={`scroll-mt-24 ${className}`}>
-      <header className="mb-5">
+      <header className="mb-6">
         {eyebrow && (
-          <p className="mb-1.5 text-xs font-semibold tracking-[0.18em] text-sage uppercase">
+          <p className="mb-2 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold tracking-[0.18em] text-indigo uppercase shadow-neumorphic-inset">
+            <span className="size-1.5 rounded-full bg-gradient-to-r from-coral to-indigo" aria-hidden />
             {eyebrow}
           </p>
         )}
