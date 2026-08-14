@@ -116,14 +116,21 @@ function AccordionPanel({
   );
 }
 
-export function CapabilitiesAccordion({ canDo, cannotDo }: CapabilitiesAccordionProps) {
+export function CapabilitiesAccordion({
+  canDo,
+  cannotDo,
+  layout = "grid",
+}: CapabilitiesAccordionProps & { layout?: "grid" | "sidebar" }) {
   const { formal } = useMode();
+  const isSidebar = layout === "sidebar";
 
   return (
     <section
       id="cosa-so-fare"
       aria-label={formal ? "Aree di competenza e limiti" : "Punti forti e debolezze"}
-      className="scroll-mt-28 mt-4 grid gap-4 sm:grid-cols-2"
+      className={`scroll-mt-28 ${
+        isSidebar ? "flex flex-col gap-4" : "mt-4 grid gap-4 sm:grid-cols-2"
+      }`}
     >
       <AccordionPanel
         title={formal ? "Aree di piena autonomia" : "Punti forti"}

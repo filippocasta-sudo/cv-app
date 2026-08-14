@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Coffee, Loader2, Pizza, Send } from "lucide-react";
+import { Coffee, Loader2, Mail, MapPin, Phone, Pizza, Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Disclosure } from "@/components/ui/Disclosure";
+import { LinkedInIcon } from "@/components/ui/icons";
 import type { PersonalInfo, SocialLink } from "@/lib/types";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -50,7 +51,7 @@ function ContactForm({ email }: { email: string }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-2xl neu-surface-inset p-4 text-sm text-mint-strong"
+        className="rounded-2xl bg-surface/80 p-4 text-sm text-mint-strong shadow-neumorphic-inset"
       >
         <p className="font-bold">Messaggio ricevuto.</p>
         <p className="mt-1 leading-relaxed">
@@ -74,7 +75,7 @@ function ContactForm({ email }: { email: string }) {
             required
             minLength={2}
             autoComplete="name"
-            className="w-full rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+            className="w-full rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
           />
         </label>
         <label className="block">
@@ -84,7 +85,7 @@ function ContactForm({ email }: { email: string }) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+            className="w-full rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
           />
         </label>
       </div>
@@ -97,7 +98,7 @@ function ContactForm({ email }: { email: string }) {
           minLength={10}
           rows={4}
           placeholder="Ruolo, contesto e cosa ti serve. Vado al punto anch'io."
-          className="w-full resize-y rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+          className="w-full resize-y rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
         />
       </label>
 
@@ -155,52 +156,98 @@ export function Footer({
   }
 
   return (
-    <footer id="contatti" className="relative mt-16 scroll-mt-24 pt-10 pb-12">
-      <div className="mb-8 h-px bg-gradient-to-r from-transparent via-foreground-faint/20 to-transparent" />
+    <footer id="contatti" className="relative mt-20 scroll-mt-24">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-coral/25 to-transparent"
+      />
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-        <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-xl sm:text-2xl">Parliamone</h2>
-            <span
-              className="group/coffee relative hidden sm:inline-flex"
-              title="Forno a legna & ottimizzazione processi sotto stress"
-            >
-              <Coffee className="size-4 text-amber" aria-hidden />
-              <Pizza className="absolute -right-2 -bottom-1 size-3 text-coral opacity-0 transition group-hover/coffee:opacity-100" />
-            </span>
-          </div>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground-muted">
-            Se il profilo ti torna, scrivimi. Preferisco una prima chiacchierata onesta a tre
-            round di test attitudinali.
-          </p>
+      <div className="footer-contact-band relative border-y border-foreground-faint/10 bg-surface-muted py-12 sm:py-14">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo/8 via-transparent to-coral/10 dark:from-indigo/15 dark:to-coral/15"
+        />
 
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {socials.map((social) => (
-              <li key={social.id}>
+        <div className="relative mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-xl sm:text-2xl">Parliamone</h2>
+              <span
+                className="group/coffee relative hidden sm:inline-flex"
+                title="Forno a legna & ottimizzazione processi sotto stress"
+              >
+                <Coffee className="size-4 text-amber" aria-hidden />
+                <Pizza className="absolute -right-2 -bottom-1 size-3 text-coral opacity-0 transition group-hover/coffee:opacity-100" />
+              </span>
+            </div>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground-muted">
+              Se il profilo ti torna, scrivimi. Preferisco una prima chiacchierata onesta a tre
+              round di test attitudinali.
+            </p>
+
+            <ul className="mt-5 space-y-2.5 text-sm">
+              <li>
                 <a
-                  href={social.url}
-                  target={social.url.startsWith("http") ? "_blank" : undefined}
-                  rel="noreferrer"
-                  className="neu-interactive inline-flex rounded-2xl px-3.5 py-2 text-sm font-bold text-foreground-muted hover:text-indigo"
+                  href={`mailto:${personal.email}`}
+                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
                 >
-                  {social.label}
+                  <Mail className="size-4 text-foreground-faint" aria-hidden />
+                  {personal.email}
                 </a>
               </li>
-            ))}
-          </ul>
-        </div>
+              <li>
+                <a
+                  href={`tel:${personal.phone.replace(/\s/g, "")}`}
+                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
+                >
+                  <Phone className="size-4 text-foreground-faint" aria-hidden />
+                  {personal.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
+                >
+                  <LinkedInIcon className="size-4 text-foreground-faint" />
+                  Profilo LinkedIn
+                </a>
+              </li>
+              <li className="inline-flex items-center gap-2 text-foreground-muted">
+                <MapPin className="size-4 text-foreground-faint" aria-hidden />
+                {personal.location}
+              </li>
+            </ul>
 
-        <div className="neu-card rounded-3xl p-5">
-          <Disclosure label="Inviami un messaggio" openLabel="Chiudi il form" emphasis>
-            <div className="pt-2">
-              <ContactForm email={personal.email} />
-            </div>
-          </Disclosure>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {socials.map((social) => (
+                <li key={social.id}>
+                  <a
+                    href={social.url}
+                    target={social.url.startsWith("http") ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="neu-interactive inline-flex rounded-2xl px-3.5 py-2 text-sm font-bold text-foreground-muted hover:text-indigo"
+                  >
+                    {social.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="neu-card rounded-3xl bg-surface/70 p-5 backdrop-blur-sm">
+            <Disclosure label="Inviami un messaggio" openLabel="Chiudi il form" emphasis>
+              <div className="pt-2">
+                <ContactForm email={personal.email} />
+              </div>
+            </Disclosure>
+          </div>
         </div>
       </div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-foreground-faint/10 pt-5 text-xs text-foreground-faint">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-8 text-xs text-foreground-faint sm:px-6">
         <p>
           © {new Date().getFullYear()} {personal.name} · CV costruito con Next.js
           <span className="no-print ml-1 opacity-40" title="May the Force be with you">

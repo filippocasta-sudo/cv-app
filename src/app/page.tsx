@@ -16,8 +16,9 @@ export default async function HomePage() {
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Header socials={cv.socials} />
         <HomeMain cv={cv} />
-        <Footer personal={cv.personal} socials={cv.socials} />
       </div>
+
+      <Footer personal={cv.personal} socials={cv.socials} />
     </>
   );
 }
