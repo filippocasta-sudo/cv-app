@@ -3,16 +3,13 @@
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
 import { Disclosure } from "@/components/ui/Disclosure";
-import { useMode } from "@/context/ModeContext";
-import type { Certification, Compensation } from "@/lib/types";
+import type { Certification } from "@/lib/types";
 
 interface ProfileDetailsProps {
   certifications: Certification[];
-  compensation: Compensation;
 }
 
-export function ProfileDetails({ certifications, compensation }: ProfileDetailsProps) {
-  const { formal } = useMode();
+export function ProfileDetails({ certifications }: ProfileDetailsProps) {
   const primaryCerts = certifications.filter((cert) => cert.primary);
   const secondaryCerts = certifications.filter((cert) => !cert.primary);
 
@@ -68,33 +65,6 @@ export function ProfileDetails({ certifications, compensation }: ProfileDetailsP
           </div>
         )}
       </motion.section>
-
-      {!formal && (
-        <motion.section
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          className="print-avoid-break neu-card rounded-3xl p-5"
-        >
-          <Disclosure
-            emphasis
-            label={`Mostra ${compensation.label.toLowerCase()}`}
-            openLabel={`Nascondi ${compensation.label.toLowerCase()}`}
-          >
-            <div className="rounded-2xl neu-surface-inset p-3.5">
-              <p className="mt-1.5 font-display text-2xl font-extrabold gradient-text-mint">
-                {compensation.range}
-              </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">
-                {compensation.note}
-              </p>
-            </div>
-          </Disclosure>
-          <p className="no-print mt-2 px-1 text-xs leading-relaxed text-foreground-faint">
-            Meglio dirlo subito che scoprirlo al terzo colloquio.
-          </p>
-        </motion.section>
-      )}
     </aside>
   );
 }

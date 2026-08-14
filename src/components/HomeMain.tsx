@@ -28,7 +28,7 @@ export function HomeMain({ cv }: { cv: CvData }) {
       <div className="mt-14 space-y-14">
         <Timeline entries={cv.timeline} classicOnly={formal} />
 
-        <ProfileDetails certifications={cv.certifications} compensation={cv.compensation} />
+        <ProfileDetails certifications={cv.certifications} />
       </div>
     </main>
   );
