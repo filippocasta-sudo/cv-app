@@ -10,6 +10,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Deployments are handled by the Vercel Git integration: pushes to `prod` become
+# production deployments and every other branch or pull request gets a preview.
+# This workflow is the quality gate that branch protection requires before a
+# merge can reach those branches.
 jobs:
   ci:
     name: CI
@@ -18,37 +22,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate repository
-        run: |
-          test -f README.md
-          echo "Repository structure validated"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-  deploy-staging:
-    name: Deploy Staging
-    needs: ci
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
-    runs-on: ubuntu-latest
-    environment: staging
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Deploy to staging
-        run: |
-          echo "Deploying commit ${{ github.sha }} to staging"
-          # Aggiungi qui i comandi di deploy (es. vercel, netlify, docker, ssh)
+      - name: Lint
+        run: npm run lint
 
-  deploy-production:
-    name: Deploy Production
-    needs: ci
-    if: github.event_name == 'push' && github.ref == 'refs/heads/prod'
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Type check
+        run: npx tsc --noEmit
 
-      - name: Deploy to production
-        run: |
-          echo "Deploying commit ${{ github.sha }} to production"
-          # Aggiungi qui i comandi di deploy (es. vercel, netlify, docker, ssh)
+      - name: Build
+        run: npm run build
