@@ -9,122 +9,41 @@ import {
   Mail,
   MapPin,
   Phone,
-  Sparkles,
-  Wrench,
 } from "lucide-react";
-import type { ReactNode } from "react";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { LinkedInIcon } from "@/components/ui/icons";
 import { useMode } from "@/context/ModeContext";
-import type {
-  Certification,
-  Compensation,
-  PersonalInfo,
-  SkillGroup,
-} from "@/lib/types";
+import type { Certification, Compensation, PersonalInfo } from "@/lib/types";
 
-interface SidebarProps {
+interface ProfileDetailsProps {
   personal: PersonalInfo;
-  hardSkills: SkillGroup[];
-  softSkills: SkillGroup[];
   certifications: Certification[];
   compensation: Compensation;
 }
 
-const PANEL_ACCENTS = {
-  hard: { icon: "text-mint", ring: "from-mint/20" },
-  soft: { icon: "text-indigo", ring: "from-indigo/20" },
-  cert: { icon: "text-amber", ring: "from-amber/20" },
-  info: { icon: "text-coral", ring: "from-coral/20" },
-} as const;
-
-function Panel({
-  icon,
-  title,
-  children,
-  accent = "hard",
-}: {
-  icon: ReactNode;
-  title: string;
-  children: ReactNode;
-  accent?: keyof typeof PANEL_ACCENTS;
-}) {
-  const style = PANEL_ACCENTS[accent];
-
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -2 }}
-      className="print-avoid-break neu-card rounded-3xl p-5"
-    >
-      <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
-        <span className={`neu-interactive grid size-8 place-items-center rounded-xl ${style.icon}`}>
-          {icon}
-        </span>
-        {title}
-      </h3>
-      {children}
-    </motion.section>
-  );
-}
-
-function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" }) {
-  const titleClass = accent === "mint" ? "text-mint" : "text-indigo";
-  const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
-
-  return (
-    <ul className="space-y-3.5">
-      {groups.map((group) => (
-        <li
-          key={group.id}
-          className="print-avoid-break border-b border-foreground-faint/10 pb-3.5 last:border-0 last:pb-0"
-        >
-          <p className={`font-display text-[15px] font-bold ${titleClass}`}>{group.name}</p>
-          <p className="mt-1 text-[13px] leading-relaxed text-foreground-muted">{group.summary}</p>
-          {group.details.length > 0 && (
-            <div className="mt-1.5">
-              <Disclosure label="Dettagli" openLabel="Nascondi dettagli">
-                <ul className={`space-y-1.5 border-l-2 ${borderClass} pl-3`}>
-                  {group.details.map((detail) => (
-                    <li key={detail} className="text-[13px] leading-relaxed text-foreground-muted">
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              </Disclosure>
-            </div>
-          )}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-export function Sidebar({
+export function ProfileDetails({
   personal,
-  hardSkills,
-  softSkills,
   certifications,
   compensation,
-}: SidebarProps) {
+}: ProfileDetailsProps) {
   const { formal } = useMode();
   const primaryCerts = certifications.filter((cert) => cert.primary);
   const secondaryCerts = certifications.filter((cert) => !cert.primary);
 
   return (
-    <aside id="competenze" className="scroll-mt-24 space-y-5">
-      <Panel icon={<Wrench className="size-4" aria-hidden />} title="Hard skills" accent="hard">
-        <SkillList groups={hardSkills} accent="mint" />
-      </Panel>
-
-      <Panel icon={<Sparkles className="size-4" aria-hidden />} title="Soft skills" accent="soft">
-        <SkillList groups={softSkills} accent="indigo" />
-      </Panel>
-
-      <Panel icon={<Award className="size-4" aria-hidden />} title="Certificazioni" accent="cert">
+    <aside className="mt-14 grid gap-5 scroll-mt-24 lg:grid-cols-2">
+      <motion.section
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        className="print-avoid-break neu-card rounded-3xl p-5"
+      >
+        <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
+          <span className="neu-interactive grid size-8 place-items-center rounded-xl text-amber">
+            <Award className="size-4" aria-hidden />
+          </span>
+          Certificazioni
+        </h3>
         <ul className="space-y-3">
           {primaryCerts.map((cert) => (
             <li key={cert.id} className="print-avoid-break">
@@ -143,7 +62,6 @@ export function Sidebar({
             </li>
           ))}
         </ul>
-
         {secondaryCerts.length > 0 && (
           <div className="mt-3 border-t border-foreground-faint/10 pt-2">
             <Disclosure
@@ -157,20 +75,26 @@ export function Sidebar({
                     <p className="text-[13px] text-foreground-faint">
                       {cert.issuer} · {cert.year}
                     </p>
-                    {cert.note && (
-                      <p className="text-[13px] leading-relaxed text-foreground-muted">
-                        {cert.note}
-                      </p>
-                    )}
                   </li>
                 ))}
               </ul>
             </Disclosure>
           </div>
         )}
-      </Panel>
+      </motion.section>
 
-      <Panel icon={<MapPin className="size-4" aria-hidden />} title="Info e contatti" accent="info">
+      <motion.section
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        className="print-avoid-break neu-card rounded-3xl p-5"
+      >
+        <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
+          <span className="neu-interactive grid size-8 place-items-center rounded-xl text-coral">
+            <MapPin className="size-4" aria-hidden />
+          </span>
+          Info e contatti
+        </h3>
         <ul className="space-y-2.5 text-[13px]">
           <li>
             <a
@@ -210,7 +134,6 @@ export function Sidebar({
             {personal.license}
           </li>
         </ul>
-
         <div className="mt-4 border-t border-foreground-faint/10 pt-3">
           <p className="mb-2 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-foreground-muted uppercase">
             <Languages className="size-3.5" aria-hidden />
@@ -225,14 +148,13 @@ export function Sidebar({
             ))}
           </ul>
         </div>
-      </Panel>
+      </motion.section>
 
       <motion.section
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="print-avoid-break neu-card rounded-3xl p-5"
+        className="print-avoid-break neu-card rounded-3xl p-5 lg:col-span-2"
       >
         <Disclosure
           emphasis

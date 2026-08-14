@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Loader2, Send } from "lucide-react";
+import { Coffee, Loader2, Pizza, Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Disclosure } from "@/components/ui/Disclosure";
@@ -50,9 +50,9 @@ function ContactForm({ email }: { email: string }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-xl border border-sage/40 bg-sage-soft p-4 text-sm text-sage-strong"
+        className="rounded-2xl neu-surface-inset p-4 text-sm text-mint-strong"
       >
-        <p className="font-semibold">Messaggio ricevuto.</p>
+        <p className="font-bold">Messaggio ricevuto.</p>
         <p className="mt-1 leading-relaxed">
           Rispondo dallo stesso indirizzo. Se hai fretta, scrivimi direttamente a{" "}
           <a href={`mailto:${email}`} className="underline">
@@ -74,7 +74,7 @@ function ContactForm({ email }: { email: string }) {
             required
             minLength={2}
             autoComplete="name"
-            className="w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage"
+            className="w-full rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
           />
         </label>
         <label className="block">
@@ -84,7 +84,7 @@ function ContactForm({ email }: { email: string }) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage"
+            className="w-full rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
           />
         </label>
       </div>
@@ -97,16 +97,16 @@ function ContactForm({ email }: { email: string }) {
           minLength={10}
           rows={4}
           placeholder="Ruolo, contesto e cosa ti serve. Vado al punto anch'io."
-          className="w-full resize-y rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage"
+          className="w-full resize-y rounded-xl px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
         />
       </label>
 
-      {status === "error" && <p className="text-sm text-red-500">{error}</p>}
+      {status === "error" && <p className="text-sm text-coral">{error}</p>}
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex items-center gap-2 rounded-lg bg-sage px-4 py-2 text-sm font-bold text-white transition hover:bg-sage-strong disabled:opacity-60"
+        className="neu-interactive inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral to-indigo px-5 py-2.5 text-sm font-bold text-white shadow-neumorphic-sm disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -141,7 +141,6 @@ export function Footer({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [router]);
 
-  /** Three quick clicks on the footer marker open the admin panel. */
   function handleSecretClick() {
     clicks.current += 1;
     if (resetTimer.current) clearTimeout(resetTimer.current);
@@ -156,10 +155,21 @@ export function Footer({
   }
 
   return (
-    <footer id="contatti" className="mt-16 scroll-mt-24 border-t border-border-subtle pt-10 pb-12">
+    <footer id="contatti" className="relative mt-16 scroll-mt-24 pt-10 pb-12">
+      <div className="mb-8 h-px bg-gradient-to-r from-transparent via-foreground-faint/20 to-transparent" />
+
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <div>
-          <h2 className="text-xl sm:text-2xl">Parliamone</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl">Parliamone</h2>
+            <span
+              className="group/coffee relative hidden sm:inline-flex"
+              title="Forno a legna & ottimizzazione processi sotto stress"
+            >
+              <Coffee className="size-4 text-amber" aria-hidden />
+              <Pizza className="absolute -right-2 -bottom-1 size-3 text-coral opacity-0 transition group-hover/coffee:opacity-100" />
+            </span>
+          </div>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground-muted">
             Se il profilo ti torna, scrivimi. Preferisco una prima chiacchierata onesta a tre
             round di test attitudinali.
@@ -172,7 +182,7 @@ export function Footer({
                   href={social.url}
                   target={social.url.startsWith("http") ? "_blank" : undefined}
                   rel="noreferrer"
-                  className="inline-flex rounded-lg border border-border-subtle bg-surface px-3 py-1.5 text-sm font-semibold transition hover:border-sage hover:text-sage"
+                  className="neu-interactive inline-flex rounded-2xl px-3.5 py-2 text-sm font-bold text-foreground-muted hover:text-indigo"
                 >
                   {social.label}
                 </a>
@@ -181,7 +191,7 @@ export function Footer({
           </ul>
         </div>
 
-        <div className="rounded-2xl border border-border-subtle bg-surface p-5">
+        <div className="neu-card rounded-3xl p-5">
           <Disclosure label="Inviami un messaggio" openLabel="Chiudi il form" emphasis>
             <div className="pt-2">
               <ContactForm email={personal.email} />
@@ -190,16 +200,19 @@ export function Footer({
         </div>
       </div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-border-subtle pt-5 text-xs text-foreground-faint">
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-foreground-faint/10 pt-5 text-xs text-foreground-faint">
         <p>
           © {new Date().getFullYear()} {personal.name} · CV costruito con Next.js
+          <span className="no-print ml-1 opacity-40" title="May the Force be with you">
+            · ★
+          </span>
         </p>
         <button
           type="button"
           onClick={handleSecretClick}
           aria-label="Area riservata"
           title="·"
-          className="no-print size-4 rounded-full text-transparent transition hover:bg-border-subtle"
+          className="no-print size-4 rounded-full text-transparent transition hover:shadow-neumorphic-inset"
         >
           ·
         </button>

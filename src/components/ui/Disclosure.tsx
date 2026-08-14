@@ -9,15 +9,10 @@ interface DisclosureProps {
   label: string;
   openLabel?: string;
   children: ReactNode;
-  /** Renders a filled affordance for entries that hide sensitive figures. */
   emphasis?: boolean;
   defaultOpen?: boolean;
 }
 
-/**
- * Progressive-disclosure primitive. In classic-CV mode the content is always
- * rendered and the trigger disappears, so nothing stays hidden when printing.
- */
 export function Disclosure({
   label,
   openLabel,
@@ -40,8 +35,8 @@ export function Disclosure({
           aria-controls={panelId}
           className={
             emphasis
-              ? "no-print group inline-flex w-full items-center justify-between gap-3 rounded-lg border border-sage/40 bg-sage-soft px-3 py-2 text-left text-sm font-semibold text-sage-strong transition hover:border-sage hover:bg-sage/15"
-              : "no-print group inline-flex w-full items-center justify-between gap-3 rounded-lg px-1 py-1.5 text-left text-sm font-semibold text-foreground-muted transition hover:text-foreground"
+              ? "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl px-4 py-2.5 text-left text-sm font-bold text-coral"
+              : "no-print group inline-flex w-full items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-left text-sm font-semibold text-foreground-muted transition hover:text-indigo"
           }
         >
           <span>{open && openLabel ? openLabel : label}</span>
@@ -63,7 +58,7 @@ export function Disclosure({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             className="print-block overflow-hidden"
           >
             <div className={formal ? "pt-1" : "pt-2"}>{children}</div>

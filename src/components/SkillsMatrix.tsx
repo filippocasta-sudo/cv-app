@@ -26,21 +26,23 @@ function CapabilityColumn({
   return (
     <div className="print-avoid-break">
       <h3
-        className={`mb-3 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase ${
-          positive ? "text-sage" : "text-foreground-faint"
+        className={`mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase ${
+          positive ? "text-mint" : "text-foreground-faint"
         }`}
       >
         <span
-          className={`grid size-5 place-items-center rounded-md ${
-            positive ? "bg-sage text-white" : "bg-surface-muted text-foreground-muted"
+          className={`grid size-6 place-items-center rounded-xl shadow-neumorphic-sm ${
+            positive
+              ? "bg-gradient-to-br from-mint to-cyan text-white"
+              : "neu-surface-inset text-foreground-muted"
           }`}
         >
-          <Icon className="size-3" aria-hidden strokeWidth={3} />
+          <Icon className="size-3.5" aria-hidden strokeWidth={3} />
         </span>
         {title}
       </h3>
 
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {items.map((item, index) => (
           <motion.li
             key={item.id}
@@ -48,14 +50,17 @@ function CapabilityColumn({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.32, delay: index * 0.04, ease: "easeOut" }}
-            className={`group rounded-xl border p-3.5 transition ${
-              positive
-                ? "border-sage/25 bg-sage-soft/45 hover:border-sage/60"
-                : "border-border-subtle bg-surface hover:border-border-strong"
+            whileHover={{ y: -2 }}
+            className={`neu-card rounded-2xl p-4 ${
+              positive ? "hover:shadow-neumorphic-lg" : "opacity-90"
             }`}
           >
-            <p className="font-display text-[15px] font-bold">{item.label}</p>
-            <p className="mt-1 text-[13px] leading-relaxed text-foreground-muted">
+            <p
+              className={`font-display text-[15px] font-bold ${positive ? "text-mint-strong" : ""}`}
+            >
+              {item.label}
+            </p>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">
               {item.detail}
             </p>
           </motion.li>
