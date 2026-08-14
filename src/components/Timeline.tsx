@@ -217,17 +217,27 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
   );
 }
 
-export function Timeline({ entries }: { entries: TimelineEntry[] }) {
+export function Timeline({
+  entries,
+  classicOnly = false,
+}: {
+  entries: TimelineEntry[];
+  classicOnly?: boolean;
+}) {
   const { formal } = useMode();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("all");
+  const classic = classicOnly || formal;
 
-  const ordered = useMemo(
-    () => [...entries].sort((a, b) => b.sortKey - a.sortKey),
-    [entries],
-  );
+  const ordered = useMemo(() => {
+    const scoped = classic
+      ? entries.filter((entry) => entry.kind === "work" || entry.kind === "education")
+      : entries;
+    return [...scoped].sort((a, b) => b.sortKey - a.sortKey);
+  }, [entries, classic]);
+
   const visible = useMemo(
-    () => (filter === "all" || formal ? ordered : ordered.filter((entry) => entry.kind === filter)),
-    [ordered, filter, formal],
+    () => (filter === "all" || classic ? ordered : ordered.filter((entry) => entry.kind === filter)),
+    [ordered, filter, classic],
   );
 
   const counts = useMemo(
@@ -244,14 +254,16 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
     <Section
       id="percorso"
       eyebrow="Percorso"
-      title={formal ? "Esperienze, formazione e progetti" : "Da dove vengo e cosa ho combinato"}
+      title={
+        classic ? "Esperienze lavorative e formazione" : "Da dove vengo e cosa ho combinato"
+      }
       description={
-        formal
-          ? "Percorso professionale, formativo e progettuale in ordine cronologico inverso."
+        classic
+          ? "Percorso professionale e formativo in ordine cronologico inverso."
           : "Lavoro, studio e progetti personali in un'unica linea temporale. Ogni card dice subito cosa ho portato a casa; il resto si apre solo se ti interessa."
       }
     >
-      {!formal && (
+      {!classic && (
         <div className="no-print mb-6 flex flex-wrap gap-2">
           {FILTERS.map((option) => {
             const active = filter === option.key;
@@ -290,7 +302,7 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
               <TimelineCard key={entry.id} entry={entry} />
             ))}
           </AnimatePresence>
-          {!formal && (filter === "all" || filter === "project") && <FantaTimelineCard />}
+          {!classic && (filter === "all" || filter === "project") && <FantaTimelineCard />}
         </ul>
       </div>
     </Section>

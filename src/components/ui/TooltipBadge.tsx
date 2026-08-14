@@ -7,7 +7,6 @@ interface TooltipBadgeProps {
   icon: ReactNode;
   tooltip: string;
   label: string;
-  className?: string;
   accent?: "coral" | "mint" | "indigo" | "amber" | "cyan";
   floating?: boolean;
 }
@@ -24,18 +23,19 @@ export function TooltipBadge({
   icon,
   tooltip,
   label,
-  className = "",
   accent = "indigo",
   floating = true,
 }: TooltipBadgeProps) {
   const [open, setOpen] = useState(false);
+  const tipId = `${label.replace(/\s+/g, "-")}-tip`;
 
   return (
-    <div className={`group relative ${className}`}>
+    <div className="group relative">
       <motion.button
         type="button"
         aria-label={label}
-        aria-describedby={open ? `${label}-tip` : undefined}
+        aria-expanded={open}
+        aria-describedby={open ? tipId : undefined}
         onClick={() => setOpen((value) => !value)}
         onBlur={() => setOpen(false)}
         whileHover={{ scale: 1.06 }}
@@ -46,10 +46,10 @@ export function TooltipBadge({
       </motion.button>
 
       <div
-        id={`${label}-tip`}
+        id={tipId}
         role="tooltip"
-        className={`pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-max max-w-[220px] -translate-x-1/2 rounded-xl px-3 py-2 text-center text-xs leading-relaxed font-semibold text-foreground shadow-neumorphic-sm neu-surface-inset transition-all duration-200 ${
-          open ? "visible opacity-100" : "invisible opacity-0 sm:group-hover:visible sm:group-hover:opacity-100"
+        className={`pointer-events-none absolute top-1/2 left-full z-50 ml-3 w-max max-w-[min(240px,calc(100vw-5rem))] -translate-y-1/2 rounded-xl px-3 py-2 text-left text-xs leading-relaxed font-semibold text-foreground shadow-neumorphic-sm neu-surface-inset transition-all duration-200 ${
+          open ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100 sm:group-focus-within:visible sm:group-focus-within:opacity-100"
         }`}
       >
         {tooltip}

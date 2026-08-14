@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ContactInfoBox } from "@/components/ContactInfoBox";
 import { HeroPortrait } from "@/components/HeroPortrait";
 import { useMode } from "@/context/ModeContext";
 import { heroLines } from "@/lib/hero";
@@ -13,7 +14,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
 
   return (
     <section id="top" className="relative scroll-mt-28 pt-4 pb-2 sm:pt-6">
-      <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,34%)] lg:gap-10">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(200px,32%)] lg:gap-10">
         <motion.div
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
@@ -50,6 +51,8 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
             )}
           </div>
 
+          <ContactInfoBox personal={personal} />
+
           <p className="mt-4 font-display text-base font-bold gradient-text-mint sm:text-lg">
             {personal.roles.join(" · ")}
           </p>
@@ -59,7 +62,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
           initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="order-1 flex justify-center lg:order-2 lg:justify-end"
+          className="order-1 flex justify-center lg:sticky lg:top-28 lg:order-2 lg:justify-end"
         >
           <HeroPortrait name={personal.name} />
         </motion.div>

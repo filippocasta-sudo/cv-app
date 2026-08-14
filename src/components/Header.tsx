@@ -7,8 +7,8 @@ import { useMode } from "@/context/ModeContext";
 import type { SocialLink } from "@/lib/types";
 
 const MODES = [
-  { key: "candid", label: "Versione schietta", short: "Schietta" },
-  { key: "formal", label: "CV formale classico", short: "Formale" },
+  { key: "candid", label: "Moderno", short: "Moderno" },
+  { key: "formal", label: "Classico", short: "Classico" },
 ] as const;
 
 function socialIcon(label: string) {
@@ -58,8 +58,7 @@ export function Header({ socials }: { socials: SocialLink[] }) {
                 <span
                   className={`relative z-10 ${active ? "text-white" : "text-foreground-muted hover:text-foreground"}`}
                 >
-                  <span className="hidden sm:inline">{mode.label}</span>
-                  <span className="sm:hidden">{mode.short}</span>
+                  {mode.label}
                 </span>
               </button>
             );
