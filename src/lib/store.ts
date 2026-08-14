@@ -1,30 +1,16 @@
-import { promises as fs } from "node:fs";
-import path from "node:path";
 import { cvData as fallbackData } from "@/data/cvData";
+import { getStorage } from "@/lib/storage";
 import type { CvData } from "@/lib/types";
 
 /**
- * Content lives in a JSON file so the admin panel can edit the CV without a
- * database. `CV_DATA_FILE` lets a read-only deploy target point at a writable
- * location (for example `/tmp` on serverless platforms).
+ * Content is edited through the admin panel and persisted by the active storage
+ * driver. When nothing has been saved yet — or the stored payload is unreadable
+ * — the versioned dataset in `data/cvData.ts` is served instead.
  */
-const dataFile =
-  process.env.CV_DATA_FILE ?? path.join(process.cwd(), "data", "cv-content.json");
-
-let cache: { data: CvData; mtimeMs: number } | null = null;
-
 export async function readCv(): Promise<CvData> {
   try {
-    // The path is runtime state, not a bundled asset: opting out keeps the
-    // build tracer from pulling the whole project into the server output.
-    const stat = await fs.stat(/* turbopackIgnore: true */ dataFile);
-    if (cache && cache.mtimeMs === stat.mtimeMs) return cache.data;
-
-    const raw = await fs.readFile(/* turbopackIgnore: true */ dataFile, "utf8");
-    const parsed = JSON.parse(raw) as unknown;
-    const data = normalizeCv(parsed);
-    cache = { data, mtimeMs: stat.mtimeMs };
-    return data;
+    const stored = await getStorage().read();
+    return stored === null ? fallbackData : normalizeCv(stored);
   } catch {
     return fallbackData;
   }
@@ -32,13 +18,7 @@ export async function readCv(): Promise<CvData> {
 
 export async function writeCv(input: unknown): Promise<CvData> {
   const data = normalizeCv(input);
-  await fs.mkdir(/* turbopackIgnore: true */ path.dirname(dataFile), { recursive: true });
-  await fs.writeFile(
-    /* turbopackIgnore: true */ dataFile,
-    `${JSON.stringify(data, null, 2)}\n`,
-    "utf8",
-  );
-  cache = null;
+  await getStorage().write(data);
   return data;
 }
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AdminPanel } from "@/components/admin/AdminPanel";
 import { LoginForm } from "@/components/admin/LoginForm";
 import { isAdminConfigured, isAuthenticated } from "@/lib/auth";
+import { describeStorage } from "@/lib/storage";
 import { readCv } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -16,5 +17,5 @@ export default async function AdminPage() {
     return <LoginForm configured={isAdminConfigured()} />;
   }
 
-  return <AdminPanel initialData={await readCv()} />;
+  return <AdminPanel initialData={await readCv()} storage={describeStorage()} />;
 }

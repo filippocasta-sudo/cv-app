@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
   Check,
+  Database,
   Loader2,
   LogOut,
   RotateCcw,
@@ -23,6 +24,7 @@ import {
 } from "@/components/admin/ProfileEditor";
 import { SkillsEditor } from "@/components/admin/SkillsEditor";
 import { TimelineEditor } from "@/components/admin/TimelineEditor";
+import type { StorageInfo } from "@/lib/storage";
 import type { CvData } from "@/lib/types";
 
 const TABS = [
@@ -38,7 +40,13 @@ const TABS = [
 type TabKey = (typeof TABS)[number]["key"];
 type Status = "idle" | "saving" | "saved" | "error";
 
-export function AdminPanel({ initialData }: { initialData: CvData }) {
+export function AdminPanel({
+  initialData,
+  storage,
+}: {
+  initialData: CvData;
+  storage: StorageInfo;
+}) {
   const router = useRouter();
   const [draft, setDraft] = useState<CvData>(initialData);
   const [saved, setSaved] = useState<CvData>(initialData);
@@ -128,7 +136,8 @@ export function AdminPanel({ initialData }: { initialData: CvData }) {
             <button
               type="button"
               onClick={resetToDefaults}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-border-strong hover:text-foreground"
+              disabled={!storage.writable}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-border-strong hover:text-foreground disabled:opacity-50"
             >
               <RotateCcw className="size-4" aria-hidden />
               <span className="hidden sm:inline">Ripristina</span>
@@ -146,7 +155,7 @@ export function AdminPanel({ initialData }: { initialData: CvData }) {
             <button
               type="button"
               onClick={save}
-              disabled={status === "saving" || !dirty}
+              disabled={status === "saving" || !dirty || !storage.writable}
               className="inline-flex items-center gap-1.5 rounded-lg bg-sage px-4 py-2 text-sm font-bold text-white transition hover:bg-sage-strong disabled:opacity-50"
             >
               {status === "saving" ? (
@@ -191,6 +200,21 @@ export function AdminPanel({ initialData }: { initialData: CvData }) {
       </header>
 
       <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
+        {storage.writable ? (
+          <p className="mb-5 inline-flex items-center gap-2 text-xs font-semibold text-foreground-faint">
+            <Database className="size-3.5" aria-hidden />
+            Storage attivo: {storage.label}
+          </p>
+        ) : (
+          <div className="mb-5 rounded-lg border border-kind-project/40 bg-kind-project-soft px-4 py-3 text-sm text-kind-project">
+            <p className="inline-flex items-center gap-2 font-bold">
+              <TriangleAlert className="size-4" aria-hidden />
+              Salvataggio non disponibile
+            </p>
+            <p className="mt-1 leading-relaxed">{storage.hint ?? storage.label}</p>
+          </div>
+        )}
+
         {error && (
           <p className="mb-5 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/50 dark:text-red-300">
             {error}
