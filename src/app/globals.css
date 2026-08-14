@@ -3,51 +3,107 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f6f6f3;
-  --surface: #ffffff;
-  --surface-muted: #eeeeea;
-  --border-subtle: #e2e2dc;
-  --border-strong: #cfcfc7;
-  --foreground: #1b1b18;
-  --foreground-muted: #6a6a62;
-  --foreground-faint: #8f8f86;
+  --background: #e6eef8;
+  --surface: #e6eef8;
+  --surface-muted: #dce4f0;
+  --border-subtle: transparent;
+  --border-strong: transparent;
+  --foreground: #1a1f2e;
+  --foreground-muted: #4a5568;
+  --foreground-faint: #6b7280;
 
-  --sage: #5f8a68;
-  --sage-soft: #e6efe6;
-  --sage-strong: #46684d;
+  --neu-shadow-dark: #c5d0e0;
+  --neu-shadow-light: #ffffff;
 
-  --kind-work: #5f8a68;
-  --kind-work-soft: #e6efe6;
-  --kind-education: #5f74a3;
-  --kind-education-soft: #e7eaf4;
-  --kind-project: #a8752f;
-  --kind-project-soft: #f6ecdc;
+  --coral: #ff5e7e;
+  --coral-soft: #ffe8ed;
+  --coral-strong: #e84a6a;
 
-  --ring: #5f8a68;
+  --mint: #00d294;
+  --mint-soft: #d9faf0;
+  --mint-strong: #00a876;
+
+  --indigo: #6c5ce7;
+  --indigo-soft: #ebe8fc;
+  --indigo-strong: #5546d4;
+
+  --amber: #ffb92b;
+  --amber-soft: #fff4dc;
+  --amber-strong: #e5a318;
+
+  --cyan: #00e5ff;
+  --magenta: #ff3d9a;
+  --lime: #b8ff3c;
+
+  --sage: var(--mint);
+  --sage-soft: var(--mint-soft);
+  --sage-strong: var(--mint-strong);
+
+  --kind-work: var(--mint);
+  --kind-work-soft: var(--mint-soft);
+  --kind-education: var(--indigo);
+  --kind-education-soft: var(--indigo-soft);
+  --kind-project: var(--amber);
+  --kind-project-soft: var(--amber-soft);
+
+  --ring: var(--indigo);
+
+  --gradient-cta: linear-gradient(135deg, #ff5e7e 0%, #ff8a6b 50%, #ffb92b 100%);
+  --gradient-skill: linear-gradient(135deg, #00d294 0%, #00e5c8 100%);
+  --gradient-tech: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(255, 94, 126, 0.12) 0%, rgba(108, 92, 231, 0.1) 50%, rgba(0, 210, 148, 0.08) 100%);
 }
 
 .dark {
-  --background: #121411;
-  --surface: #1a1d19;
-  --surface-muted: #22251f;
-  --border-subtle: #2d312b;
-  --border-strong: #3d423a;
-  --foreground: #f0efe8;
-  --foreground-muted: #a2a299;
-  --foreground-faint: #82827a;
+  --background: #1e222d;
+  --surface: #1e222d;
+  --surface-muted: #252a38;
+  --border-subtle: transparent;
+  --border-strong: transparent;
+  --foreground: #eef1f8;
+  --foreground-muted: #a8b0c4;
+  --foreground-faint: #7a849c;
 
-  --sage: #8fb897;
-  --sage-soft: #233025;
-  --sage-strong: #a9cbaf;
+  --neu-shadow-dark: #141820;
+  --neu-shadow-light: #2a3040;
 
-  --kind-work: #8fb897;
-  --kind-work-soft: #233025;
-  --kind-education: #97aada;
-  --kind-education-soft: #232838;
-  --kind-project: #d9a559;
-  --kind-project-soft: #332818;
+  --coral: #ff6b8a;
+  --coral-soft: #2d1f28;
+  --coral-strong: #ff8aa3;
 
-  --ring: #8fb897;
+  --mint: #00f0a8;
+  --mint-soft: #152a24;
+  --mint-strong: #5dffd0;
+
+  --indigo: #8b7cf7;
+  --indigo-soft: #221f38;
+  --indigo-strong: #a99bfa;
+
+  --amber: #ffc94d;
+  --amber-soft: #2a2418;
+  --amber-strong: #ffe08a;
+
+  --cyan: #4df0ff;
+  --magenta: #ff6bb8;
+  --lime: #c8ff5a;
+
+  --sage: var(--mint);
+  --sage-soft: var(--mint-soft);
+  --sage-strong: var(--mint-strong);
+
+  --kind-work: var(--mint);
+  --kind-work-soft: var(--mint-soft);
+  --kind-education: var(--indigo);
+  --kind-education-soft: var(--indigo-soft);
+  --kind-project: var(--amber);
+  --kind-project-soft: var(--amber-soft);
+
+  --ring: var(--cyan);
+
+  --gradient-cta: linear-gradient(135deg, #ff5e7e 0%, #ff3d9a 50%, #6c5ce7 100%);
+  --gradient-skill: linear-gradient(135deg, #00f0a8 0%, #00e5ff 100%);
+  --gradient-tech: linear-gradient(135deg, #8b7cf7 0%, #ff3d9a 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(255, 94, 126, 0.15) 0%, rgba(139, 124, 247, 0.12) 50%, rgba(0, 240, 168, 0.1) 100%);
 }
 
 @theme inline {
@@ -59,6 +115,22 @@
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-foreground-faint: var(--foreground-faint);
+
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-coral-strong: var(--coral-strong);
+  --color-mint: var(--mint);
+  --color-mint-soft: var(--mint-soft);
+  --color-mint-strong: var(--mint-strong);
+  --color-indigo: var(--indigo);
+  --color-indigo-soft: var(--indigo-soft);
+  --color-indigo-strong: var(--indigo-strong);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-amber-strong: var(--amber-strong);
+  --color-cyan: var(--cyan);
+  --color-magenta: var(--magenta);
+  --color-lime: var(--lime);
 
   --color-sage: var(--sage);
   --color-sage-soft: var(--sage-soft);
@@ -73,6 +145,78 @@
 
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-neumorphic: 8px 8px 16px var(--neu-shadow-dark), -8px -8px 16px var(--neu-shadow-light);
+  --shadow-neumorphic-sm: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light);
+  --shadow-neumorphic-lg: 12px 12px 24px var(--neu-shadow-dark), -12px -12px 24px var(--neu-shadow-light);
+  --shadow-neumorphic-inset: inset 6px 6px 12px var(--neu-shadow-dark), inset -6px -6px 12px var(--neu-shadow-light);
+  --shadow-neumorphic-pressed: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light);
+}
+
+@utility shadow-neumorphic {
+  box-shadow: var(--shadow-neumorphic);
+}
+
+@utility shadow-neumorphic-sm {
+  box-shadow: var(--shadow-neumorphic-sm);
+}
+
+@utility shadow-neumorphic-lg {
+  box-shadow: var(--shadow-neumorphic-lg);
+}
+
+@utility shadow-neumorphic-inset {
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+@utility shadow-neumorphic-pressed {
+  box-shadow: var(--shadow-neumorphic-pressed);
+}
+
+@utility neu-surface {
+  background-color: var(--surface);
+  box-shadow: var(--shadow-neumorphic);
+}
+
+@utility neu-surface-inset {
+  background-color: var(--surface-muted);
+  box-shadow: var(--shadow-neumorphic-inset);
+}
+
+@utility gradient-text-coral {
+  background: var(--gradient-cta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-mint {
+  background: var(--gradient-skill);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+@utility animate-float-slow {
+  animation: float 8s ease-in-out 1s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @layer base {
@@ -100,17 +244,17 @@
   h6 {
     font-family: var(--font-display);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   :focus-visible {
     outline: 2px solid var(--ring);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 
   ::selection {
-    background-color: var(--sage);
-    color: var(--surface);
+    background-color: var(--coral);
+    color: white;
   }
 }
 
@@ -118,13 +262,57 @@
   text-wrap: balance;
 }
 
+/* Neumorphic interactive states */
+.neu-interactive {
+  background-color: var(--surface);
+  box-shadow: var(--shadow-neumorphic-sm);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.neu-interactive:hover {
+  box-shadow: var(--shadow-neumorphic);
+  transform: translateY(-1px);
+}
+
+.neu-interactive:active,
+.neu-interactive[aria-pressed="true"] {
+  box-shadow: var(--shadow-neumorphic-pressed);
+  transform: translateY(1px);
+}
+
+.neu-card {
+  background-color: var(--surface);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-neumorphic);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.neu-card:hover {
+  box-shadow: var(--shadow-neumorphic-lg);
+}
+
+.ambient-glow {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.dark .ambient-glow {
+  opacity: 0.25;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  /* Scroll-triggered reveals start transparent, so neutralise the inline
-     styles rather than leaving content invisible. */
   *,
   *::before,
   *::after {
@@ -136,11 +324,7 @@
   }
 }
 
-/* Reveal every disclosure and drop interactive chrome when printing the
-   classic CV, so a PDF export never hides content behind an accordion. */
 @media print {
-  /* Sections animate in on scroll: anything still below the viewport when
-     printing would otherwise be committed to paper at opacity 0. */
   *,
   *::before,
   *::after {
@@ -148,6 +332,7 @@
     transform: none !important;
     animation: none !important;
     transition: none !important;
+    box-shadow: none !important;
   }
 
   :root {
@@ -178,5 +363,10 @@
   .print-avoid-break {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  .ambient-glow,
+  .easter-egg-layer {
+    display: none !important;
   }
 }

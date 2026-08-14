@@ -1,4 +1,5 @@
 import { CareerGoals } from "@/components/CareerGoals";
+import { PassionLayer } from "@/components/easter-eggs/PassionLayer";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -14,9 +15,10 @@ export default async function HomePage() {
 
   return (
     <>
+      <PassionLayer />
       <Header name={cv.personal.name} />
 
-      <main className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <main className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Hero personal={cv.personal} />
         <CareerGoals goals={cv.goals} />
 
