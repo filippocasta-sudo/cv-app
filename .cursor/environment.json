@@ -1,4 +1,12 @@
 {
   "name": "cv-app",
-  "install": "./scripts/cloud-agent-install.sh"
+  "install": "./scripts/cloud-agent-install.sh",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "npm run dev",
+      "description": "Next.js dev server su http://localhost:3000"
+    }
+  ],
+  "ports": [{ "name": "web", "port": 3000 }]
 }

@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f6f6f3;
+  --surface: #ffffff;
+  --surface-muted: #eeeeea;
+  --border-subtle: #e2e2dc;
+  --border-strong: #cfcfc7;
+  --foreground: #1b1b18;
+  --foreground-muted: #6a6a62;
+  --foreground-faint: #8f8f86;
+
+  --sage: #5f8a68;
+  --sage-soft: #e6efe6;
+  --sage-strong: #46684d;
+
+  --kind-work: #5f8a68;
+  --kind-work-soft: #e6efe6;
+  --kind-education: #5f74a3;
+  --kind-education-soft: #e7eaf4;
+  --kind-project: #a8752f;
+  --kind-project-soft: #f6ecdc;
+
+  --ring: #5f8a68;
+}
+
+.dark {
+  --background: #121411;
+  --surface: #1a1d19;
+  --surface-muted: #22251f;
+  --border-subtle: #2d312b;
+  --border-strong: #3d423a;
+  --foreground: #f0efe8;
+  --foreground-muted: #a2a299;
+  --foreground-faint: #82827a;
+
+  --sage: #8fb897;
+  --sage-soft: #233025;
+  --sage-strong: #a9cbaf;
+
+  --kind-work: #8fb897;
+  --kind-work-soft: #233025;
+  --kind-education: #97aada;
+  --kind-education-soft: #232838;
+  --kind-project: #d9a559;
+  --kind-project-soft: #332818;
+
+  --ring: #8fb897;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-faint: var(--foreground-faint);
+
+  --color-sage: var(--sage);
+  --color-sage-soft: var(--sage-soft);
+  --color-sage-strong: var(--sage-strong);
+
+  --color-kind-work: var(--kind-work);
+  --color-kind-work-soft: var(--kind-work-soft);
+  --color-kind-education: var(--kind-education);
+  --color-kind-education-soft: var(--kind-education-soft);
+  --color-kind-project: var(--kind-project);
+  --color-kind-project-soft: var(--kind-project-soft);
+
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--sage);
+    color: var(--surface);
+  }
+}
+
+@utility text-balance-tight {
+  text-wrap: balance;
+}
+
+/* Reveal every disclosure and drop interactive chrome when printing the
+   classic CV, so a PDF export never hides content behind an accordion. */
+@media print {
+  :root {
+    --background: #ffffff;
+    --surface: #ffffff;
+    --surface-muted: #ffffff;
+    --border-subtle: #cccccc;
+    --foreground: #000000;
+    --foreground-muted: #333333;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .print-block {
+    display: block !important;
+    height: auto !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
