@@ -323,13 +323,13 @@ export function Timeline({
           aria-hidden
         />
         <ul className="space-y-5">
-          {birthDate && <BirthDateMarker birthDate={birthDate} />}
           <AnimatePresence mode="popLayout" initial={false}>
             {visible.map((entry) => (
               <TimelineCard key={entry.id} entry={entry} />
             ))}
           </AnimatePresence>
           {!classic && (filter === "all" || filter === "project") && <FantaTimelineCard />}
+          {birthDate && <BirthDateMarker birthDate={birthDate} />}
         </ul>
       </div>
     </Section>
