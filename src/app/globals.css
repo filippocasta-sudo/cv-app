@@ -118,9 +118,38 @@
   text-wrap: balance;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Scroll-triggered reveals start transparent, so neutralise the inline
+     styles rather than leaving content invisible. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Reveal every disclosure and drop interactive chrome when printing the
    classic CV, so a PDF export never hides content behind an accordion. */
 @media print {
+  /* Sections animate in on scroll: anything still below the viewport when
+     printing would otherwise be committed to paper at opacity 0. */
+  *,
+  *::before,
+  *::after {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
   :root {
     --background: #ffffff;
     --surface: #ffffff;
