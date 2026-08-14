@@ -1,29 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { LinkedInIcon } from "@/components/ui/icons";
+import { HeroPortrait } from "@/components/HeroPortrait";
 import { useMode } from "@/context/ModeContext";
+import { heroLines } from "@/lib/hero";
 import type { PersonalInfo } from "@/lib/types";
 
 export function Hero({ personal }: { personal: PersonalInfo }) {
   const { formal } = useMode();
+  const intro = formal ? personal.formalIntro : personal.intro;
+  const [line1, line2] = heroLines(intro);
 
   return (
-    <section id="top" className="relative pt-10 pb-8 sm:pt-14">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="relative rounded-3xl p-6 sm:p-8"
-        style={{ background: "var(--gradient-hero)" }}
-      >
-        <div className="neu-card rounded-3xl p-6 sm:p-8">
+    <section id="top" className="relative scroll-mt-28 pt-4 pb-2 sm:pt-6">
+      <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(220px,34%)] lg:gap-10">
+        <motion.div
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="order-2 lg:order-1"
+        >
           {!formal && (
             <motion.span
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold text-coral shadow-neumorphic-inset"
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-coral shadow-neumorphic-inset"
             >
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-coral opacity-60" />
@@ -33,56 +34,36 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
             </motion.span>
           )}
 
-          <h1 className="mt-4 text-4xl leading-[1.02] sm:text-6xl">
+          <h1 className="mt-3 text-3xl leading-[1.05] sm:text-5xl lg:text-[3.25rem]">
             <span className="gradient-text-coral">{personal.name.split(" ")[0]}</span>{" "}
             <span className="text-foreground">{personal.name.split(" ").slice(1).join(" ")}</span>
           </h1>
 
-          <p className="mt-3 font-display text-lg font-bold gradient-text-mint sm:text-xl">
-            {personal.roles.join("  ·  ")}
-          </p>
-
-          <p className="text-balance-tight mt-5 max-w-3xl text-[15px] leading-relaxed text-foreground-muted sm:text-base">
-            {formal ? personal.formalIntro : personal.intro}
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-2">
-            {[
-              {
-                href: `mailto:${personal.email}`,
-                icon: <Mail className="size-4" aria-hidden />,
-                label: personal.email,
-              },
-              {
-                href: `tel:${personal.phone.replace(/\s/g, "")}`,
-                icon: <Phone className="size-4" aria-hidden />,
-                label: personal.phone,
-              },
-              {
-                href: personal.linkedin,
-                icon: <LinkedInIcon className="size-4" />,
-                label: "LinkedIn",
-                external: true,
-              },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-                className="neu-interactive inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-foreground-muted hover:text-indigo"
-              >
-                {item.icon}
-                <span className="max-w-[200px] truncate sm:max-w-none">{item.label}</span>
-              </a>
-            ))}
-            <span className="neu-interactive inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-foreground-muted">
-              <MapPin className="size-4" aria-hidden />
-              {personal.location}
-            </span>
+          <div className="mt-4 space-y-2">
+            <p className="text-balance-tight max-w-xl text-[15px] leading-relaxed text-foreground sm:text-base">
+              {line1}
+            </p>
+            {line2 && (
+              <p className="text-balance-tight max-w-xl text-[15px] leading-relaxed text-foreground-muted sm:text-base">
+                {line2}
+              </p>
+            )}
           </div>
-        </div>
-      </motion.div>
+
+          <p className="mt-4 font-display text-base font-bold gradient-text-mint sm:text-lg">
+            {personal.roles.join(" · ")}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+          className="order-1 flex justify-center lg:order-2 lg:justify-end"
+        >
+          <HeroPortrait name={personal.name} />
+        </motion.div>
+      </div>
     </section>
   );
 }

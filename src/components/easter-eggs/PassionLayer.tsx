@@ -29,7 +29,7 @@ export function PassionLayer() {
       </motion.div>
 
       {/* Corner passion badges */}
-      <div className="pointer-events-auto absolute top-28 left-3 sm:left-6">
+      <div className="pointer-events-auto absolute top-[30%] left-3 sm:left-6">
         <TooltipBadge
           icon={<Shirt className="size-4 text-coral" strokeWidth={2.2} />}
           label="Lega FantaTregnago"
@@ -39,7 +39,7 @@ export function PassionLayer() {
         />
       </div>
 
-      <div className="pointer-events-auto absolute top-36 right-3 sm:right-6">
+      <div className="pointer-events-auto absolute top-[32%] right-3 sm:right-6">
         <TooltipBadge
           icon={<Swords className="size-4 text-cyan dark:text-magenta" strokeWidth={2.2} />}
           label="Star Wars fan"
