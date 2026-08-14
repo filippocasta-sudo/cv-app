@@ -10,4 +10,4 @@ export function heroLines(intro: string): [string, string] {
   return [intro.slice(0, breakAt).trim(), intro.slice(breakAt).trim()];
 }
 
-export const PORTRAIT_PATH = "/images/filippo-portrait.jpg";
+export const PORTRAIT_PATH = "/images/filippo-portrait.png";
