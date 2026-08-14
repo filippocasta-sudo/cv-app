@@ -63,6 +63,8 @@ export interface PersonalInfo {
   linkedin: string;
   location: string;
   license: string;
+  /** Display string, e.g. "12 maggio 1992". */
+  birthDate: string;
   languages: Language[];
 }
 

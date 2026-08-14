@@ -68,6 +68,12 @@ export function PersonalEditor({
             value={personal.license}
             onChange={(license) => patch({ license })}
           />
+          <TextField
+            label="Data di nascita"
+            value={personal.birthDate}
+            onChange={(birthDate) => patch({ birthDate })}
+            placeholder="es. 12 maggio 1992"
+          />
         </div>
 
         <div className="mt-3 space-y-3">

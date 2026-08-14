@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Briefcase,
+  Cake,
   ChevronDown,
   GraduationCap,
   Lightbulb,
@@ -111,7 +112,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 </span>
               </span>
             )}
-            <span className="ml-auto text-xs font-semibold text-foreground-faint tabular-nums">
+            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-mint">
               {entry.period}
             </span>
           </div>
@@ -217,12 +218,37 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
   );
 }
 
+function BirthDateMarker({ birthDate }: { birthDate: string }) {
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative flex justify-center pb-8"
+    >
+      <div className="relative z-10 flex flex-col items-center text-center">
+        <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-coral to-indigo text-white shadow-neumorphic-sm ring-4 ring-background sm:size-11">
+          <Cake className="size-5" aria-hidden />
+        </span>
+        <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-extrabold text-foreground tabular-nums shadow-neumorphic-inset">
+          {birthDate}
+        </span>
+        <span className="mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
+          Data di nascita
+        </span>
+      </div>
+    </motion.li>
+  );
+}
+
 export function Timeline({
   entries,
   classicOnly = false,
+  birthDate,
 }: {
   entries: TimelineEntry[];
   classicOnly?: boolean;
+  birthDate?: string;
 }) {
   const { formal } = useMode();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("all");
@@ -297,6 +323,7 @@ export function Timeline({
           aria-hidden
         />
         <ul className="space-y-5">
+          {birthDate && <BirthDateMarker birthDate={birthDate} />}
           <AnimatePresence mode="popLayout" initial={false}>
             {visible.map((entry) => (
               <TimelineCard key={entry.id} entry={entry} />

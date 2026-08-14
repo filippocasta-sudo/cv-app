@@ -3,7 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import { TooltipBadge } from "@/components/ui/TooltipBadge";
+import { useMode } from "@/context/ModeContext";
 import { PORTRAIT_PATH } from "@/lib/hero";
+import { PASSION_EGGS } from "@/lib/passionEggs";
 
 interface HeroPortraitProps {
   name: string;
@@ -11,6 +14,7 @@ interface HeroPortraitProps {
 }
 
 export function HeroPortrait({ name, photoUrl = PORTRAIT_PATH }: HeroPortraitProps) {
+  const { formal } = useMode();
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const initials = name
@@ -21,6 +25,21 @@ export function HeroPortrait({ name, photoUrl = PORTRAIT_PATH }: HeroPortraitPro
 
   return (
     <div className="relative mx-auto flex h-[min(420px,55vh)] w-full max-w-[280px] items-end justify-center sm:max-w-[300px] lg:max-w-xs">
+      {!formal && (
+        <div className="no-print pointer-events-auto absolute top-1/2 -left-1 z-20 flex -translate-y-1/2 flex-col gap-3 lg:hidden">
+          {PASSION_EGGS.map((egg) => (
+            <TooltipBadge
+              key={egg.label}
+              icon={egg.icon}
+              label={egg.label}
+              tooltip={egg.tooltip}
+              accent={egg.accent}
+              floating={egg.floating}
+            />
+          ))}
+        </div>
+      )}
+
       {/* Animated theme blobs — visible through transparent portrait */}
       <motion.div
         aria-hidden
