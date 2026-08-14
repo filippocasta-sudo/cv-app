@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Atkinson_Hyperlegible, Syne } from "next/font/google";
 import { ModeProvider } from "@/context/ModeContext";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const syne = Syne({
@@ -18,13 +19,19 @@ const atkinson = Atkinson_Hyperlegible({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl(),
   title: "Filippo Castagna — IT Omnichannel Delivery Specialist",
   description:
     "CV interattivo di Filippo Castagna: delivery omnicanale, coordinamento AMS e project management. Versione schietta o CV formale classico.",
+  // Deployment and branch hostnames serve the same content, so point every copy
+  // at the production domain instead of competing with it in search results.
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Filippo Castagna — IT Omnichannel Delivery Specialist",
     description:
       "CV interattivo: esperienze, competenze, obiettivi di carriera e limiti dichiarati senza giri di parole.",
+    url: "/",
+    siteName: "Filippo Castagna — CV",
     type: "profile",
     locale: "it_IT",
   },

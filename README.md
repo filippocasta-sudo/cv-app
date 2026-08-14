@@ -34,6 +34,7 @@ L'applicazione risponde su http://localhost:3000.
 | `BLOB_READ_WRITE_TOKEN` | Sì su Vercel | Iniettata automaticamente quando un Blob store è collegato al progetto. Abilita il salvataggio dei contenuti in produzione. |
 | `ADMIN_SESSION_SECRET` | No | Chiave aggiuntiva per la firma del cookie di sessione. |
 | `CV_DATA_FILE` | No | Percorso del JSON usato dal driver su filesystem. Default `data/cv-content.json`. |
+| `NEXT_PUBLIC_SITE_URL` | No | Origine pubblica per canonical, Open Graph, `robots.txt` e `sitemap.xml`. Su Vercel viene ricavata da `VERCEL_PROJECT_PRODUCTION_URL`; serve solo per sovrascriverla. |
 
 ## Pannello admin
 
@@ -122,6 +123,20 @@ Setup iniziale del progetto:
 
 Opzionale ma consigliato per un pubblico italiano: Settings → Functions → Region, imposta
 Frankfurt (`fra1`) per ridurre la latenza rispetto al default statunitense.
+
+### Dominio pubblico
+
+Il dominio di produzione va aggiunto in Settings → Domains. Vercel considera canonico solo un
+dominio aggiunto esplicitamente: gli URL generati automaticamente (`<progetto>-<scope>.vercel.app` e
+quelli per singolo deployment) vengono serviti con `X-Robots-Tag: noindex`, quindi non finiscono nei
+risultati di ricerca.
+
+L'applicazione ricava l'origine pubblica da `VERCEL_PROJECT_PRODUCTION_URL`, che Vercel imposta
+sempre con il dominio di produzione più corto, anche nei deployment di preview. Canonical, Open
+Graph, `robots.txt` e `sitemap.xml` puntano quindi alla produzione senza configurazione manuale.
+
+Per cambiare il sottodominio `.vercel.app` generato serve rinominare il progetto in Settings →
+General: gli indirizzi `.vercel.app` sono assegnati in ordine di arrivo e non si possono riservare.
 
 Nota sui preview: i deployment di preview condividono lo stesso Blob store della produzione, quindi
 una modifica salvata da un preview cambia anche i contenuti pubblici. Per tenerli separati serve un
