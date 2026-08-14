@@ -35,7 +35,11 @@ export const metadata: Metadata = {
     type: "profile",
     locale: "it_IT",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false, noimageindex: true },
+  },
 };
 
 export const viewport: Viewport = {
@@ -46,7 +50,7 @@ export const viewport: Viewport = {
 };
 
 /** Applies the stored theme before first paint to avoid a flash of light mode. */
-const themeBootstrap = `(function(){try{var s=localStorage.getItem('cv-theme');var d=s?s==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}}catch(e){}})();`;
+const themeBootstrap = `(function(){try{var s=localStorage.getItem('cv-theme');var d=s?s==='dark':false;if(d){document.documentElement.classList.add('dark');document.documentElement.style.colorScheme='dark';}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

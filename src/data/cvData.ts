@@ -14,6 +14,7 @@ export const cvData: CvData = {
     linkedin: "https://www.linkedin.com/in/filippo-castagna-9220/",
     location: "Tregnago (VR), Italia",
     license: "Patente B — automunito",
+    birthDate: "1992",
     languages: [
       { name: "Italiano", level: "Madrelingua" },
       { name: "Inglese", level: "B2" },

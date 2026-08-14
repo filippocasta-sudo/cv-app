@@ -28,11 +28,7 @@ function readStoredSnapshot(): Snapshot {
   try {
     const storedTheme = window.localStorage.getItem(THEME_KEY);
     const theme: Theme =
-      storedTheme === "light" || storedTheme === "dark"
-        ? storedTheme
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+      storedTheme === "light" || storedTheme === "dark" ? storedTheme : "light";
     return { theme, formal: window.localStorage.getItem(FORMAL_KEY) === "true" };
   } catch {
     return SERVER_SNAPSHOT;
