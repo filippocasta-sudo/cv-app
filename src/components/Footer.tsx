@@ -73,6 +73,7 @@ function ContactForm({ email }: { email: string }) {
             name="name"
             required
             minLength={2}
+            autoComplete="name"
             className="w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage"
           />
         </label>
@@ -82,6 +83,7 @@ function ContactForm({ email }: { email: string }) {
             name="email"
             type="email"
             required
+            autoComplete="email"
             className="w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage"
           />
         </label>
