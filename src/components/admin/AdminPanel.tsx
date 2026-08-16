@@ -94,10 +94,16 @@ export function AdminPanel({
     setStatus("saving");
     setError("");
     try {
+      const italian = italianBundle(draft);
+      const payload: CvData = {
+        ...draft,
+        en: syncEnFromItalian(italian, draft.en ?? italian),
+      };
+
       const response = await fetch("/api/cv", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
+        body: JSON.stringify(payload),
       });
       const body = (await response.json().catch(() => ({}))) as CvData & { error?: string };
 
