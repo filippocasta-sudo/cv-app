@@ -53,10 +53,10 @@ function ContactForm({ email }: { email: string }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-2xl bg-surface/80 p-4 text-sm text-mint-strong shadow-neumorphic-inset"
+        className="rounded-2xl border border-white/25 bg-white/20 p-4 text-sm text-white"
       >
         <p className="font-bold">{t("footer.sentTitle")}</p>
-        <p className="mt-1 leading-relaxed">
+        <p className="mt-1 leading-relaxed text-white/90">
           {t("footer.sentBody")}{" "}
           <a href={`mailto:${email}`} className="underline">
             {email}
@@ -71,45 +71,45 @@ function ContactForm({ email }: { email: string }) {
     <form onSubmit={handleSubmit} className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1 block text-xs font-semibold text-foreground-muted">{t("footer.name")}</span>
+          <span className="mb-1 block text-xs font-semibold text-white/85">{t("footer.name")}</span>
           <input
             name="name"
             required
             minLength={2}
             autoComplete="name"
-            className="w-full rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-xs font-semibold text-foreground-muted">{t("footer.email")}</span>
+          <span className="mb-1 block text-xs font-semibold text-white/85">{t("footer.email")}</span>
           <input
             name="email"
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
       </div>
 
       <label className="block">
-        <span className="mb-1 block text-xs font-semibold text-foreground-muted">{t("footer.message")}</span>
+        <span className="mb-1 block text-xs font-semibold text-white/85">{t("footer.message")}</span>
         <textarea
           name="message"
           required
           minLength={10}
           rows={4}
           placeholder={t("footer.placeholder")}
-          className="w-full resize-y rounded-xl bg-surface/90 px-3 py-2.5 text-sm shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-indigo/40"
+          className="w-full resize-y rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
         />
       </label>
 
-      {status === "error" && <p className="text-sm text-coral">{error}</p>}
+      {status === "error" && <p className="text-sm text-amber-soft">{error}</p>}
 
       <button
         type="submit"
         disabled={status === "sending"}
-        className="neu-interactive inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-coral to-indigo px-5 py-2.5 text-sm font-bold text-white shadow-neumorphic-sm disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-bold text-indigo-strong transition hover:bg-white/90 disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -159,26 +159,26 @@ export function Footer({
   }
 
   return (
-    <footer id="contatti" className="relative mt-20 scroll-mt-24">
+    <footer id="contatti" className="relative mt-20 flex flex-1 flex-col scroll-mt-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-coral/25 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
       />
 
-      <div className="footer-contact-band gradient-surface-coral-indigo relative border-y border-indigo/15 py-12 sm:py-14 dark:border-indigo/25">
-        <div className="relative mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
+      <div className="footer-contact-band gradient-surface-indigo-magenta relative flex flex-1 flex-col border-t border-white/15 py-12 sm:py-14">
+        <div className="relative mx-auto grid w-full max-w-6xl flex-1 gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-coral-strong sm:text-2xl">{t("footer.title")}</h2>
+              <h2 className="text-xl font-bold text-white sm:text-2xl">{t("footer.title")}</h2>
               <span
                 className="group/coffee relative hidden sm:inline-flex"
                 title={t("footer.pizzaTip")}
               >
-                <Coffee className="size-4 text-amber" aria-hidden />
-                <Pizza className="absolute -right-2 -bottom-1 size-3 text-coral opacity-0 transition group-hover/coffee:opacity-100" />
+                <Coffee className="size-4 text-amber-soft" aria-hidden />
+                <Pizza className="absolute -right-2 -bottom-1 size-3 text-white opacity-0 transition group-hover/coffee:opacity-100" />
               </span>
             </div>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-indigo/80 dark:text-indigo-strong/90">
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-white/90">
               {t("footer.intro")}
             </p>
 
@@ -186,18 +186,18 @@ export function Footer({
               <li>
                 <a
                   href={`mailto:${personal.email}`}
-                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
+                  className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-white/80"
                 >
-                  <Mail className="size-4 text-coral" aria-hidden />
+                  <Mail className="size-4 text-white/85" aria-hidden />
                   {personal.email}
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${personal.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
+                  className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-white/80"
                 >
-                  <Phone className="size-4 text-coral" aria-hidden />
+                  <Phone className="size-4 text-white/85" aria-hidden />
                   {personal.phone}
                 </a>
               </li>
@@ -206,14 +206,14 @@ export function Footer({
                   href={personal.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
+                  className="inline-flex items-center gap-2 font-semibold text-white transition hover:text-white/80"
                 >
-                  <LinkedInIcon className="size-4 text-coral" />
+                  <LinkedInIcon className="size-4 text-white/85" />
                   {t("footer.linkedin")}
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2 text-indigo/80 dark:text-indigo-strong/90">
-                <MapPin className="size-4 text-coral" aria-hidden />
+              <li className="inline-flex items-center gap-2 text-white/85">
+                <MapPin className="size-4 text-white/85" aria-hidden />
                 {personal.location}
               </li>
             </ul>
@@ -225,7 +225,7 @@ export function Footer({
                     href={social.url}
                     target={social.url.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="neu-interactive inline-flex rounded-2xl border border-indigo/10 bg-surface/45 px-3.5 py-2 text-sm font-bold text-indigo-strong hover:text-coral-strong dark:border-indigo/25 dark:bg-surface/20"
+                    className="inline-flex rounded-2xl border border-white/30 bg-white/15 px-3.5 py-2 text-sm font-bold text-white transition hover:border-white/45 hover:bg-white/25"
                   >
                     {social.label}
                   </a>
@@ -234,7 +234,7 @@ export function Footer({
             </ul>
           </div>
 
-          <div className="neu-card rounded-3xl bg-surface/75 p-5 backdrop-blur-sm dark:bg-surface/40">
+          <div className="rounded-3xl border border-white/20 bg-white/12 p-5 backdrop-blur-md">
             <Disclosure
               label={t("footer.openForm")}
               openLabel={t("footer.closeForm")}
@@ -247,24 +247,24 @@ export function Footer({
             </Disclosure>
           </div>
         </div>
-      </div>
 
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-8 text-xs text-foreground-faint sm:px-6">
-        <p>
-          © {new Date().getFullYear()} {personal.name}{t("footer.builtWith")}
-          <span className="no-print ml-1 opacity-40" title="May the Force be with you">
-            · ★
-          </span>
-        </p>
-        <button
-          type="button"
-          onClick={handleSecretClick}
-          aria-label={t("footer.adminSr")}
-          title="·"
-          className="no-print size-4 rounded-full text-transparent transition hover:shadow-neumorphic-inset"
-        >
-          ·
-        </button>
+        <div className="relative mx-auto mt-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 pt-10 text-xs text-white/65 sm:px-6">
+          <p>
+            © {new Date().getFullYear()} {personal.name}{t("footer.builtWith")}
+            <span className="no-print ml-1 opacity-60" title="May the Force be with you">
+              · ★
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={handleSecretClick}
+            aria-label={t("footer.adminSr")}
+            title="·"
+            className="no-print size-4 rounded-full text-transparent transition hover:bg-white/10"
+          >
+            ·
+          </button>
+        </div>
       </div>
     </footer>
   );
