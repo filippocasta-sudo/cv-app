@@ -1,5 +1,7 @@
 "use client";
 
+import { Reorder, useDragControls } from "framer-motion";
+import { GripVertical } from "lucide-react";
 import {
   AddButton,
   EditorCard,
@@ -8,12 +10,164 @@ import {
   TextAreaField,
   TextField,
 } from "@/components/admin/fields";
+import {
+  applyTimelineVisualOrder,
+  nextTimelineSortKey,
+  sortTimelineEntries,
+} from "@/lib/timelineOrder";
 import { TIMELINE_KIND_LABELS, type TimelineEntry, type TimelineKind } from "@/lib/types";
 
 const KIND_OPTIONS = (Object.keys(TIMELINE_KIND_LABELS) as TimelineKind[]).map((kind) => ({
   value: kind,
   label: TIMELINE_KIND_LABELS[kind],
 }));
+
+function TimelineEntryCard({
+  entry,
+  index,
+  translationMode,
+  onUpdate,
+  onRemove,
+}: {
+  entry: TimelineEntry;
+  index: number;
+  translationMode: boolean;
+  onUpdate: (patch: Partial<TimelineEntry>) => void;
+  onRemove?: () => void;
+}) {
+  const dragControls = useDragControls();
+
+  const card = (
+    <div className="flex items-start gap-2">
+      {!translationMode && (
+        <button
+          type="button"
+          aria-label="Trascina per riordinare"
+          className="mt-4 inline-flex shrink-0 cursor-grab touch-none rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] p-2 text-foreground-muted active:cursor-grabbing"
+          onPointerDown={(event) => dragControls.start(event)}
+        >
+          <GripVertical className="size-4" aria-hidden />
+        </button>
+      )}
+
+      <div className="min-w-0 flex-1">
+        <EditorCard
+          title={entry.title}
+          subtitle={`#${index + 1} · ${TIMELINE_KIND_LABELS[entry.kind]} · ${entry.organization || "—"} · ${entry.period || "—"}`}
+          onRemove={onRemove}
+        >
+            {!translationMode && (
+              <SelectField
+                label="Tipologia"
+                value={entry.kind}
+                options={KIND_OPTIONS}
+                onChange={(kind) => onUpdate({ kind })}
+              />
+            )}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <TextField
+                label="Ruolo / Titolo"
+                value={entry.title}
+                onChange={(title) => onUpdate({ title })}
+              />
+              <TextField
+                label="Azienda / Istituto"
+                value={entry.organization}
+                onChange={(organization) => onUpdate({ organization })}
+              />
+              <TextField
+                label="Periodo"
+                value={entry.period}
+                placeholder="Feb 2026 — Oggi"
+                onChange={(period) => onUpdate({ period })}
+              />
+              <TextField
+                label="Luogo (opzionale)"
+                value={entry.location ?? ""}
+                onChange={(location) => onUpdate({ location: location || undefined })}
+              />
+            </div>
+
+            {!translationMode && (
+              <label className="inline-flex cursor-pointer items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={entry.current === true}
+                  onChange={(event) =>
+                    onUpdate({ current: event.target.checked || undefined })
+                  }
+                  className="size-4 accent-[var(--sage)]"
+                />
+                <span className="font-semibold text-foreground-muted">
+                  Mostra badge “In corso”
+                </span>
+              </label>
+            )}
+
+            <TextAreaField
+              label="Risultato principale / impatto"
+              value={entry.impact}
+              rows={2}
+              placeholder="Cosa hai portato a casa, in una frase."
+              onChange={(impact) => onUpdate({ impact })}
+            />
+
+            <StringListField
+              label={entry.kind === "education" ? "Cosa ho studiato" : "Cosa ho fatto"}
+              items={entry.context}
+              multiline
+              onChange={(context) => onUpdate({ context })}
+            />
+
+            {entry.kind !== "education" && (
+              <StringListField
+                label="Cosa ho imparato"
+                items={entry.learned}
+                multiline
+                onChange={(learned) => onUpdate({ learned })}
+              />
+            )}
+
+            {entry.kind === "project" && !translationMode && (
+              <TextField
+                label="Link progetto (opzionale)"
+                value={entry.link ?? ""}
+                placeholder="https://…"
+                onChange={(link) => onUpdate({ link: link || undefined })}
+              />
+            )}
+
+            <StringListField
+              label="Tag"
+              items={entry.tags}
+              placeholder="Jira"
+              onChange={(tags) => onUpdate({ tags })}
+            />
+
+            <TextAreaField
+              label="Versione per CV formale (opzionale)"
+              value={entry.formalSummary ?? ""}
+              rows={2}
+              onChange={(value) => onUpdate({ formalSummary: value || undefined })}
+            />
+        </EditorCard>
+      </div>
+    </div>
+  );
+
+  if (translationMode) return card;
+
+  return (
+    <Reorder.Item
+      value={entry}
+      dragListener={false}
+      dragControls={dragControls}
+      className="list-none"
+    >
+      {card}
+    </Reorder.Item>
+  );
+}
 
 export function TimelineEditor({
   entries,
@@ -24,6 +178,8 @@ export function TimelineEditor({
   onChange: (entries: TimelineEntry[]) => void;
   translationMode?: boolean;
 }) {
+  const ordered = sortTimelineEntries(entries);
+
   function update(index: number, patch: Partial<TimelineEntry>) {
     onChange(entries.map((entry, position) => (position === index ? { ...entry, ...patch } : entry)));
   }
@@ -37,7 +193,7 @@ export function TimelineEditor({
         title: "",
         organization: "",
         period: `${now.getFullYear()} — Oggi`,
-        sortKey: Number(`${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}`),
+        sortKey: nextTimelineSortKey(entries),
         impact: "",
         context: [],
         learned: [],
@@ -47,131 +203,60 @@ export function TimelineEditor({
     ]);
   }
 
-  const ordered = [...entries].sort((a, b) => b.sortKey - a.sortKey);
+  function handleReorder(reordered: TimelineEntry[]) {
+    onChange(applyTimelineVisualOrder(reordered));
+  }
 
   return (
     <div className="space-y-4">
       {!translationMode && (
         <p className="text-sm leading-relaxed text-foreground-muted">
-          La timeline è ordinata in pagina con <strong>Ordinamento</strong> decrescente: usa un
-          numero tipo <code className="rounded bg-surface-muted px-1">202602</code> per febbraio
-          2026.
+          Trascina le voci con l&apos;icona{" "}
+          <GripVertical className="inline size-3.5 align-text-bottom" aria-hidden /> per
+          ordinarle come in pagina: in alto le più recenti.
         </p>
       )}
 
       {!translationMode && <AddButton label="Aggiungi voce alla timeline" onClick={add} />}
 
-      <div className="space-y-4">
-        {ordered.map((entry) => {
-          const index = entries.indexOf(entry);
-          return (
-            <EditorCard
-              key={entry.id}
-              title={entry.title}
-              subtitle={`${TIMELINE_KIND_LABELS[entry.kind]} · ${entry.organization || "—"} · ${entry.period || "—"}`}
-              onRemove={
-                translationMode
-                  ? undefined
-                  : () => onChange(entries.filter((_, position) => position !== index))
-              }
-            >
-              {!translationMode && (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <SelectField
-                    label="Tipologia"
-                    value={entry.kind}
-                    options={KIND_OPTIONS}
-                    onChange={(kind) => update(index, { kind })}
-                  />
-                  <TextField
-                    label="Ordinamento (numero)"
-                    type="number"
-                    value={String(entry.sortKey)}
-                    onChange={(value) => update(index, { sortKey: Number(value) || 0 })}
-                  />
-                </div>
-              )}
-              <div className="grid gap-3 sm:grid-cols-2">
-                <TextField
-                  label="Ruolo / Titolo"
-                  value={entry.title}
-                  onChange={(title) => update(index, { title })}
-                />
-                <TextField
-                  label="Azienda / Istituto"
-                  value={entry.organization}
-                  onChange={(organization) => update(index, { organization })}
-                />
-                <TextField
-                  label="Periodo"
-                  value={entry.period}
-                  placeholder="Feb 2026 — Oggi"
-                  onChange={(period) => update(index, { period })}
-                />
-                <TextField
-                  label="Luogo (opzionale)"
-                  value={entry.location ?? ""}
-                  onChange={(location) => update(index, { location: location || undefined })}
+      {translationMode ? (
+        <div className="space-y-4">
+          {ordered.map((entry, position) => {
+            const index = entries.findIndex((item) => item.id === entry.id);
+            return (
+              <div key={entry.id}>
+                <TimelineEntryCard
+                  entry={entry}
+                  index={position}
+                  translationMode
+                  onUpdate={(patch) => update(index, patch)}
                 />
               </div>
-
-              {!translationMode && (
-                <label className="inline-flex cursor-pointer items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={entry.current === true}
-                    onChange={(event) =>
-                      update(index, { current: event.target.checked || undefined })
-                    }
-                    className="size-4 accent-[var(--sage)]"
-                  />
-                  <span className="font-semibold text-foreground-muted">
-                    Mostra badge “In corso”
-                  </span>
-                </label>
-              )}
-
-              <TextAreaField
-                label="Risultato principale / impatto"
-                value={entry.impact}
-                rows={2}
-                placeholder="Cosa hai portato a casa, in una frase."
-                onChange={(impact) => update(index, { impact })}
+            );
+          })}
+        </div>
+      ) : (
+        <Reorder.Group
+          axis="y"
+          values={ordered}
+          onReorder={handleReorder}
+          className="space-y-4"
+        >
+          {ordered.map((entry, position) => {
+            const index = entries.findIndex((item) => item.id === entry.id);
+            return (
+              <TimelineEntryCard
+                key={entry.id}
+                entry={entry}
+                index={position}
+                translationMode={false}
+                onUpdate={(patch) => update(index, patch)}
+                onRemove={() => onChange(entries.filter((_, itemIndex) => itemIndex !== index))}
               />
-
-              <StringListField
-                label={entry.kind === "education" ? "Cosa ho studiato" : "Cosa ho fatto"}
-                items={entry.context}
-                multiline
-                onChange={(context) => update(index, { context })}
-              />
-
-              {entry.kind !== "education" && (
-                <StringListField
-                  label="Cosa ho imparato"
-                  items={entry.learned}
-                  multiline
-                  onChange={(learned) => update(index, { learned })}
-                />
-              )}
-
-              <StringListField
-                label="Tag"
-                items={entry.tags}
-                placeholder="Jira"
-                onChange={(tags) => update(index, { tags })}
-              />
-
-              <TextAreaField
-                label="Versione per CV formale (opzionale)"
-                value={entry.formalSummary ?? ""}
-                rows={2}
-                onChange={(value) => update(index, { formalSummary: value || undefined })}
-              />
-            </EditorCard>
-          );
-        })}
-      </div>
+            );
+          })}
+        </Reorder.Group>
+      )}
     </div>
   );
 }
