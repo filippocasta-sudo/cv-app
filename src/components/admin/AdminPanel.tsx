@@ -41,7 +41,7 @@ const TABS = [
   { key: "goals", label: "Cosa vorrei fare" },
   { key: "skills", label: "Competenze" },
   { key: "certifications", label: "Certificazioni" },
-  { key: "capabilities", label: "So fare / Non so fare" },
+  { key: "capabilities", label: "Cosa so fare / Cosa NON vorrei fare" },
   { key: "timeline", label: "Timeline" },
   { key: "extra", label: "RAL e link" },
 ] as const;
@@ -353,9 +353,9 @@ export function AdminPanel({
             {tab === "capabilities" && (
               <div className="space-y-10">
                 <section>
-                  <h2 className="mb-3 text-lg">Su questo rispondo io</h2>
+                  <h2 className="mb-3 text-lg">Cosa so fare</h2>
                   <CapabilitiesEditor
-                    label="So fare"
+                    label="Cosa so fare"
                     prefix="can"
                     items={bundle.canDo}
                     translationMode={translationMode}
@@ -363,9 +363,9 @@ export function AdminPanel({
                   />
                 </section>
                 <section>
-                  <h2 className="mb-3 text-lg">Su questo non contarci</h2>
+                  <h2 className="mb-3 text-lg">Cosa NON vorrei fare</h2>
                   <CapabilitiesEditor
-                    label="Non so fare"
+                    label="Cosa NON vorrei fare"
                     prefix="cannot"
                     items={bundle.cannotDo}
                     translationMode={translationMode}
