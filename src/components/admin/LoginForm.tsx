@@ -40,12 +40,12 @@ export function LoginForm({ configured }: { configured: boolean }) {
   }
 
   return (
-    <div className="grid min-h-screen place-items-center px-4">
+    <div data-admin className="grid min-h-screen place-items-center bg-background px-4">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full max-w-sm rounded-2xl border border-border-subtle bg-surface p-6"
+        className="w-full max-w-sm rounded-2xl border-2 border-[var(--admin-border)] bg-surface p-6 shadow-sm"
       >
         <span className="grid size-10 place-items-center rounded-xl bg-sage-soft text-sage">
           <KeyRound className="size-5" aria-hidden />
@@ -68,7 +68,7 @@ export function LoginForm({ configured }: { configured: boolean }) {
                 autoFocus
                 autoComplete="current-password"
                 onChange={(event) => setPassword(event.target.value)}
-                className="w-full rounded-lg border border-border-subtle bg-background px-3 py-2 text-sm outline-none transition focus:border-sage"
+                className="w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-mint/25"
               />
             </label>
 
