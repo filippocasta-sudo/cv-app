@@ -67,6 +67,7 @@ export const UI = {
     "timeline.whatIDid": "Cosa ho fatto",
     "timeline.whatILearned": "Cosa ho imparato",
     "timeline.whatIStudied": "Cosa ho studiato",
+    "timeline.projectLink": "Vai al progetto",
     "timeline.birthDate": "Data di nascita",
     "timeline.pizzaTip": "Forno a legna & ottimizzazione processi sotto stress",
 
@@ -177,6 +178,7 @@ export const UI = {
     "timeline.whatIDid": "What I did",
     "timeline.whatILearned": "What I learned",
     "timeline.whatIStudied": "What I studied",
+    "timeline.projectLink": "View project",
     "timeline.birthDate": "Date of birth",
     "timeline.pizzaTip": "Wood-fired oven & process optimization under pressure",
 

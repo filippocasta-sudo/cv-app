@@ -308,6 +308,90 @@
   box-shadow: var(--shadow-neumorphic-lg);
 }
 
+/* Vibrant gradient surfaces — contact, goals, footer (white text for contrast). */
+.gradient-surface-coral-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--coral) 92%, #c43d58 8%) 0%,
+    color-mix(in srgb, var(--indigo) 90%, #4538b8 10%) 100%
+  );
+  color: #fff;
+}
+
+.gradient-surface-mint-cyan {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--mint) 90%, #008f63 10%) 0%,
+    color-mix(in srgb, var(--cyan) 86%, #0097b3 14%) 100%
+  );
+  color: #fff;
+}
+
+.gradient-surface-indigo-magenta {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--indigo) 92%, #4538b8 8%) 0%,
+    color-mix(in srgb, var(--magenta) 88%, #c42d72 12%) 100%
+  );
+  color: #fff;
+}
+
+.dark .gradient-surface-coral-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--coral) 78%, #1e222d 22%) 0%,
+    color-mix(in srgb, var(--indigo) 76%, #1a1638 24%) 100%
+  );
+}
+
+.dark .gradient-surface-mint-cyan {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--mint) 72%, #0f2a22 28%) 0%,
+    color-mix(in srgb, var(--cyan) 68%, #0a2830 32%) 100%
+  );
+}
+
+.dark .gradient-surface-indigo-magenta {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--indigo) 74%, #151828 26%) 0%,
+    color-mix(in srgb, var(--magenta) 70%, #281428 30%) 100%
+  );
+}
+
+/* Neumorphic shadows look like white halos on saturated gradients — use flat glass instead. */
+.neu-card.gradient-surface-coral-indigo,
+.neu-card.gradient-surface-mint-cyan {
+  box-shadow: none;
+}
+
+.neu-card.gradient-surface-coral-indigo:hover,
+.neu-card.gradient-surface-mint-cyan:hover {
+  box-shadow: none;
+}
+
+.gradient-surface-coral-indigo .neu-interactive,
+.gradient-surface-mint-cyan .neu-interactive,
+.gradient-surface-indigo-magenta .neu-interactive,
+.footer-contact-band .neu-interactive {
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.gradient-surface-coral-indigo .neu-interactive:hover,
+.gradient-surface-coral-indigo .neu-interactive:active,
+.gradient-surface-mint-cyan .neu-interactive:hover,
+.gradient-surface-mint-cyan .neu-interactive:active,
+.gradient-surface-indigo-magenta .neu-interactive:hover,
+.gradient-surface-indigo-magenta .neu-interactive:active,
+.footer-contact-band .neu-interactive:hover,
+.footer-contact-band .neu-interactive:active {
+  box-shadow: none;
+  transform: none;
+}
+
 .ambient-glow {
   position: fixed;
   pointer-events: none;
