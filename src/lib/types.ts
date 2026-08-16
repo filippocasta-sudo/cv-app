@@ -14,6 +14,8 @@ export interface TimelineEntry {
   context: string[];
   learned: string[];
   formalSummary?: string;
+  /** Optional reference URL — shown on project cards. */
+  link?: string;
   tags: string[];
 }
 

@@ -436,14 +436,14 @@ export const cvData: CvData = {
       kind: "project",
       title: "Sito PWA per ristorante con prenotazioni e menu digitale",
       organization: "Ristorante All'Apaia · Progetto personale",
-      period: "2024 — Oggi",
-      sortKey: 202406,
-      current: true,
+      period: "2026",
+      sortKey: 202602,
       location: "Tregnago (VR)",
+      link: "https://www.ristoranteallapaia.it/",
       impact:
         "Sviluppato il sito web in PWA per il ristorante di mia moglie, con prenotazioni online e menu del giorno gestibile da back-end senza passare dal codice.",
       context: [
-        "Progressive Web App su https://www.ristoranteallapaia.it/, installabile e ottimizzata per mobile",
+        "Progressive Web App installabile e ottimizzata per mobile",
         "Modulo di prenotazione online integrato nel flusso operativo della sala",
         "Menu del giorno digitale aggiornabile da pannello di amministrazione",
         "Stack e contenuti pensati per essere gestiti dal locale, non solo dallo sviluppatore",
@@ -454,23 +454,24 @@ export const cvData: CvData = {
       ],
       formalSummary:
         "Progettazione e sviluppo di sito PWA per attività di ristorazione, con modulo prenotazioni e gestione menu digitale via back-end.",
-      tags: ["PWA", "Prenotazioni online", "CMS", "ristoranteallapaia.it"],
+      tags: ["PWA", "Prenotazioni online", "CMS"],
     },
     {
       id: "tl-vivi-tregnago",
       kind: "project",
       title: "Piattaforma digitale per consegne locali in lockdown",
       organization: "Vivi Tregnago · Volontariato",
-      period: "Mar 2020 — Giu 2021",
-      sortKey: 202003,
+      period: "2020 — 2022",
+      sortKey: 202212,
       location: "Tregnago (VR)",
+      link: "https://www.facebook.com/ViviTregnago/",
       impact:
         "Collaborato al progetto Vivi Tregnago durante il Covid: gestione digitale e creazione del sito vivitregnago.it per far pubblicizzare e organizzare le consegne a domicilio alle attività locali sotto restrizioni sanitarie.",
       context: [
         "Coordinamento digitale del progetto civico in risposta al lockdown",
         "Sviluppo del sito vivitregnago.it per vetrina e organizzazione consegne a domicilio",
         "Supporto alle attività del territorio per restare raggiungibili con negozi chiusi",
-        "Il sito è oggi offline; resta la pagina Facebook del progetto: https://www.facebook.com/ViviTregnago/",
+        "Il sito web è oggi offline; resta la pagina Facebook del progetto come riferimento",
       ],
       learned: [
         "In emergenza serve una soluzione semplice che le persone capiscano al primo colpo",
@@ -478,7 +479,7 @@ export const cvData: CvData = {
       ],
       formalSummary:
         "Volontariato nel progetto Vivi Tregnago (Covid-19): gestione digitale e realizzazione piattaforma web per promozione e consegne a domicilio delle attività locali.",
-      tags: ["Volontariato", "Covid-19", "Progetto civico", "vivitregnago.it"],
+      tags: ["Volontariato", "Covid-19", "Progetto civico"],
     },
     {
       id: "tl-automation",

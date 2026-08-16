@@ -155,6 +155,15 @@ export function TimelineEditor({
                 />
               )}
 
+              {entry.kind === "project" && !translationMode && (
+                <TextField
+                  label="Link progetto (opzionale)"
+                  value={entry.link ?? ""}
+                  placeholder="https://…"
+                  onChange={(link) => update(index, { link: link || undefined })}
+                />
+              )}
+
               <StringListField
                 label="Tag"
                 items={entry.tags}

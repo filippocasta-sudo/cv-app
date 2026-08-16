@@ -103,6 +103,7 @@ export function syncEnFromItalian(
             kind: entry.kind,
             sortKey: entry.sortKey,
             current: entry.current,
+            link: entry.link,
           }
         : { ...entry };
     }),

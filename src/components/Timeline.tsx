@@ -7,6 +7,7 @@ import {
   ChevronDown,
   GraduationCap,
   Lightbulb,
+  ExternalLink,
   Pizza,
   Rocket,
   Target,
@@ -132,6 +133,18 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               <span className="font-normal text-foreground-faint"> · {entry.location}</span>
             )}
           </p>
+
+          {entry.kind === "project" && entry.link && (
+            <a
+              href={entry.link}
+              target="_blank"
+              rel="noreferrer"
+              className={`no-print mt-2 inline-flex items-center gap-1.5 text-sm font-bold transition hover:opacity-80 ${config.accent}`}
+            >
+              <ExternalLink className="size-3.5" aria-hidden />
+              {t("timeline.projectLink")}
+            </a>
+          )}
 
           <p className="mt-3 flex gap-2 text-sm leading-relaxed">
             <Target className={`mt-0.5 size-4 shrink-0 ${config.accent}`} aria-hidden />
