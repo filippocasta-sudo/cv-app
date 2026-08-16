@@ -154,6 +154,7 @@ function normalizeLocaleBundle(input: unknown, fallback: CvDataLocaleBundle): Cv
             context: strList(item.context),
             learned: strList(item.learned),
             formalSummary: str(item.formalSummary) || undefined,
+            link: str(item.link) || undefined,
             tags: strList(item.tags),
           };
         })
