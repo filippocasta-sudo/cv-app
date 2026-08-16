@@ -431,6 +431,55 @@ export const cvDataEn: CvDataLocaleBundle = {
       tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     },
     {
+      id: "tl-ristorante-paia",
+      kind: "project",
+      title: "Restaurant PWA with online booking and digital menu",
+      organization: "Ristorante All'Apaia · Personal project",
+      period: "2024 — Present",
+      sortKey: 202406,
+      current: true,
+      location: "Tregnago (VR)",
+      impact:
+        "Built a PWA website for my wife's restaurant with online reservations and a daily menu managed from a back-end without touching code.",
+      context: [
+        "Progressive Web App at https://www.ristoranteallapaia.it/, installable and optimized for mobile",
+        "Online booking module integrated into the restaurant's service flow",
+        "Digital daily menu editable from an admin panel",
+        "Stack and content designed to be run by the venue, not only by the developer",
+      ],
+      learned: [
+        "A real client with Saturday service ahead beats any refactor in priority",
+        "A PWA makes sense when the phone in your pocket is the restaurateur's work tool",
+      ],
+      formalSummary:
+        "Design and development of a PWA for a restaurant business, with booking module and digital menu management via back-end.",
+      tags: ["PWA", "Online booking", "CMS", "ristoranteallapaia.it"],
+    },
+    {
+      id: "tl-vivi-tregnago",
+      kind: "project",
+      title: "Digital platform for local deliveries during lockdown",
+      organization: "Vivi Tregnago · Volunteering",
+      period: "Mar 2020 — Jun 2021",
+      sortKey: 202003,
+      location: "Tregnago (VR)",
+      impact:
+        "Contributed to the Vivi Tregnago project during Covid: digital coordination and creation of vivitregnago.it so local businesses could promote and organize home delivery under health restrictions.",
+      context: [
+        "Digital coordination of the civic project in response to lockdown",
+        "Development of vivitregnago.it for showcase and home delivery organization",
+        "Support for local businesses to stay reachable with shops closed",
+        "The site is offline today; the project's Facebook page remains: https://www.facebook.com/ViviTregnago/",
+      ],
+      learned: [
+        "In a crisis you need a simple solution people understand on first contact",
+        "A community project holds up when someone answers the phone, not only when the site is live",
+      ],
+      formalSummary:
+        "Volunteering on the Vivi Tregnago project (Covid-19): digital management and web platform for promotion and home delivery of local businesses.",
+      tags: ["Volunteering", "Covid-19", "Civic project", "vivitregnago.it"],
+    },
+    {
       id: "tl-automation",
       kind: "project",
       title: "AMS reporting automations",
