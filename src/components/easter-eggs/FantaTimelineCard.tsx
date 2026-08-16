@@ -34,7 +34,7 @@ export function FantaTimelineCard() {
         </span>
       </motion.span>
 
-      <div className="neu-card overflow-hidden">
+      <div className="neu-card gradient-card-coral-magenta overflow-hidden">
         <div className="p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-coral-soft px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-coral uppercase shadow-neumorphic-inset">
