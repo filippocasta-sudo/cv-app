@@ -140,18 +140,20 @@ export function TimelineEditor({
               />
 
               <StringListField
-                label="Cosa facevo / contesto"
+                label={entry.kind === "education" ? "Cosa ho studiato" : "Cosa ho fatto"}
                 items={entry.context}
                 multiline
                 onChange={(context) => update(index, { context })}
               />
 
-              <StringListField
-                label="Cosa ho imparato"
-                items={entry.learned}
-                multiline
-                onChange={(learned) => update(index, { learned })}
-              />
+              {entry.kind !== "education" && (
+                <StringListField
+                  label="Cosa ho imparato"
+                  items={entry.learned}
+                  multiline
+                  onChange={(learned) => update(index, { learned })}
+                />
+              )}
 
               <StringListField
                 label="Tag"

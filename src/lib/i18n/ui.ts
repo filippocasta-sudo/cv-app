@@ -64,8 +64,9 @@ export const UI = {
     "timeline.inProgress": "In corso",
     "timeline.expand": "Espandi dettagli",
     "timeline.collapse": "Chiudi dettagli",
-    "timeline.whatIDid": "Cosa facevo",
+    "timeline.whatIDid": "Cosa ho fatto",
     "timeline.whatILearned": "Cosa ho imparato",
+    "timeline.whatIStudied": "Cosa ho studiato",
     "timeline.birthDate": "Data di nascita",
     "timeline.pizzaTip": "Forno a legna & ottimizzazione processi sotto stress",
 
@@ -175,6 +176,7 @@ export const UI = {
     "timeline.collapse": "Close details",
     "timeline.whatIDid": "What I did",
     "timeline.whatILearned": "What I learned",
+    "timeline.whatIStudied": "What I studied",
     "timeline.birthDate": "Date of birth",
     "timeline.pizzaTip": "Wood-fired oven & process optimization under pressure",
 

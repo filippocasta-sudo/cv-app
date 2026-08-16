@@ -70,7 +70,10 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
   const config = KIND_STYLES[entry.kind];
   const Icon = config.icon;
   const expanded = formal || open;
-  const hasDetails = entry.context.length > 0 || entry.learned.length > 0;
+  const isEducation = entry.kind === "education";
+  const hasDetails = isEducation
+    ? entry.context.length > 0
+    : entry.context.length > 0 || entry.learned.length > 0;
   const isPizza = entry.id === "tl-ristorazione";
   const pizzaTip = t("timeline.pizzaTip");
 
@@ -176,7 +179,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 {entry.context.length > 0 && (
                   <div>
                     <p className="mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
-                      {t("timeline.whatIDid")}
+                      {t(isEducation ? "timeline.whatIStudied" : "timeline.whatIDid")}
                     </p>
                     <ul className="space-y-1.5">
                       {entry.context.map((item) => (
@@ -195,7 +198,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                   </div>
                 )}
 
-                {entry.learned.length > 0 && (
+                {!isEducation && entry.learned.length > 0 && (
                   <div className="rounded-2xl neu-surface-inset p-3.5">
                     <p className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       <Lightbulb className="size-3.5" aria-hidden />
