@@ -21,7 +21,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
-        className="print-avoid-break neu-card gradient-card-amber-coral rounded-3xl p-5"
+        className="print-avoid-break neu-card rounded-3xl p-5"
       >
         <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
           <span className="neu-interactive grid size-8 place-items-center rounded-xl text-amber">

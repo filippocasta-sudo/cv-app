@@ -29,7 +29,6 @@ const KIND_STYLES: Record<
     chip: string;
     rail: string;
     accent: string;
-    cardFill: string;
   }
 > = {
   work: {
@@ -39,7 +38,6 @@ const KIND_STYLES: Record<
     chip: "bg-mint-soft text-mint shadow-neumorphic-inset",
     rail: "from-mint/50",
     accent: "text-mint",
-    cardFill: "gradient-card-mint-cyan",
   },
   education: {
     labelKey: "timeline.kindEducation",
@@ -48,7 +46,6 @@ const KIND_STYLES: Record<
     chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
     rail: "from-indigo/50",
     accent: "text-indigo",
-    cardFill: "gradient-card-indigo-magenta",
   },
   project: {
     labelKey: "timeline.kindProject",
@@ -57,7 +54,6 @@ const KIND_STYLES: Record<
     chip: "bg-amber-soft text-amber shadow-neumorphic-inset",
     rail: "from-amber/50",
     accent: "text-amber",
-    cardFill: "gradient-card-amber-coral",
   },
 };
 
@@ -98,7 +94,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
         <Icon className="size-4" />
       </motion.span>
 
-      <div className={`neu-card overflow-hidden ${config.cardFill} ${expanded ? "shadow-neumorphic-lg" : ""}`}>
+      <div className={`neu-card overflow-hidden ${expanded ? "shadow-neumorphic-lg" : ""}`}>
         <div className="p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span
