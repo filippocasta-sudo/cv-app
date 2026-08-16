@@ -34,9 +34,7 @@ function AccordionPanel({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: positive ? 0.05 : 0.1 }}
       className={`print-avoid-break neu-card overflow-hidden rounded-3xl ${
-        positive
-          ? "bg-gradient-to-br from-mint-soft/70 via-surface to-surface"
-          : "bg-gradient-to-br from-surface-muted/80 via-surface to-surface"
+        positive ? "gradient-card-mint-cyan" : "gradient-card-coral-magenta"
       }`}
     >
       {!formal && (

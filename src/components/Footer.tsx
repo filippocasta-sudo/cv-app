@@ -239,7 +239,7 @@ export function Footer({
             </ul>
           </div>
 
-          <div className="neu-card rounded-3xl bg-surface/70 p-5 backdrop-blur-sm">
+          <div className="neu-card gradient-card-indigo-magenta rounded-3xl p-5 backdrop-blur-sm">
             <Disclosure label={t("footer.openForm")} openLabel={t("footer.closeForm")} emphasis>
               <div className="pt-2">
                 <ContactForm email={personal.email} />
