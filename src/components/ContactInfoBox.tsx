@@ -14,7 +14,7 @@ export function ContactInfoBox({ personal }: { personal: PersonalInfo }) {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.12 }}
-      className="print-avoid-break neu-card mt-5 rounded-3xl p-4 sm:p-5"
+      className="print-avoid-break neu-card gradient-card-coral-indigo mt-5 rounded-3xl p-4 sm:p-5"
       aria-label={t("contact.infoTitle")}
     >
       <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-coral uppercase">
