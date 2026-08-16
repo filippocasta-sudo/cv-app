@@ -50,7 +50,7 @@ export function AdminPanel({
   const router = useRouter();
   const [draft, setDraft] = useState<CvData>(initialData);
   const [saved, setSaved] = useState<CvData>(initialData);
-  const [tab, setTab] = useState<TabKey>("timeline");
+  const [tab, setTab] = useState<TabKey>("profile");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -112,8 +112,8 @@ export function AdminPanel({
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 border-b border-border-subtle bg-background/90 backdrop-blur-md">
+    <div data-admin className="min-h-screen bg-background">
+      <header className="sticky top-0 z-40 border-b-2 border-[var(--admin-border)] bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
           <Link
             href="/"
@@ -137,7 +137,7 @@ export function AdminPanel({
               type="button"
               onClick={resetToDefaults}
               disabled={!storage.writable}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-border-strong hover:text-foreground disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg border-2 border-[var(--admin-border)] px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-[var(--admin-border-focus)] hover:text-foreground disabled:opacity-50"
             >
               <RotateCcw className="size-4" aria-hidden />
               <span className="hidden sm:inline">Ripristina</span>
@@ -146,7 +146,7 @@ export function AdminPanel({
             <button
               type="button"
               onClick={logout}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-border-strong hover:text-foreground"
+              className="inline-flex items-center gap-1.5 rounded-lg border-2 border-[var(--admin-border)] px-3 py-2 text-sm font-semibold text-foreground-muted transition hover:border-[var(--admin-border-focus)] hover:text-foreground"
             >
               <LogOut className="size-4" aria-hidden />
               <span className="hidden sm:inline">Esci</span>
@@ -233,6 +233,7 @@ export function AdminPanel({
               <PersonalEditor
                 personal={draft.personal}
                 onChange={(personal) => patch("personal", personal)}
+                storageWritable={storage.writable}
               />
             )}
 

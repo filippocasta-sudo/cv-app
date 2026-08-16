@@ -54,6 +54,19 @@
   --gradient-hero: linear-gradient(135deg, rgba(255, 94, 126, 0.12) 0%, rgba(108, 92, 231, 0.1) 50%, rgba(0, 210, 148, 0.08) 100%);
 }
 
+/* Admin panel: visible field borders (public site keeps transparent borders for neumorphism). */
+[data-admin] {
+  --admin-border: #b8c4d4;
+  --admin-border-focus: var(--mint);
+  --admin-input-bg: #f0f4fa;
+}
+
+.dark [data-admin] {
+  --admin-border: #4a5568;
+  --admin-border-focus: var(--cyan);
+  --admin-input-bg: #252a38;
+}
+
 .dark {
   --background: #1e222d;
   --surface: #1e222d;

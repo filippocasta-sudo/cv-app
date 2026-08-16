@@ -7,6 +7,7 @@ import {
   TextAreaField,
   TextField,
 } from "@/components/admin/fields";
+import { PortraitUpload } from "@/components/admin/PortraitUpload";
 import type {
   CareerGoals,
   Compensation,
@@ -18,9 +19,11 @@ import type {
 export function PersonalEditor({
   personal,
   onChange,
+  storageWritable = true,
 }: {
   personal: PersonalInfo;
   onChange: (personal: PersonalInfo) => void;
+  storageWritable?: boolean;
 }) {
   const patch = (values: Partial<PersonalInfo>) => onChange({ ...personal, ...values });
 
@@ -34,7 +37,13 @@ export function PersonalEditor({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-border-subtle bg-surface p-4">
+      <PortraitUpload
+        portraitUrl={personal.portraitUrl}
+        onChange={(portraitUrl) => patch({ portraitUrl })}
+        disabled={!storageWritable}
+      />
+
+      <div className="rounded-xl border-2 border-[var(--admin-border)] bg-surface p-4 shadow-sm">
         <div className="grid gap-3 sm:grid-cols-2">
           <TextField label="Nome" value={personal.name} onChange={(name) => patch({ name })} />
           <TextField
@@ -85,13 +94,15 @@ export function PersonalEditor({
           <TextAreaField
             label="Introduzione schietta"
             value={personal.intro}
-            rows={4}
+            rows={6}
+            placeholder="Testo completo visibile in homepage (versione Moderno). Puoi usare paragrafi separati da una riga vuota."
             onChange={(intro) => patch({ intro })}
           />
           <TextAreaField
             label="Introduzione per CV formale"
             value={personal.formalIntro}
-            rows={4}
+            rows={6}
+            placeholder="Testo completo visibile in homepage (versione Classico)."
             onChange={(formalIntro) => patch({ formalIntro })}
           />
         </div>
@@ -119,7 +130,7 @@ export function PersonalEditor({
                   languages: personal.languages.filter((_, position) => position !== index),
                 })
               }
-              className="mb-0.5 rounded-lg border border-border-subtle px-2 py-2 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500"
+              className="mb-0.5 rounded-lg border-2 border-[var(--admin-border)] px-2 py-2 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500"
             >
               Rimuovi
             </button>
@@ -144,7 +155,7 @@ export function GoalsEditor({
   const patch = (values: Partial<CareerGoals>) => onChange({ ...goals, ...values });
 
   return (
-    <div className="space-y-3 rounded-xl border border-border-subtle bg-surface p-4">
+    <div className="space-y-3 rounded-xl border-2 border-[var(--admin-border)] bg-surface p-4 shadow-sm">
       <TextAreaField
         label="Frase di apertura"
         value={goals.headline}
@@ -182,7 +193,7 @@ export function CompensationEditor({
   const patch = (values: Partial<Compensation>) => onChange({ ...compensation, ...values });
 
   return (
-    <div className="space-y-3 rounded-xl border border-border-subtle bg-surface p-4">
+    <div className="space-y-3 rounded-xl border-2 border-[var(--admin-border)] bg-surface p-4 shadow-sm">
       <p className="text-sm leading-relaxed text-foreground-muted">
         Questo blocco resta nascosto dietro un pulsante nella sidebar pubblica.
       </p>
