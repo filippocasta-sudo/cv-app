@@ -165,16 +165,11 @@ export function Footer({
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-coral/25 to-transparent"
       />
 
-      <div className="footer-contact-band relative border-y border-foreground-faint/10 bg-surface-muted py-12 sm:py-14">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo/8 via-transparent to-coral/10 dark:from-indigo/15 dark:to-coral/15"
-        />
-
+      <div className="footer-contact-band gradient-surface-coral-indigo relative border-y border-indigo/15 py-12 sm:py-14 dark:border-indigo/25">
         <div className="relative mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl sm:text-2xl">{t("footer.title")}</h2>
+              <h2 className="text-xl font-bold text-coral-strong sm:text-2xl">{t("footer.title")}</h2>
               <span
                 className="group/coffee relative hidden sm:inline-flex"
                 title={t("footer.pizzaTip")}
@@ -183,7 +178,7 @@ export function Footer({
                 <Pizza className="absolute -right-2 -bottom-1 size-3 text-coral opacity-0 transition group-hover/coffee:opacity-100" />
               </span>
             </div>
-            <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground-muted">
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-indigo/80 dark:text-indigo-strong/90">
               {t("footer.intro")}
             </p>
 
@@ -191,18 +186,18 @@ export function Footer({
               <li>
                 <a
                   href={`mailto:${personal.email}`}
-                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
+                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
                 >
-                  <Mail className="size-4 text-foreground-faint" aria-hidden />
+                  <Mail className="size-4 text-coral" aria-hidden />
                   {personal.email}
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${personal.phone.replace(/\s/g, "")}`}
-                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
+                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
                 >
-                  <Phone className="size-4 text-foreground-faint" aria-hidden />
+                  <Phone className="size-4 text-coral" aria-hidden />
                   {personal.phone}
                 </a>
               </li>
@@ -211,14 +206,14 @@ export function Footer({
                   href={personal.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 font-semibold transition hover:text-coral"
+                  className="inline-flex items-center gap-2 font-semibold text-indigo-strong transition hover:text-coral-strong"
                 >
-                  <LinkedInIcon className="size-4 text-foreground-faint" />
+                  <LinkedInIcon className="size-4 text-coral" />
                   {t("footer.linkedin")}
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2 text-foreground-muted">
-                <MapPin className="size-4 text-foreground-faint" aria-hidden />
+              <li className="inline-flex items-center gap-2 text-indigo/80 dark:text-indigo-strong/90">
+                <MapPin className="size-4 text-coral" aria-hidden />
                 {personal.location}
               </li>
             </ul>
@@ -230,7 +225,7 @@ export function Footer({
                     href={social.url}
                     target={social.url.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="neu-interactive inline-flex rounded-2xl px-3.5 py-2 text-sm font-bold text-foreground-muted hover:text-indigo"
+                    className="neu-interactive inline-flex rounded-2xl border border-indigo/10 bg-surface/45 px-3.5 py-2 text-sm font-bold text-indigo-strong hover:text-coral-strong dark:border-indigo/25 dark:bg-surface/20"
                   >
                     {social.label}
                   </a>
@@ -239,8 +234,13 @@ export function Footer({
             </ul>
           </div>
 
-          <div className="neu-card gradient-card-indigo-magenta rounded-3xl p-5 backdrop-blur-sm">
-            <Disclosure label={t("footer.openForm")} openLabel={t("footer.closeForm")} emphasis>
+          <div className="neu-card rounded-3xl bg-surface/75 p-5 backdrop-blur-sm dark:bg-surface/40">
+            <Disclosure
+              label={t("footer.openForm")}
+              openLabel={t("footer.closeForm")}
+              emphasis
+              onGradient
+            >
               <div className="pt-2">
                 <ContactForm email={personal.email} />
               </div>
