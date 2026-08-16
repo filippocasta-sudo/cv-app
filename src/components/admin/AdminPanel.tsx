@@ -24,8 +24,17 @@ import {
 } from "@/components/admin/ProfileEditor";
 import { SkillsEditor } from "@/components/admin/SkillsEditor";
 import { TimelineEditor } from "@/components/admin/TimelineEditor";
+import {
+  type AdminLocale,
+  ensureCvWithEn,
+  getActiveBundle,
+  italianBundle,
+  patchActiveBundle,
+  syncEnFromItalian,
+  type LocaleBundleKey,
+} from "@/components/admin/localeHelpers";
 import type { StorageInfo } from "@/lib/storage";
-import type { CvData } from "@/lib/types";
+import type { CvData, CvDataLocaleBundle } from "@/lib/types";
 
 const TABS = [
   { key: "profile", label: "Profilo" },
@@ -36,6 +45,11 @@ const TABS = [
   { key: "timeline", label: "Timeline" },
   { key: "extra", label: "RAL e link" },
 ] as const;
+
+const LOCALES = [
+  { key: "it", label: "ITA" },
+  { key: "en", label: "ENG" },
+] as const satisfies ReadonlyArray<{ key: AdminLocale; label: string }>;
 
 type TabKey = (typeof TABS)[number]["key"];
 type Status = "idle" | "saving" | "saved" | "error";
@@ -48,25 +62,48 @@ export function AdminPanel({
   storage: StorageInfo;
 }) {
   const router = useRouter();
-  const [draft, setDraft] = useState<CvData>(initialData);
-  const [saved, setSaved] = useState<CvData>(initialData);
+  const [draft, setDraft] = useState<CvData>(() => ensureCvWithEn(initialData));
+  const [saved, setSaved] = useState<CvData>(() => ensureCvWithEn(initialData));
   const [tab, setTab] = useState<TabKey>("profile");
+  const [locale, setLocale] = useState<AdminLocale>("it");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
   const dirty = useMemo(() => JSON.stringify(draft) !== JSON.stringify(saved), [draft, saved]);
+  const bundle = useMemo(() => getActiveBundle(draft, locale), [draft, locale]);
+  const translationMode = locale === "en";
 
-  const patch = <K extends keyof CvData>(key: K, value: CvData[K]) =>
-    setDraft((current) => ({ ...current, [key]: value }));
+  const patchBundle = <K extends LocaleBundleKey>(key: K, value: CvDataLocaleBundle[K]) =>
+    setDraft((current) => patchActiveBundle(current, locale, key, value));
+
+  function selectLocale(next: AdminLocale) {
+    if (next === locale) return;
+
+    if (next === "en") {
+      setDraft((current) => {
+        const italian = italianBundle(current);
+        const english = syncEnFromItalian(italian, current.en ?? italian);
+        return { ...current, en: english };
+      });
+    }
+
+    setLocale(next);
+  }
 
   async function save() {
     setStatus("saving");
     setError("");
     try {
+      const italian = italianBundle(draft);
+      const payload: CvData = {
+        ...draft,
+        en: syncEnFromItalian(italian, draft.en ?? italian),
+      };
+
       const response = await fetch("/api/cv", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
+        body: JSON.stringify(payload),
       });
       const body = (await response.json().catch(() => ({}))) as CvData & { error?: string };
 
@@ -98,7 +135,7 @@ export function AdminPanel({
       setStatus("error");
       return;
     }
-    const body = (await response.json()) as CvData;
+    const body = ensureCvWithEn((await response.json()) as CvData);
     setDraft(body);
     setSaved(body);
     setStatus("saved");
@@ -124,6 +161,36 @@ export function AdminPanel({
           </Link>
 
           <span className="font-display text-sm font-extrabold">Pannello admin</span>
+
+          <div
+            role="group"
+            aria-label="Lingua contenuti"
+            className="flex rounded-xl border border-border-subtle p-0.5"
+          >
+            {LOCALES.map((item) => {
+              const active = locale === item.key;
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => selectLocale(item.key)}
+                  aria-pressed={active}
+                  className={`relative rounded-lg px-2.5 py-1 text-xs font-bold transition sm:px-3 ${
+                    active ? "text-white" : "text-foreground-muted hover:text-foreground"
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="admin-locale-pill"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute inset-0 rounded-lg bg-sage"
+                    />
+                  )}
+                  <span className="relative z-10">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
 
           {dirty && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-kind-project-soft px-2.5 py-1 text-xs font-semibold text-kind-project">
@@ -221,9 +288,17 @@ export function AdminPanel({
           </p>
         )}
 
+        {translationMode && (
+          <p className="mb-5 rounded-lg border border-border-subtle bg-surface-muted px-4 py-3 text-sm leading-relaxed text-foreground-muted">
+            Stai modificando la <strong>versione inglese</strong>. Aggiungi o rimuovi voci
+            (timeline, competenze, certificazioni, link) dalla versione <strong>ITA</strong>; qui
+            traduci i testi mantenendo la stessa struttura.
+          </p>
+        )}
+
         <AnimatePresence mode="wait">
           <motion.div
-            key={tab}
+            key={`${tab}-${locale}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -231,14 +306,15 @@ export function AdminPanel({
           >
             {tab === "profile" && (
               <PersonalEditor
-                personal={draft.personal}
-                onChange={(personal) => patch("personal", personal)}
+                personal={bundle.personal}
+                translationMode={translationMode}
                 storageWritable={storage.writable}
+                onChange={(personal) => patchBundle("personal", personal)}
               />
             )}
 
             {tab === "goals" && (
-              <GoalsEditor goals={draft.goals} onChange={(goals) => patch("goals", goals)} />
+              <GoalsEditor goals={bundle.goals} onChange={(goals) => patchBundle("goals", goals)} />
             )}
 
             {tab === "skills" && (
@@ -248,8 +324,9 @@ export function AdminPanel({
                   <SkillsEditor
                     label="Hard skill"
                     prefix="hs"
-                    groups={draft.hardSkills}
-                    onChange={(hardSkills) => patch("hardSkills", hardSkills)}
+                    groups={bundle.hardSkills}
+                    translationMode={translationMode}
+                    onChange={(hardSkills) => patchBundle("hardSkills", hardSkills)}
                   />
                 </section>
                 <section>
@@ -257,8 +334,9 @@ export function AdminPanel({
                   <SkillsEditor
                     label="Soft skill"
                     prefix="ss"
-                    groups={draft.softSkills}
-                    onChange={(softSkills) => patch("softSkills", softSkills)}
+                    groups={bundle.softSkills}
+                    translationMode={translationMode}
+                    onChange={(softSkills) => patchBundle("softSkills", softSkills)}
                   />
                 </section>
               </div>
@@ -266,8 +344,9 @@ export function AdminPanel({
 
             {tab === "certifications" && (
               <CertificationsEditor
-                items={draft.certifications}
-                onChange={(certifications) => patch("certifications", certifications)}
+                items={bundle.certifications}
+                translationMode={translationMode}
+                onChange={(certifications) => patchBundle("certifications", certifications)}
               />
             )}
 
@@ -278,8 +357,9 @@ export function AdminPanel({
                   <CapabilitiesEditor
                     label="So fare"
                     prefix="can"
-                    items={draft.canDo}
-                    onChange={(canDo) => patch("canDo", canDo)}
+                    items={bundle.canDo}
+                    translationMode={translationMode}
+                    onChange={(canDo) => patchBundle("canDo", canDo)}
                   />
                 </section>
                 <section>
@@ -287,8 +367,9 @@ export function AdminPanel({
                   <CapabilitiesEditor
                     label="Non so fare"
                     prefix="cannot"
-                    items={draft.cannotDo}
-                    onChange={(cannotDo) => patch("cannotDo", cannotDo)}
+                    items={bundle.cannotDo}
+                    translationMode={translationMode}
+                    onChange={(cannotDo) => patchBundle("cannotDo", cannotDo)}
                   />
                 </section>
               </div>
@@ -296,8 +377,9 @@ export function AdminPanel({
 
             {tab === "timeline" && (
               <TimelineEditor
-                entries={draft.timeline}
-                onChange={(timeline) => patch("timeline", timeline)}
+                entries={bundle.timeline}
+                translationMode={translationMode}
+                onChange={(timeline) => patchBundle("timeline", timeline)}
               />
             )}
 
@@ -306,15 +388,16 @@ export function AdminPanel({
                 <section>
                   <h2 className="mb-3 text-lg">RAL desiderata</h2>
                   <CompensationEditor
-                    compensation={draft.compensation}
-                    onChange={(compensation) => patch("compensation", compensation)}
+                    compensation={bundle.compensation}
+                    onChange={(compensation) => patchBundle("compensation", compensation)}
                   />
                 </section>
                 <section>
                   <h2 className="mb-3 text-lg">Link e social</h2>
                   <SocialsEditor
-                    socials={draft.socials}
-                    onChange={(socials) => patch("socials", socials)}
+                    socials={bundle.socials}
+                    translationMode={translationMode}
+                    onChange={(socials) => patchBundle("socials", socials)}
                   />
                 </section>
               </div>

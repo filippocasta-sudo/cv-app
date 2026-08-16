@@ -18,9 +18,11 @@ const KIND_OPTIONS = (Object.keys(TIMELINE_KIND_LABELS) as TimelineKind[]).map((
 export function TimelineEditor({
   entries,
   onChange,
+  translationMode = false,
 }: {
   entries: TimelineEntry[];
   onChange: (entries: TimelineEntry[]) => void;
+  translationMode?: boolean;
 }) {
   function update(index: number, patch: Partial<TimelineEntry>) {
     onChange(entries.map((entry, position) => (position === index ? { ...entry, ...patch } : entry)));
@@ -49,13 +51,15 @@ export function TimelineEditor({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm leading-relaxed text-foreground-muted">
-        La timeline è ordinata in pagina con <strong>Ordinamento</strong> decrescente: usa un
-        numero tipo <code className="rounded bg-surface-muted px-1">202602</code> per febbraio
-        2026.
-      </p>
+      {!translationMode && (
+        <p className="text-sm leading-relaxed text-foreground-muted">
+          La timeline è ordinata in pagina con <strong>Ordinamento</strong> decrescente: usa un
+          numero tipo <code className="rounded bg-surface-muted px-1">202602</code> per febbraio
+          2026.
+        </p>
+      )}
 
-      <AddButton label="Aggiungi voce alla timeline" onClick={add} />
+      {!translationMode && <AddButton label="Aggiungi voce alla timeline" onClick={add} />}
 
       <div className="space-y-4">
         {ordered.map((entry) => {
@@ -65,21 +69,29 @@ export function TimelineEditor({
               key={entry.id}
               title={entry.title}
               subtitle={`${TIMELINE_KIND_LABELS[entry.kind]} · ${entry.organization || "—"} · ${entry.period || "—"}`}
-              onRemove={() => onChange(entries.filter((_, position) => position !== index))}
+              onRemove={
+                translationMode
+                  ? undefined
+                  : () => onChange(entries.filter((_, position) => position !== index))
+              }
             >
+              {!translationMode && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <SelectField
+                    label="Tipologia"
+                    value={entry.kind}
+                    options={KIND_OPTIONS}
+                    onChange={(kind) => update(index, { kind })}
+                  />
+                  <TextField
+                    label="Ordinamento (numero)"
+                    type="number"
+                    value={String(entry.sortKey)}
+                    onChange={(value) => update(index, { sortKey: Number(value) || 0 })}
+                  />
+                </div>
+              )}
               <div className="grid gap-3 sm:grid-cols-2">
-                <SelectField
-                  label="Tipologia"
-                  value={entry.kind}
-                  options={KIND_OPTIONS}
-                  onChange={(kind) => update(index, { kind })}
-                />
-                <TextField
-                  label="Ordinamento (numero)"
-                  type="number"
-                  value={String(entry.sortKey)}
-                  onChange={(value) => update(index, { sortKey: Number(value) || 0 })}
-                />
                 <TextField
                   label="Ruolo / Titolo"
                   value={entry.title}
@@ -103,17 +115,21 @@ export function TimelineEditor({
                 />
               </div>
 
-              <label className="inline-flex cursor-pointer items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={entry.current === true}
-                  onChange={(event) => update(index, { current: event.target.checked || undefined })}
-                  className="size-4 accent-[var(--sage)]"
-                />
-                <span className="font-semibold text-foreground-muted">
-                  Mostra badge “In corso”
-                </span>
-              </label>
+              {!translationMode && (
+                <label className="inline-flex cursor-pointer items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={entry.current === true}
+                    onChange={(event) =>
+                      update(index, { current: event.target.checked || undefined })
+                    }
+                    className="size-4 accent-[var(--sage)]"
+                  />
+                  <span className="font-semibold text-foreground-muted">
+                    Mostra badge “In corso”
+                  </span>
+                </label>
+              )}
 
               <TextAreaField
                 label="Risultato principale / impatto"

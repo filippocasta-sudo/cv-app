@@ -5,10 +5,12 @@ import { ContactInfoBox } from "@/components/ContactInfoBox";
 import { HeroPortrait } from "@/components/HeroPortrait";
 import { useMode } from "@/context/ModeContext";
 import { introParagraphs } from "@/lib/hero";
+import { useI18n } from "@/lib/i18n";
 import type { PersonalInfo } from "@/lib/types";
 
 export function Hero({ personal }: { personal: PersonalInfo }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const intro = formal ? personal.formalIntro : personal.intro;
   const paragraphs = introParagraphs(intro);
   const portraitSrc = personal.portraitUrl?.trim() || undefined;
@@ -67,7 +69,11 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
           transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           className="order-1 flex justify-center lg:sticky lg:top-28 lg:order-2 lg:justify-end"
         >
-          <HeroPortrait name={personal.name} photoUrl={portraitSrc} />
+          <HeroPortrait
+            name={personal.name}
+            photoUrl={portraitSrc}
+            altPrefix={t("hero.portraitAlt")}
+          />
         </motion.div>
       </div>
     </section>

@@ -3,20 +3,23 @@
 import { motion } from "framer-motion";
 import { Car, Languages, Mail, MapPin, Phone } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/icons";
+import { useI18n } from "@/lib/i18n";
 import type { PersonalInfo } from "@/lib/types";
 
 export function ContactInfoBox({ personal }: { personal: PersonalInfo }) {
+  const { t } = useI18n();
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.12 }}
       className="print-avoid-break neu-card mt-5 rounded-3xl p-4 sm:p-5"
-      aria-label="Info e contatti"
+      aria-label={t("contact.infoTitle")}
     >
       <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-coral uppercase">
         <MapPin className="size-3.5" aria-hidden />
-        Info e contatti
+        {t("contact.infoTitle")}
       </h2>
       <ul className="grid gap-2 text-[13px] sm:grid-cols-2">
         <li>
@@ -45,7 +48,7 @@ export function ContactInfoBox({ personal }: { personal: PersonalInfo }) {
             className="inline-flex items-center gap-2 transition hover:text-coral"
           >
             <LinkedInIcon className="size-3.5 shrink-0 text-foreground-faint" />
-            Profilo LinkedIn
+            {t("contact.linkedin")}
           </a>
         </li>
         <li className="inline-flex items-center gap-2 text-foreground-muted">
@@ -60,7 +63,7 @@ export function ContactInfoBox({ personal }: { personal: PersonalInfo }) {
       <div className="mt-3 border-t border-foreground-faint/10 pt-3">
         <p className="mb-2 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-foreground-muted uppercase">
           <Languages className="size-3.5" aria-hidden />
-          Lingue
+          {t("contact.languages")}
         </p>
         <ul className="flex flex-wrap gap-x-4 gap-y-1.5">
           {personal.languages.map((language) => (

@@ -1,6 +1,6 @@
 import { cvData as fallbackData } from "@/data/cvData";
 import { getStorage } from "@/lib/storage";
-import type { CvData } from "@/lib/types";
+import type { CvData, CvDataLocaleBundle } from "@/lib/types";
 
 /**
  * Content is edited through the admin panel and persisted by the active storage
@@ -42,11 +42,7 @@ function id(value: unknown, prefix: string, index: number): string {
   return candidate.length > 0 ? candidate : `${prefix}-${index + 1}`;
 }
 
-/**
- * Coerces arbitrary JSON (file contents or an admin request body) into a
- * complete `CvData`, so a malformed field can never crash a render.
- */
-export function normalizeCv(input: unknown): CvData {
+function normalizeLocaleBundle(input: unknown, fallback: CvDataLocaleBundle): CvDataLocaleBundle {
   const source = (typeof input === "object" && input !== null ? input : {}) as Record<
     string,
     unknown
@@ -54,7 +50,7 @@ export function normalizeCv(input: unknown): CvData {
   const personalSource = (source.personal ?? {}) as Record<string, unknown>;
   const goalsSource = (source.goals ?? {}) as Record<string, unknown>;
   const compensationSource = (source.compensation ?? {}) as Record<string, unknown>;
-  const fallbackPersonal = fallbackData.personal;
+  const fallbackPersonal = fallback.personal;
 
   const languages = Array.isArray(personalSource.languages)
     ? personalSource.languages.map((entry) => {
@@ -63,7 +59,7 @@ export function normalizeCv(input: unknown): CvData {
       })
     : fallbackPersonal.languages;
 
-  const skillGroups = (value: unknown, prefix: string, fallback: CvData["hardSkills"]) =>
+  const skillGroups = (value: unknown, prefix: string, fb: CvDataLocaleBundle["hardSkills"]) =>
     Array.isArray(value)
       ? value.map((entry, index) => {
           const item = (entry ?? {}) as Record<string, unknown>;
@@ -74,9 +70,9 @@ export function normalizeCv(input: unknown): CvData {
             details: strList(item.details),
           };
         })
-      : fallback;
+      : fb;
 
-  const capabilities = (value: unknown, prefix: string, fallback: CvData["canDo"]) =>
+  const capabilities = (value: unknown, prefix: string, fb: CvDataLocaleBundle["canDo"]) =>
     Array.isArray(value)
       ? value.map((entry, index) => {
           const item = (entry ?? {}) as Record<string, unknown>;
@@ -86,7 +82,7 @@ export function normalizeCv(input: unknown): CvData {
             detail: str(item.detail),
           };
         })
-      : fallback;
+      : fb;
 
   return {
     personal: {
@@ -107,19 +103,19 @@ export function normalizeCv(input: unknown): CvData {
       languages,
     },
     goals: {
-      headline: str(goalsSource.headline, fallbackData.goals.headline),
+      headline: str(goalsSource.headline, fallback.goals.headline),
       targetRoles: Array.isArray(goalsSource.targetRoles)
         ? strList(goalsSource.targetRoles)
-        : fallbackData.goals.targetRoles,
+        : fallback.goals.targetRoles,
       projectTypes: Array.isArray(goalsSource.projectTypes)
         ? strList(goalsSource.projectTypes)
-        : fallbackData.goals.projectTypes,
+        : fallback.goals.projectTypes,
       idealContext: Array.isArray(goalsSource.idealContext)
         ? strList(goalsSource.idealContext)
-        : fallbackData.goals.idealContext,
+        : fallback.goals.idealContext,
     },
-    hardSkills: skillGroups(source.hardSkills, "hs", fallbackData.hardSkills),
-    softSkills: skillGroups(source.softSkills, "ss", fallbackData.softSkills),
+    hardSkills: skillGroups(source.hardSkills, "hs", fallback.hardSkills),
+    softSkills: skillGroups(source.softSkills, "ss", fallback.softSkills),
     certifications: Array.isArray(source.certifications)
       ? source.certifications.map((entry, index) => {
           const item = (entry ?? {}) as Record<string, unknown>;
@@ -132,13 +128,13 @@ export function normalizeCv(input: unknown): CvData {
             note: str(item.note) || undefined,
           };
         })
-      : fallbackData.certifications,
-    canDo: capabilities(source.canDo, "can", fallbackData.canDo),
-    cannotDo: capabilities(source.cannotDo, "cannot", fallbackData.cannotDo),
+      : fallback.certifications,
+    canDo: capabilities(source.canDo, "can", fallback.canDo),
+    cannotDo: capabilities(source.cannotDo, "cannot", fallback.cannotDo),
     compensation: {
-      label: str(compensationSource.label, fallbackData.compensation.label),
-      range: str(compensationSource.range, fallbackData.compensation.range),
-      note: str(compensationSource.note, fallbackData.compensation.note),
+      label: str(compensationSource.label, fallback.compensation.label),
+      range: str(compensationSource.range, fallback.compensation.range),
+      note: str(compensationSource.note, fallback.compensation.note),
     },
     timeline: Array.isArray(source.timeline)
       ? source.timeline.map((entry, index) => {
@@ -161,7 +157,7 @@ export function normalizeCv(input: unknown): CvData {
             tags: strList(item.tags),
           };
         })
-      : fallbackData.timeline,
+      : fallback.timeline,
     socials: Array.isArray(source.socials)
       ? source.socials.map((entry, index) => {
           const item = (entry ?? {}) as Record<string, unknown>;
@@ -171,6 +167,37 @@ export function normalizeCv(input: unknown): CvData {
             url: str(item.url),
           };
         })
-      : fallbackData.socials,
+      : fallback.socials,
+  };
+}
+
+/**
+ * Coerces arbitrary JSON (file contents or an admin request body) into a
+ * complete `CvData`, so a malformed field can never crash a render.
+ */
+export function normalizeCv(input: unknown): CvData {
+  const source = (typeof input === "object" && input !== null ? input : {}) as Record<
+    string,
+    unknown
+  >;
+  const italianFallback: CvDataLocaleBundle = {
+    personal: fallbackData.personal,
+    goals: fallbackData.goals,
+    hardSkills: fallbackData.hardSkills,
+    softSkills: fallbackData.softSkills,
+    certifications: fallbackData.certifications,
+    canDo: fallbackData.canDo,
+    cannotDo: fallbackData.cannotDo,
+    compensation: fallbackData.compensation,
+    timeline: fallbackData.timeline,
+    socials: fallbackData.socials,
+  };
+
+  const core = normalizeLocaleBundle(source, italianFallback);
+  const enFallback = fallbackData.en ?? core;
+
+  return {
+    ...core,
+    en: normalizeLocaleBundle(source.en, enFallback),
   };
 }

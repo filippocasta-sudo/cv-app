@@ -82,6 +82,19 @@ export interface SocialLink {
   url: string;
 }
 
+export type CvDataLocaleBundle = {
+  personal: PersonalInfo;
+  goals: CareerGoals;
+  hardSkills: SkillGroup[];
+  softSkills: SkillGroup[];
+  certifications: Certification[];
+  canDo: Capability[];
+  cannotDo: Capability[];
+  compensation: Compensation;
+  timeline: TimelineEntry[];
+  socials: SocialLink[];
+};
+
 export interface CvData {
   personal: PersonalInfo;
   goals: CareerGoals;
@@ -93,6 +106,7 @@ export interface CvData {
   compensation: Compensation;
   timeline: TimelineEntry[];
   socials: SocialLink[];
+  en?: CvDataLocaleBundle;
 }
 
 export const TIMELINE_KIND_LABELS: Record<TimelineKind, string> = {

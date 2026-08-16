@@ -1,4 +1,5 @@
 import type { CvData } from "@/lib/types";
+import { cvDataEn } from "@/data/cvData.en";
 
 export const cvData: CvData = {
   personal: {
@@ -505,6 +506,8 @@ export const cvData: CvData = {
     { id: "soc-github", label: "GitHub", url: "https://github.com/filippocasta-sudo" },
     { id: "soc-email", label: "Email", url: "mailto:filippocasta@gmail.com" },
   ],
+
+  en: cvDataEn,
 };
 
 export default cvData;

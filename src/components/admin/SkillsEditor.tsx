@@ -14,11 +14,13 @@ export function SkillsEditor({
   prefix,
   groups,
   onChange,
+  translationMode = false,
 }: {
   label: string;
   prefix: string;
   groups: SkillGroup[];
   onChange: (groups: SkillGroup[]) => void;
+  translationMode?: boolean;
 }) {
   function update(index: number, patch: Partial<SkillGroup>) {
     onChange(groups.map((group, position) => (position === index ? { ...group, ...patch } : group)));
@@ -26,15 +28,17 @@ export function SkillsEditor({
 
   return (
     <div className="space-y-4">
-      <AddButton
-        label={`Aggiungi ${label.toLowerCase()}`}
-        onClick={() =>
-          onChange([
-            ...groups,
-            { id: `${prefix}-${Date.now()}`, name: "", summary: "", details: [] },
-          ])
-        }
-      />
+      {!translationMode && (
+        <AddButton
+          label={`Aggiungi ${label.toLowerCase()}`}
+          onClick={() =>
+            onChange([
+              ...groups,
+              { id: `${prefix}-${Date.now()}`, name: "", summary: "", details: [] },
+            ])
+          }
+        />
+      )}
 
       <div className="space-y-4">
         {groups.map((group, index) => (
@@ -42,7 +46,11 @@ export function SkillsEditor({
             key={group.id}
             title={group.name}
             subtitle={`${group.details.length} dettagli espandibili`}
-            onRemove={() => onChange(groups.filter((_, position) => position !== index))}
+            onRemove={
+              translationMode
+                ? undefined
+                : () => onChange(groups.filter((_, position) => position !== index))
+            }
           >
             <TextField
               label="Macro-competenza"

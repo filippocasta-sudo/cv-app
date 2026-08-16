@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, X } from "lucide-react";
 import { useState } from "react";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
 import type { Capability } from "@/lib/types";
 
 interface CapabilitiesAccordionProps {
@@ -21,6 +22,7 @@ function AccordionPanel({
   tone: "positive" | "negative";
 }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const [open, setOpen] = useState(formal);
   const positive = tone === "positive";
   const Icon = positive ? Check : X;
@@ -63,8 +65,9 @@ function AccordionPanel({
                 {title}
               </span>
               <span className="text-xs text-foreground-faint">
-                {items.length} {items.length === 1 ? "punto" : "punti"}
-                {!open && " · clicca per i dettagli"}
+                {items.length}{" "}
+                {items.length === 1 ? t("capabilities.point") : t("capabilities.points")}
+                {!open && t("capabilities.clickDetails")}
               </span>
             </span>
           </span>
@@ -122,23 +125,24 @@ export function CapabilitiesAccordion({
   layout = "grid",
 }: CapabilitiesAccordionProps & { layout?: "grid" | "sidebar" }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const isSidebar = layout === "sidebar";
 
   return (
     <section
       id="cosa-so-fare"
-      aria-label={formal ? "Aree di competenza e limiti" : "Punti forti e debolezze"}
+      aria-label={formal ? t("capabilities.ariaFormal") : t("capabilities.ariaModern")}
       className={`scroll-mt-28 ${
         isSidebar ? "flex flex-col gap-4" : "mt-4 grid gap-4 sm:grid-cols-2"
       }`}
     >
       <AccordionPanel
-        title={formal ? "Aree di piena autonomia" : "Punti forti"}
+        title={formal ? t("capabilities.strengthsFormal") : t("capabilities.strengthsModern")}
         items={canDo}
         tone="positive"
       />
       <AccordionPanel
-        title={formal ? "Ambiti non presidiati" : "Punti deboli"}
+        title={formal ? t("capabilities.weaknessesFormal") : t("capabilities.weaknessesModern")}
         items={cannotDo}
         tone="negative"
       />
