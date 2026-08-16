@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { ContactInfoBox } from "@/components/ContactInfoBox";
 import { HeroPortrait } from "@/components/HeroPortrait";
 import { useMode } from "@/context/ModeContext";
-import { heroLines } from "@/lib/hero";
+import { introParagraphs } from "@/lib/hero";
+import { useI18n } from "@/lib/i18n";
 import type { PersonalInfo } from "@/lib/types";
 
 export function Hero({ personal }: { personal: PersonalInfo }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const intro = formal ? personal.formalIntro : personal.intro;
-  const [line1, line2] = heroLines(intro);
+  const paragraphs = introParagraphs(intro);
 
   return (
     <section id="top" className="relative scroll-mt-28 pt-4 pb-2 sm:pt-6">
@@ -41,14 +43,16 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
           </h1>
 
           <div className="mt-4 space-y-2">
-            <p className="text-balance-tight max-w-xl text-[15px] leading-relaxed text-foreground sm:text-base">
-              {line1}
-            </p>
-            {line2 && (
-              <p className="text-balance-tight max-w-xl text-[15px] leading-relaxed text-foreground-muted sm:text-base">
-                {line2}
+            {paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-balance-tight max-w-xl text-[15px] leading-relaxed sm:text-base ${
+                  index === 0 ? "text-foreground" : "text-foreground-muted"
+                }`}
+              >
+                {paragraph}
               </p>
-            )}
+            ))}
           </div>
 
           <ContactInfoBox personal={personal} />
@@ -64,7 +68,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
           transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           className="order-1 flex justify-center lg:sticky lg:top-28 lg:order-2 lg:justify-end"
         >
-          <HeroPortrait name={personal.name} />
+          <HeroPortrait name={personal.name} altPrefix={t("hero.portraitAlt")} />
         </motion.div>
       </div>
     </section>

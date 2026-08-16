@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import { Target } from "lucide-react";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
 import type { CareerGoals } from "@/lib/types";
 
 export function GoalsPanel({ goals }: { goals: CareerGoals }) {
   const { formal } = useMode();
+  const { t } = useI18n();
 
   return (
     <motion.section
@@ -20,7 +22,7 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
       <article className="neu-card rounded-3xl bg-gradient-to-br from-coral-soft/80 via-surface to-surface p-5 sm:p-6">
         <h2 className="inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-coral uppercase">
           <Target className="size-3.5" aria-hidden />
-          {formal ? "Obiettivo professionale" : "Cosa vorrei fare"}
+          {formal ? t("goals.titleFormal") : t("goals.titleModern")}
         </h2>
 
         <p className="text-balance-tight mt-3 text-base leading-snug font-semibold text-foreground sm:text-lg">
@@ -28,7 +30,7 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
         </p>
 
         <p className="mt-4 text-[11px] font-bold tracking-wide text-foreground-muted uppercase">
-          Ruoli target
+          {t("goals.targetRoles")}
         </p>
         <ul className="mt-2 flex flex-wrap gap-2">
           {goals.targetRoles.map((role) => (
@@ -42,11 +44,11 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
         </ul>
 
         <div className="mt-4 border-t border-foreground-faint/10 pt-3">
-          <Disclosure label="Contesto e progetti" openLabel="Nascondi contesto">
+          <Disclosure label={t("goals.context")} openLabel={t("goals.hideContext")}>
             <div className="grid gap-4 pt-2 sm:grid-cols-2">
               <div>
                 <p className="text-[11px] font-bold tracking-wide text-indigo uppercase">
-                  Tipo di progetti
+                  {t("goals.projectTypes")}
                 </p>
                 <ul className="mt-2 space-y-1.5">
                   {goals.projectTypes.map((item) => (
@@ -58,7 +60,7 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
               </div>
               <div>
                 <p className="text-[11px] font-bold tracking-wide text-mint uppercase">
-                  Contesto ideale
+                  {t("goals.idealContext")}
                 </p>
                 <ul className="mt-2 space-y-1.5">
                   {goals.idealContext.map((item) => (

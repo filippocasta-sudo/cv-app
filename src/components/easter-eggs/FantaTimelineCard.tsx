@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import { ClipboardList, Shirt } from "lucide-react";
 import { useState } from "react";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
 
 /** Easter-egg timeline node — visual only, not part of CV data. */
 export function FantaTimelineCard() {
   const { formal } = useMode();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
 
   if (formal) return null;
@@ -36,28 +38,25 @@ export function FantaTimelineCard() {
         <div className="p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-coral-soft px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-coral uppercase shadow-neumorphic-inset">
-              Passione
+              {t("fanta.passion")}
             </span>
             <span className="rounded-full bg-indigo-soft px-2 py-0.5 text-[11px] font-bold tracking-wide text-indigo uppercase">
-              Easter egg
+              {t("fanta.easterEgg")}
             </span>
             <span className="ml-auto text-xs font-semibold text-foreground-faint tabular-nums">
-              2009 — oggi
+              {t("fanta.period")}
             </span>
           </div>
 
-          <h3 className="mt-2.5 text-lg leading-snug">Lega FantaTregnago</h3>
+          <h3 className="mt-2.5 text-lg leading-snug">{t("fanta.title")}</h3>
           <p className="mt-0.5 text-sm font-semibold text-foreground-muted">
-            Commissioner & Coach
+            {t("fanta.subtitle")}
             <span className="font-normal text-foreground-faint"> · Tregnago (VR)</span>
           </p>
 
           <p className="mt-3 flex gap-2 text-sm leading-relaxed">
             <ClipboardList className="mt-0.5 size-4 shrink-0 text-coral" aria-hidden />
-            <span>
-              Gestisco regolamenti, aste e litigi post-giornata con la stessa energia di un
-              change advisory board — ma con più emoticon.
-            </span>
+            <span>{t("fanta.impact")}</span>
           </p>
 
           <button
@@ -66,7 +65,7 @@ export function FantaTimelineCard() {
             aria-expanded={open}
             className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-coral transition hover:text-coral-strong"
           >
-            {open ? "Chiudi lore" : "Sblocca dettagli tattici"}
+            {open ? t("fanta.collapse") : t("fanta.expand")}
           </button>
 
           {open && (
@@ -75,8 +74,7 @@ export function FantaTimelineCard() {
               animate={{ opacity: 1, height: "auto" }}
               className="mt-3 rounded-xl neu-surface-inset p-3 text-[13px] leading-relaxed text-foreground-muted italic"
             >
-              &ldquo;League Commissioner & Coach a tempo perso&rdquo; — fondata nel 2009, ancora
-              in piedi nonostante VAR immaginario e transfer market discutibili.
+              &ldquo;{t("fanta.lore")}&rdquo;
             </motion.p>
           )}
         </div>

@@ -10,4 +10,12 @@ export function heroLines(intro: string): [string, string] {
   return [intro.slice(0, breakAt).trim(), intro.slice(breakAt).trim()];
 }
 
+/** Full intro paragraphs (no truncation). */
+export function introParagraphs(intro: string): string[] {
+  return intro
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
 export const PORTRAIT_PATH = "/images/filippo-portrait.png";
