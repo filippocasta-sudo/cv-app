@@ -24,12 +24,13 @@ export function HomeMain({ cv }: { cv: CvData }) {
         className={`mt-14 grid gap-8 ${!formal ? "lg:grid-cols-[minmax(0,1fr)_minmax(240px,300px)] lg:items-start" : ""}`}
       >
         {!formal && (
-          <aside className="no-print order-1 lg:order-2 lg:col-start-2 lg:row-start-1">
+          <aside className="no-print order-1 flex flex-col gap-4 lg:order-2 lg:col-start-2 lg:row-start-1">
             <CapabilitiesAccordion
               canDo={cv.canDo}
               cannotDo={cv.cannotDo}
               layout="sidebar"
             />
+            <ProfileDetails certifications={cv.certifications} />
           </aside>
         )}
 
@@ -39,7 +40,7 @@ export function HomeMain({ cv }: { cv: CvData }) {
             classicOnly={formal}
             birthDate={cv.personal.birthDate}
           />
-          <ProfileDetails certifications={cv.certifications} />
+          {formal && <ProfileDetails certifications={cv.certifications} />}
         </div>
       </div>
     </main>
