@@ -36,7 +36,7 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
           {goals.targetRoles.map((role) => (
             <li
               key={role}
-              className="rounded-full border border-white/30 bg-white/20 px-3 py-1.5 text-xs font-bold text-white shadow-neumorphic-inset sm:text-sm"
+              className="rounded-full border border-white/30 bg-white/20 px-3 py-1.5 text-xs font-bold text-white sm:text-sm"
             >
               {role}
             </li>

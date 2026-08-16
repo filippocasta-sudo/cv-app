@@ -360,6 +360,38 @@
   );
 }
 
+/* Neumorphic shadows look like white halos on saturated gradients — use flat glass instead. */
+.neu-card.gradient-surface-coral-indigo,
+.neu-card.gradient-surface-mint-cyan {
+  box-shadow: none;
+}
+
+.neu-card.gradient-surface-coral-indigo:hover,
+.neu-card.gradient-surface-mint-cyan:hover {
+  box-shadow: none;
+}
+
+.gradient-surface-coral-indigo .neu-interactive,
+.gradient-surface-mint-cyan .neu-interactive,
+.gradient-surface-indigo-magenta .neu-interactive,
+.footer-contact-band .neu-interactive {
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.gradient-surface-coral-indigo .neu-interactive:hover,
+.gradient-surface-coral-indigo .neu-interactive:active,
+.gradient-surface-mint-cyan .neu-interactive:hover,
+.gradient-surface-mint-cyan .neu-interactive:active,
+.gradient-surface-indigo-magenta .neu-interactive:hover,
+.gradient-surface-indigo-magenta .neu-interactive:active,
+.footer-contact-band .neu-interactive:hover,
+.footer-contact-band .neu-interactive:active {
+  box-shadow: none;
+  transform: none;
+}
+
 .ambient-glow {
   position: fixed;
   pointer-events: none;

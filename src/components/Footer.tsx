@@ -53,7 +53,7 @@ function ContactForm({ email }: { email: string }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-2xl bg-white/20 p-4 text-sm text-white shadow-neumorphic-inset"
+        className="rounded-2xl border border-white/25 bg-white/20 p-4 text-sm text-white"
       >
         <p className="font-bold">{t("footer.sentTitle")}</p>
         <p className="mt-1 leading-relaxed text-white/90">
@@ -77,7 +77,7 @@ function ContactForm({ email }: { email: string }) {
             required
             minLength={2}
             autoComplete="name"
-            className="w-full rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
+            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
         <label className="block">
@@ -87,7 +87,7 @@ function ContactForm({ email }: { email: string }) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
+            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
       </div>
@@ -100,7 +100,7 @@ function ContactForm({ email }: { email: string }) {
           minLength={10}
           rows={4}
           placeholder={t("footer.placeholder")}
-          className="w-full resize-y rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
+          className="w-full resize-y rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
         />
       </label>
 
@@ -109,7 +109,7 @@ function ContactForm({ email }: { email: string }) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="neu-interactive inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-bold text-indigo-strong shadow-neumorphic-sm disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-bold text-indigo-strong transition hover:bg-white/90 disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -225,7 +225,7 @@ export function Footer({
                     href={social.url}
                     target={social.url.startsWith("http") ? "_blank" : undefined}
                     rel="noreferrer"
-                    className="neu-interactive inline-flex rounded-2xl border border-white/25 bg-white/15 px-3.5 py-2 text-sm font-bold text-white hover:bg-white/25"
+                    className="inline-flex rounded-2xl border border-white/30 bg-white/15 px-3.5 py-2 text-sm font-bold text-white transition hover:border-white/45 hover:bg-white/25"
                   >
                     {social.label}
                   </a>
@@ -260,7 +260,7 @@ export function Footer({
             onClick={handleSecretClick}
             aria-label={t("footer.adminSr")}
             title="·"
-            className="no-print size-4 rounded-full text-transparent transition hover:shadow-neumorphic-inset"
+            className="no-print size-4 rounded-full text-transparent transition hover:bg-white/10"
           >
             ·
           </button>
