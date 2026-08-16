@@ -38,10 +38,10 @@ export function Disclosure({
           className={
             emphasis
               ? onGradient
-                ? "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl px-4 py-2.5 text-left text-sm font-bold text-indigo-strong hover:text-coral-strong"
+                ? "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-2.5 text-left text-sm font-bold text-white hover:bg-white/25"
                 : "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl px-4 py-2.5 text-left text-sm font-bold text-coral"
               : onGradient
-                ? "no-print group inline-flex w-full items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-left text-sm font-semibold text-indigo-strong transition hover:text-coral-strong"
+                ? "no-print group inline-flex w-full items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-left text-sm font-semibold text-white/90 transition hover:text-white"
                 : "no-print group inline-flex w-full items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-left text-sm font-semibold text-foreground-muted transition hover:text-indigo"
           }
         >
