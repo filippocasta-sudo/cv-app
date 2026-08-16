@@ -65,6 +65,8 @@ export interface PersonalInfo {
   license: string;
   /** Display string, e.g. "12 maggio 1992". */
   birthDate: string;
+  /** Optional override; defaults to /images/filippo-portrait.png */
+  portraitUrl?: string;
   languages: Language[];
 }
 

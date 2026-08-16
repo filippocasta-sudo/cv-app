@@ -87,6 +87,7 @@ export function HeroPortrait({
             fill
             priority
             sizes="(max-width: 768px) 280px, 320px"
+            unoptimized={photoUrl.startsWith("http") || photoUrl.includes("?v=")}
             className={`object-contain object-bottom transition-opacity duration-500 ${
               loaded ? "opacity-100" : "opacity-0"
             }`}

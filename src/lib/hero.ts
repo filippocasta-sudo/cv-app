@@ -1,4 +1,15 @@
-/** Split intro copy into two hero lines for the above-the-fold layout. */
+/** Split intro into display paragraphs (preserves blank lines and full text). */
+export function introParagraphs(intro: string): string[] {
+  const trimmed = intro.trim();
+  if (!trimmed) return [];
+
+  const blocks = trimmed.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+  if (blocks.length > 1) return blocks;
+
+  return [trimmed];
+}
+
+/** @deprecated Prefer introParagraphs — kept for tests referencing the old two-line split. */
 export function heroLines(intro: string): [string, string] {
   const sentences = intro.match(/[^.!?]+[.!?]+/g)?.map((s) => s.trim()) ?? [intro];
   if (sentences.length >= 2) {
@@ -8,14 +19,6 @@ export function heroLines(intro: string): [string, string] {
   const breakAt = intro.indexOf(" ", midpoint);
   if (breakAt === -1) return [intro, ""];
   return [intro.slice(0, breakAt).trim(), intro.slice(breakAt).trim()];
-}
-
-/** Full intro paragraphs (no truncation). */
-export function introParagraphs(intro: string): string[] {
-  return intro
-    .split(/\n\n+/)
-    .map((p) => p.trim())
-    .filter(Boolean);
 }
 
 export const PORTRAIT_PATH = "/images/filippo-portrait.png";

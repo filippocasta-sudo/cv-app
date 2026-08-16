@@ -99,6 +99,7 @@ function normalizeLocaleBundle(input: unknown, fallback: CvDataLocaleBundle): Cv
       location: str(personalSource.location, fallbackPersonal.location),
       license: str(personalSource.license, fallbackPersonal.license),
       birthDate: str(personalSource.birthDate, fallbackPersonal.birthDate),
+      portraitUrl: str(personalSource.portraitUrl) || undefined,
       languages,
     },
     goals: {

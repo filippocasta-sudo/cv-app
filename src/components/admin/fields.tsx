@@ -3,7 +3,7 @@
 import { Plus, Trash2 } from "lucide-react";
 
 const inputClass =
-  "w-full rounded-lg border border-border-subtle bg-surface px-3 py-2 text-sm outline-none transition focus:border-sage";
+  "w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm shadow-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-mint/25";
 
 export function TextField({
   label,
@@ -26,7 +26,7 @@ export function TextField({
       <input
         type={type}
         value={value}
-        placeholder={placeholder}
+        placeholder={placeholder ?? `Inserisci ${label.toLowerCase()}…`}
         disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
         className={`${inputClass}${disabled ? " opacity-60" : ""}`}
@@ -54,7 +54,7 @@ export function TextAreaField({
       <textarea
         value={value}
         rows={rows}
-        placeholder={placeholder}
+        placeholder={placeholder ?? `Inserisci ${label.toLowerCase()}…`}
         onChange={(event) => onChange(event.target.value)}
         className={`${inputClass} resize-y`}
       />
@@ -106,7 +106,7 @@ export function CheckboxField({
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="size-4 accent-[var(--sage)]"
+        className="size-4 accent-[var(--mint)]"
       />
       <span className="font-semibold text-foreground-muted">{label}</span>
     </label>
@@ -138,7 +138,7 @@ export function StringListField({
         <button
           type="button"
           onClick={() => onChange([...items, ""])}
-          className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-semibold text-sage transition hover:bg-sage-soft"
+          className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-semibold text-mint transition hover:bg-mint-soft"
         >
           <Plus className="size-3.5" aria-hidden />
           Aggiungi
@@ -146,8 +146,8 @@ export function StringListField({
       </div>
 
       {items.length === 0 && (
-        <p className="rounded-lg border border-dashed border-border-subtle px-3 py-2 text-xs text-foreground-faint">
-          Nessuna voce.
+        <p className="rounded-lg border-2 border-dashed border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-xs text-foreground-faint">
+          Nessuna voce — clicca Aggiungi.
         </p>
       )}
 
@@ -158,14 +158,14 @@ export function StringListField({
               <textarea
                 value={item}
                 rows={2}
-                placeholder={placeholder}
+                placeholder={placeholder ?? "Inserisci testo…"}
                 onChange={(event) => update(index, event.target.value)}
                 className={`${inputClass} resize-y`}
               />
             ) : (
               <input
                 value={item}
-                placeholder={placeholder}
+                placeholder={placeholder ?? "Inserisci testo…"}
                 onChange={(event) => update(index, event.target.value)}
                 className={inputClass}
               />
@@ -174,7 +174,7 @@ export function StringListField({
               type="button"
               onClick={() => onChange(items.filter((_, position) => position !== index))}
               aria-label={`Rimuovi voce ${index + 1}`}
-              className="mt-1 grid size-8 shrink-0 place-items-center rounded-lg border border-border-subtle text-foreground-faint transition hover:border-red-400 hover:text-red-500"
+              className="mt-1 grid size-8 shrink-0 place-items-center rounded-lg border-2 border-[var(--admin-border)] text-foreground-faint transition hover:border-red-400 hover:text-red-500"
             >
               <Trash2 className="size-3.5" aria-hidden />
             </button>
@@ -197,7 +197,7 @@ export function EditorCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-border-subtle bg-surface p-4">
+    <div className="rounded-xl border-2 border-[var(--admin-border)] bg-surface p-4 shadow-sm">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
           <p className="font-display text-sm font-bold">{title || "Senza titolo"}</p>
@@ -207,7 +207,7 @@ export function EditorCard({
           <button
             type="button"
             onClick={onRemove}
-            className="inline-flex shrink-0 items-center gap-1 rounded-md border border-border-subtle px-2 py-1 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500"
+            className="inline-flex shrink-0 items-center gap-1 rounded-md border-2 border-[var(--admin-border)] px-2 py-1 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500"
           >
             <Trash2 className="size-3.5" aria-hidden />
             Elimina
@@ -224,7 +224,7 @@ export function AddButton({ label, onClick }: { label: string; onClick: () => vo
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-sage/50 bg-sage-soft/40 px-4 py-3 text-sm font-bold text-sage-strong transition hover:border-sage hover:bg-sage-soft"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-mint/50 bg-mint-soft/40 px-4 py-3 text-sm font-bold text-mint-strong transition hover:border-mint hover:bg-mint-soft"
     >
       <Plus className="size-4" aria-hidden />
       {label}
