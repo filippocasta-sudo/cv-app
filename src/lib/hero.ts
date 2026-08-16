@@ -1,4 +1,15 @@
-/** Split intro copy into two hero lines for the above-the-fold layout. */
+/** Split intro into display paragraphs (preserves blank lines and full text). */
+export function introParagraphs(intro: string): string[] {
+  const trimmed = intro.trim();
+  if (!trimmed) return [];
+
+  const blocks = trimmed.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+  if (blocks.length > 1) return blocks;
+
+  return [trimmed];
+}
+
+/** @deprecated Prefer introParagraphs — kept for tests referencing the old two-line split. */
 export function heroLines(intro: string): [string, string] {
   const sentences = intro.match(/[^.!?]+[.!?]+/g)?.map((s) => s.trim()) ?? [intro];
   if (sentences.length >= 2) {

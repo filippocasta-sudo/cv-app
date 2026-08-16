@@ -8,11 +8,13 @@ export function CapabilitiesEditor({
   prefix,
   items,
   onChange,
+  translationMode = false,
 }: {
   label: string;
   prefix: string;
   items: Capability[];
   onChange: (items: Capability[]) => void;
+  translationMode?: boolean;
 }) {
   function update(index: number, patch: Partial<Capability>) {
     onChange(items.map((item, position) => (position === index ? { ...item, ...patch } : item)));
@@ -20,19 +22,25 @@ export function CapabilitiesEditor({
 
   return (
     <div className="space-y-4">
-      <AddButton
-        label={`Aggiungi voce · ${label}`}
-        onClick={() =>
-          onChange([...items, { id: `${prefix}-${Date.now()}`, label: "", detail: "" }])
-        }
-      />
+      {!translationMode && (
+        <AddButton
+          label={`Aggiungi voce · ${label}`}
+          onClick={() =>
+            onChange([...items, { id: `${prefix}-${Date.now()}`, label: "", detail: "" }])
+          }
+        />
+      )}
 
       <div className="space-y-4">
         {items.map((item, index) => (
           <EditorCard
             key={item.id}
             title={item.label}
-            onRemove={() => onChange(items.filter((_, position) => position !== index))}
+            onRemove={
+              translationMode
+                ? undefined
+                : () => onChange(items.filter((_, position) => position !== index))
+            }
           >
             <TextField
               label="Titolo"

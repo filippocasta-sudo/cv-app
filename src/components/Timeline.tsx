@@ -15,12 +15,14 @@ import { useMemo, useState } from "react";
 import { FantaTimelineCard } from "@/components/easter-eggs/FantaTimelineCard";
 import { Section } from "@/components/ui/Section";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
+import type { UiKey } from "@/lib/i18n/ui";
 import type { TimelineEntry, TimelineKind } from "@/lib/types";
 
-const KIND_CONFIG: Record<
+const KIND_STYLES: Record<
   TimelineKind,
   {
-    label: string;
+    labelKey: UiKey;
     icon: typeof Briefcase;
     dot: string;
     chip: string;
@@ -29,7 +31,7 @@ const KIND_CONFIG: Record<
   }
 > = {
   work: {
-    label: "Esperienza",
+    labelKey: "timeline.kindWork",
     icon: Briefcase,
     dot: "bg-gradient-to-br from-mint to-cyan text-white",
     chip: "bg-mint-soft text-mint shadow-neumorphic-inset",
@@ -37,7 +39,7 @@ const KIND_CONFIG: Record<
     accent: "text-mint",
   },
   education: {
-    label: "Formazione",
+    labelKey: "timeline.kindEducation",
     icon: GraduationCap,
     dot: "bg-gradient-to-br from-indigo to-magenta text-white",
     chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
@@ -45,7 +47,7 @@ const KIND_CONFIG: Record<
     accent: "text-indigo",
   },
   project: {
-    label: "Progetto",
+    labelKey: "timeline.kindProject",
     icon: Rocket,
     dot: "bg-gradient-to-br from-amber to-coral text-white",
     chip: "bg-amber-soft text-amber shadow-neumorphic-inset",
@@ -55,20 +57,25 @@ const KIND_CONFIG: Record<
 };
 
 const FILTERS = [
-  { key: "all", label: "Tutto" },
-  { key: "work", label: "Esperienza" },
-  { key: "education", label: "Formazione" },
-  { key: "project", label: "Progetti" },
+  { key: "all", labelKey: "timeline.filterAll" as const },
+  { key: "work", labelKey: "timeline.filterWork" as const },
+  { key: "education", labelKey: "timeline.filterEducation" as const },
+  { key: "project", labelKey: "timeline.filterProject" as const },
 ] as const;
 
 function TimelineCard({ entry }: { entry: TimelineEntry }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
-  const config = KIND_CONFIG[entry.kind];
+  const config = KIND_STYLES[entry.kind];
   const Icon = config.icon;
   const expanded = formal || open;
-  const hasDetails = entry.context.length > 0 || entry.learned.length > 0;
+  const isEducation = entry.kind === "education";
+  const hasDetails = isEducation
+    ? entry.context.length > 0
+    : entry.context.length > 0 || entry.learned.length > 0;
   const isPizza = entry.id === "tl-ristorazione";
+  const pizzaTip = t("timeline.pizzaTip");
 
   return (
     <motion.li
@@ -92,23 +99,20 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
             <span
               className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase ${config.chip}`}
             >
-              {config.label}
+              {t(config.labelKey)}
             </span>
             {entry.current && (
               <span className="rounded-full bg-gradient-to-r from-coral to-magenta px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-neumorphic-sm">
-                In corso
+                {t("timeline.inProgress")}
               </span>
             )}
             {isPizza && !formal && (
-              <span
-                className="group/pizza relative inline-flex"
-                title="Forno a legna & ottimizzazione processi sotto stress"
-              >
+              <span className="group/pizza relative inline-flex" title={pizzaTip}>
                 <span className="neu-interactive grid size-7 place-items-center rounded-xl text-amber">
                   <Pizza className="size-3.5" aria-hidden />
                 </span>
                 <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden w-max max-w-[200px] -translate-x-1/2 rounded-lg px-2 py-1 text-[10px] font-semibold text-foreground shadow-neumorphic-sm neu-surface-inset group-hover/pizza:block">
-                  Forno a legna & ottimizzazione processi sotto stress
+                  {pizzaTip}
                 </span>
               </span>
             )}
@@ -150,7 +154,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               aria-expanded={open}
               className={`no-print mt-3 inline-flex items-center gap-1.5 text-sm font-semibold transition ${config.accent} hover:opacity-80`}
             >
-              {open ? "Chiudi dettagli" : "Espandi dettagli"}
+              {open ? t("timeline.collapse") : t("timeline.expand")}
               <motion.span
                 animate={{ rotate: open ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
@@ -175,7 +179,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 {entry.context.length > 0 && (
                   <div>
                     <p className="mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
-                      Cosa facevo
+                      {t(isEducation ? "timeline.whatIStudied" : "timeline.whatIDid")}
                     </p>
                     <ul className="space-y-1.5">
                       {entry.context.map((item) => (
@@ -194,11 +198,11 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                   </div>
                 )}
 
-                {entry.learned.length > 0 && (
+                {!isEducation && entry.learned.length > 0 && (
                   <div className="rounded-2xl neu-surface-inset p-3.5">
                     <p className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       <Lightbulb className="size-3.5" aria-hidden />
-                      Cosa ho imparato
+                      {t("timeline.whatILearned")}
                     </p>
                     <ul className="space-y-1.5">
                       {entry.learned.map((item) => (
@@ -219,6 +223,8 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
 }
 
 function BirthDateMarker({ birthDate }: { birthDate: string }) {
+  const { t } = useI18n();
+
   return (
     <motion.li
       initial={{ opacity: 0, y: 8 }}
@@ -234,7 +240,7 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
           {birthDate}
         </span>
         <span className="mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
-          Data di nascita
+          {t("timeline.birthDate")}
         </span>
       </div>
     </motion.li>
@@ -251,6 +257,7 @@ export function Timeline({
   birthDate?: string;
 }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("all");
   const classic = classicOnly || formal;
 
@@ -279,15 +286,9 @@ export function Timeline({
   return (
     <Section
       id="percorso"
-      eyebrow="Percorso"
-      title={
-        classic ? "Esperienze lavorative e formazione" : "Da dove vengo e cosa ho combinato"
-      }
-      description={
-        classic
-          ? "Percorso professionale e formativo in ordine cronologico inverso."
-          : "Lavoro, studio e progetti personali in un'unica linea temporale. Ogni card dice subito cosa ho portato a casa; il resto si apre solo se ti interessa."
-      }
+      eyebrow={t("timeline.eyebrow")}
+      title={classic ? t("timeline.titleFormal") : t("timeline.titleModern")}
+      description={classic ? t("timeline.descFormal") : t("timeline.descModern")}
     >
       {!classic && (
         <div className="no-print mb-6 flex flex-wrap gap-2">
@@ -305,7 +306,7 @@ export function Timeline({
                     : "neu-interactive text-foreground-muted hover:text-foreground"
                 }`}
               >
-                {option.label}
+                {t(option.labelKey)}
                 <span
                   className={`ml-1.5 tabular-nums ${active ? "text-white/75" : "text-foreground-faint"}`}
                 >

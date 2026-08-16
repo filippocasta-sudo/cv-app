@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Sparkles, Wrench } from "lucide-react";
 import { useState } from "react";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
 import type { SkillGroup } from "@/lib/types";
 
 function SkillAccordionItem({
@@ -14,6 +15,7 @@ function SkillAccordionItem({
   accent: "mint" | "indigo";
 }) {
   const { formal } = useMode();
+  const { t } = useI18n();
   const [open, setOpen] = useState(formal);
   const [detailsOpen, setDetailsOpen] = useState(formal);
   const expanded = open;
@@ -62,7 +64,7 @@ function SkillAccordionItem({
                     aria-expanded={detailsOpen}
                     className="no-print inline-flex items-center gap-1.5 text-xs font-semibold text-foreground-muted transition hover:text-indigo"
                   >
-                    {detailsOpen ? "Nascondi dettagli" : "Mostra dettagli"}
+                      {detailsOpen ? t("skills.hideDetails") : t("skills.showDetails")}
                     <motion.span
                       animate={{ rotate: detailsOpen ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
@@ -100,13 +102,14 @@ interface SkillsAccordionListProps {
 
 export function SkillsAccordionList({ hardSkills, softSkills }: SkillsAccordionListProps) {
   const { formal } = useMode();
+  const { t } = useI18n();
 
   return (
-    <section id="competenze" aria-label="Competenze" className="scroll-mt-28 mt-5 grid gap-6 lg:grid-cols-2 lg:gap-8">
+    <section id="competenze" aria-label={t("skills.aria")} className="scroll-mt-28 mt-5 grid gap-6 lg:grid-cols-2 lg:gap-8">
       <div>
         <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
           <Wrench className="size-3.5" aria-hidden />
-          {formal ? "Competenze tecniche" : "Hard skills"}
+          {formal ? t("skills.hardFormal") : t("skills.hardModern")}
         </h2>
         <ul className="space-y-3">
           {hardSkills.map((group) => (
@@ -120,7 +123,7 @@ export function SkillsAccordionList({ hardSkills, softSkills }: SkillsAccordionL
       <div>
         <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
           <Sparkles className="size-3.5" aria-hidden />
-          {formal ? "Competenze trasversali" : "Soft skills"}
+          {formal ? t("skills.softFormal") : t("skills.softModern")}
         </h2>
         <ul className="space-y-3">
           {softSkills.map((group) => (

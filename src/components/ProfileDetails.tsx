@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
 import { Disclosure } from "@/components/ui/Disclosure";
+import { useI18n } from "@/lib/i18n";
 import type { Certification } from "@/lib/types";
 
 interface ProfileDetailsProps {
@@ -10,6 +11,7 @@ interface ProfileDetailsProps {
 }
 
 export function ProfileDetails({ certifications }: ProfileDetailsProps) {
+  const { t } = useI18n();
   const primaryCerts = certifications.filter((cert) => cert.primary);
   const secondaryCerts = certifications.filter((cert) => !cert.primary);
 
@@ -25,7 +27,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
           <span className="neu-interactive grid size-8 place-items-center rounded-xl text-amber">
             <Award className="size-4" aria-hidden />
           </span>
-          Certificazioni e corsi
+          {t("profile.certsTitle")}
         </h3>
         <ul className="space-y-3">
           {primaryCerts.map((cert) => (
@@ -48,8 +50,8 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
         {secondaryCerts.length > 0 && (
           <div className="mt-3 border-t border-foreground-faint/10 pt-2">
             <Disclosure
-              label={`Corsi e attestati passati (${secondaryCerts.length})`}
-              openLabel="Nascondi corsi passati"
+              label={`${t("profile.pastCerts")} (${secondaryCerts.length})`}
+              openLabel={t("profile.hidePastCerts")}
             >
               <ul className="space-y-2.5 border-l-2 border-amber/30 pl-3">
                 {secondaryCerts.map((cert) => (

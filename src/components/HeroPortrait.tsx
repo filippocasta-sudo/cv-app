@@ -5,16 +5,24 @@ import Image from "next/image";
 import { useState } from "react";
 import { TooltipBadge } from "@/components/ui/TooltipBadge";
 import { useMode } from "@/context/ModeContext";
+import { useI18n } from "@/lib/i18n";
 import { PORTRAIT_PATH } from "@/lib/hero";
-import { PASSION_EGGS } from "@/lib/passionEggs";
+import { getPassionEggs } from "@/lib/passionEggs";
 
 interface HeroPortraitProps {
   name: string;
   photoUrl?: string;
+  altPrefix?: string;
 }
 
-export function HeroPortrait({ name, photoUrl = PORTRAIT_PATH }: HeroPortraitProps) {
+export function HeroPortrait({
+  name,
+  photoUrl = PORTRAIT_PATH,
+  altPrefix = "Ritratto di",
+}: HeroPortraitProps) {
   const { formal } = useMode();
+  const { t } = useI18n();
+  const eggs = getPassionEggs(t);
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const initials = name
@@ -27,7 +35,7 @@ export function HeroPortrait({ name, photoUrl = PORTRAIT_PATH }: HeroPortraitPro
     <div className="relative mx-auto flex h-[min(420px,55vh)] w-full max-w-[280px] items-end justify-center sm:max-w-[300px] lg:max-w-xs">
       {!formal && (
         <div className="no-print pointer-events-auto absolute top-1/2 -left-1 z-20 flex -translate-y-1/2 flex-col gap-3 lg:hidden">
-          {PASSION_EGGS.map((egg) => (
+          {eggs.map((egg) => (
             <TooltipBadge
               key={egg.label}
               icon={egg.icon}
@@ -75,10 +83,11 @@ export function HeroPortrait({ name, photoUrl = PORTRAIT_PATH }: HeroPortraitPro
         {!failed ? (
           <Image
             src={photoUrl}
-            alt={`Ritratto di ${name}`}
+            alt={`${altPrefix} ${name}`}
             fill
             priority
             sizes="(max-width: 768px) 280px, 320px"
+            unoptimized={photoUrl.startsWith("http") || photoUrl.includes("?v=")}
             className={`object-contain object-bottom transition-opacity duration-500 ${
               loaded ? "opacity-100" : "opacity-0"
             }`}

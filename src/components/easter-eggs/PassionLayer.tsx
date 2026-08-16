@@ -2,13 +2,17 @@
 
 import { TooltipBadge } from "@/components/ui/TooltipBadge";
 import { useMode } from "@/context/ModeContext";
-import { PASSION_EGGS } from "@/lib/passionEggs";
+import { useI18n } from "@/lib/i18n";
+import { getPassionEggs } from "@/lib/passionEggs";
 
 /** Passion badges on the left edge (desktop) — tooltips open inward. */
 export function PassionLayer() {
   const { formal } = useMode();
+  const { t } = useI18n();
 
   if (formal) return null;
+
+  const eggs = getPassionEggs(t);
 
   return (
     <div className="easter-egg-layer no-print pointer-events-none fixed inset-0 z-30 hidden overflow-hidden lg:block">
@@ -16,7 +20,7 @@ export function PassionLayer() {
       <div className="ambient-glow top-1/3 -right-32 size-80 bg-indigo/25" aria-hidden />
 
       <div className="pointer-events-auto fixed top-1/2 left-2 z-40 flex -translate-y-1/2 flex-col gap-5 sm:left-3">
-        {PASSION_EGGS.map((egg) => (
+        {eggs.map((egg) => (
           <TooltipBadge
             key={egg.label}
             icon={egg.icon}

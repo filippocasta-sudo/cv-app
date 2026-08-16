@@ -65,6 +65,8 @@ export interface PersonalInfo {
   license: string;
   /** Display string, e.g. "12 maggio 1992". */
   birthDate: string;
+  /** Optional override; defaults to /images/filippo-portrait.png */
+  portraitUrl?: string;
   languages: Language[];
 }
 
@@ -80,6 +82,19 @@ export interface SocialLink {
   url: string;
 }
 
+export type CvDataLocaleBundle = {
+  personal: PersonalInfo;
+  goals: CareerGoals;
+  hardSkills: SkillGroup[];
+  softSkills: SkillGroup[];
+  certifications: Certification[];
+  canDo: Capability[];
+  cannotDo: Capability[];
+  compensation: Compensation;
+  timeline: TimelineEntry[];
+  socials: SocialLink[];
+};
+
 export interface CvData {
   personal: PersonalInfo;
   goals: CareerGoals;
@@ -91,6 +106,7 @@ export interface CvData {
   compensation: Compensation;
   timeline: TimelineEntry[];
   socials: SocialLink[];
+  en?: CvDataLocaleBundle;
 }
 
 export const TIMELINE_KIND_LABELS: Record<TimelineKind, string> = {

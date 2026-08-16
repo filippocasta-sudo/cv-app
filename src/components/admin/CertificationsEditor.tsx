@@ -11,9 +11,11 @@ import type { Certification } from "@/lib/types";
 export function CertificationsEditor({
   items,
   onChange,
+  translationMode = false,
 }: {
   items: Certification[];
   onChange: (items: Certification[]) => void;
+  translationMode?: boolean;
 }) {
   function update(index: number, patch: Partial<Certification>) {
     onChange(items.map((item, position) => (position === index ? { ...item, ...patch } : item)));
@@ -26,21 +28,23 @@ export function CertificationsEditor({
         finiscono nell&apos;accordion dei corsi passati.
       </p>
 
-      <AddButton
-        label="Aggiungi certificazione o corso"
-        onClick={() =>
-          onChange([
-            ...items,
-            {
-              id: `cert-${Date.now()}`,
-              name: "",
-              issuer: "",
-              year: String(new Date().getFullYear()),
-              primary: true,
-            },
-          ])
-        }
-      />
+      {!translationMode && (
+        <AddButton
+          label="Aggiungi certificazione o corso"
+          onClick={() =>
+            onChange([
+              ...items,
+              {
+                id: `cert-${Date.now()}`,
+                name: "",
+                issuer: "",
+                year: String(new Date().getFullYear()),
+                primary: true,
+              },
+            ])
+          }
+        />
+      )}
 
       <div className="space-y-4">
         {items.map((item, index) => (
@@ -48,7 +52,11 @@ export function CertificationsEditor({
             key={item.id}
             title={item.name}
             subtitle={`${item.issuer || "—"} · ${item.year || "—"}`}
-            onRemove={() => onChange(items.filter((_, position) => position !== index))}
+            onRemove={
+              translationMode
+                ? undefined
+                : () => onChange(items.filter((_, position) => position !== index))
+            }
           >
             <div className="grid gap-3 sm:grid-cols-2">
               <TextField
@@ -65,6 +73,7 @@ export function CertificationsEditor({
                 label="Anno"
                 value={item.year}
                 onChange={(year) => update(index, { year })}
+                disabled={translationMode}
               />
               <TextField
                 label="Nota (opzionale)"
@@ -72,11 +81,13 @@ export function CertificationsEditor({
                 onChange={(note) => update(index, { note: note || undefined })}
               />
             </div>
-            <CheckboxField
-              label="In primo piano"
-              checked={item.primary}
-              onChange={(primary) => update(index, { primary })}
-            />
+            {!translationMode && (
+              <CheckboxField
+                label="In primo piano"
+                checked={item.primary}
+                onChange={(primary) => update(index, { primary })}
+              />
+            )}
           </EditorCard>
         ))}
       </div>
