@@ -18,9 +18,11 @@ import type {
 export function PersonalEditor({
   personal,
   onChange,
+  translationMode = false,
 }: {
   personal: PersonalInfo;
   onChange: (personal: PersonalInfo) => void;
+  translationMode?: boolean;
 }) {
   const patch = (values: Partial<PersonalInfo>) => onChange({ ...personal, ...values });
 
@@ -47,16 +49,19 @@ export function PersonalEditor({
             type="email"
             value={personal.email}
             onChange={(email) => patch({ email })}
+            disabled={translationMode}
           />
           <TextField
             label="Telefono"
             value={personal.phone}
             onChange={(phone) => patch({ phone })}
+            disabled={translationMode}
           />
           <TextField
             label="LinkedIn"
             value={personal.linkedin}
             onChange={(linkedin) => patch({ linkedin })}
+            disabled={translationMode}
           />
           <TextField
             label="Posizione"
@@ -119,16 +124,19 @@ export function PersonalEditor({
                   languages: personal.languages.filter((_, position) => position !== index),
                 })
               }
-              className="mb-0.5 rounded-lg border border-border-subtle px-2 py-2 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500"
+              disabled={translationMode}
+              className="mb-0.5 rounded-lg border border-border-subtle px-2 py-2 text-xs font-semibold text-foreground-muted transition hover:border-red-400 hover:text-red-500 disabled:opacity-40"
             >
               Rimuovi
             </button>
           </div>
         ))}
-        <AddButton
-          label="Aggiungi lingua"
-          onClick={() => patch({ languages: [...personal.languages, { name: "", level: "" }] })}
-        />
+        {!translationMode && (
+          <AddButton
+            label="Aggiungi lingua"
+            onClick={() => patch({ languages: [...personal.languages, { name: "", level: "" }] })}
+          />
+        )}
       </EditorCard>
     </div>
   );
@@ -212,9 +220,11 @@ export function CompensationEditor({
 export function SocialsEditor({
   socials,
   onChange,
+  translationMode = false,
 }: {
   socials: SocialLink[];
   onChange: (socials: SocialLink[]) => void;
+  translationMode?: boolean;
 }) {
   function update(index: number, patch: Partial<SocialLink>) {
     onChange(socials.map((item, position) => (position === index ? { ...item, ...patch } : item)));
@@ -222,16 +232,22 @@ export function SocialsEditor({
 
   return (
     <div className="space-y-4">
-      <AddButton
-        label="Aggiungi link"
-        onClick={() => onChange([...socials, { id: `soc-${Date.now()}`, label: "", url: "" }])}
-      />
+      {!translationMode && (
+        <AddButton
+          label="Aggiungi link"
+          onClick={() => onChange([...socials, { id: `soc-${Date.now()}`, label: "", url: "" }])}
+        />
+      )}
       {socials.map((social, index) => (
         <EditorCard
           key={social.id}
           title={social.label}
           subtitle={social.url}
-          onRemove={() => onChange(socials.filter((_, position) => position !== index))}
+          onRemove={
+            translationMode
+              ? undefined
+              : () => onChange(socials.filter((_, position) => position !== index))
+          }
         >
           <div className="grid gap-3 sm:grid-cols-2">
             <TextField
@@ -243,6 +259,7 @@ export function SocialsEditor({
               label="URL"
               value={social.url}
               onChange={(url) => update(index, { url })}
+              disabled={translationMode}
             />
           </div>
         </EditorCard>

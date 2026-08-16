@@ -11,12 +11,14 @@ export function TextField({
   onChange,
   placeholder,
   type = "text",
+  disabled = false,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   type?: string;
+  disabled?: boolean;
 }) {
   return (
     <label className="block">
@@ -25,8 +27,9 @@ export function TextField({
         type={type}
         value={value}
         placeholder={placeholder}
+        disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
-        className={inputClass}
+        className={`${inputClass}${disabled ? " opacity-60" : ""}`}
       />
     </label>
   );
