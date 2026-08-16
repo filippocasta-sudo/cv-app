@@ -22,7 +22,9 @@ function SkillAccordionItem({
   const titleClass = accent === "mint" ? "text-mint-strong" : "text-indigo-strong";
   const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
   const tint =
-    accent === "mint" ? "gradient-card-mint-cyan" : "gradient-card-indigo-magenta";
+    accent === "mint"
+      ? "bg-gradient-to-br from-mint-soft/60 via-surface to-surface"
+      : "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface";
 
   return (
     <article className={`neu-card overflow-hidden rounded-2xl ${tint}`}>
