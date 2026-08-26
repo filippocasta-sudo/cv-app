@@ -21,7 +21,7 @@ export function Section({
     <section id={id} className={`scroll-mt-24 ${className}`}>
       <header className="mb-6">
         {eyebrow && (
-          <p className="mb-2 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold tracking-[0.18em] text-indigo uppercase shadow-neumorphic-inset">
+          <p className="mb-2 inline-flex items-center gap-2 rounded-full px-3 py-1 font-heading text-xs font-bold tracking-[0.18em] text-indigo uppercase shadow-neumorphic-inset">
             <span className="size-1.5 rounded-full bg-gradient-to-r from-coral to-indigo" aria-hidden />
             {eyebrow}
           </p>

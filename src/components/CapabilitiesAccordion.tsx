@@ -58,7 +58,7 @@ function AccordionPanel({
             </span>
             <span>
               <span
-                className={`block font-display text-sm font-extrabold sm:text-base ${
+                className={`block font-heading text-sm font-extrabold sm:text-base ${
                   positive ? "text-mint-strong" : "text-foreground"
                 }`}
               >
@@ -79,7 +79,7 @@ function AccordionPanel({
 
       {formal && (
         <h3
-          className={`px-4 pt-4 font-display text-sm font-extrabold sm:px-5 sm:text-base ${
+          className={`px-4 pt-4 font-heading text-sm font-extrabold sm:px-5 sm:text-base ${
             positive ? "text-mint-strong" : "text-foreground"
           }`}
         >
@@ -105,7 +105,7 @@ function AccordionPanel({
                   transition={{ delay: index * 0.03 }}
                   className="rounded-2xl neu-surface-inset p-3"
                 >
-                  <p className="font-display text-[14px] font-bold">{item.label}</p>
+                  <p className="font-heading text-[14px] font-bold">{item.label}</p>
                   <p className="mt-1 text-[12px] leading-relaxed text-foreground-muted sm:text-[13px]">
                     {item.detail}
                   </p>

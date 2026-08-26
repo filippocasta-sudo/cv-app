@@ -40,7 +40,7 @@ export function FantaTimelineCard() {
             <span className="rounded-full bg-coral-soft px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-coral uppercase shadow-neumorphic-inset">
               {t("timeline.kindProject")}
             </span>
-            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
+            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-bold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
               {t("fanta.period")}
             </span>
           </div>

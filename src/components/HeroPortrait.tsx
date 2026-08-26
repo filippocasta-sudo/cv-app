@@ -99,7 +99,7 @@ export function HeroPortrait({
           />
         ) : (
           <div className="flex h-full items-end justify-center pb-4">
-            <span className="font-display text-5xl font-extrabold gradient-text-accent">{initials}</span>
+            <span className="font-heading text-5xl font-extrabold gradient-text-accent">{initials}</span>
           </div>
         )}
       </motion.div>

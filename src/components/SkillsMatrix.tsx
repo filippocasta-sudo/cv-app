@@ -56,7 +56,7 @@ function CapabilityColumn({
             }`}
           >
             <p
-              className={`font-display text-[15px] font-bold ${positive ? "text-mint-strong" : ""}`}
+              className={`font-heading text-[15px] font-bold ${positive ? "text-mint-strong" : ""}`}
             >
               {item.label}
             </p>

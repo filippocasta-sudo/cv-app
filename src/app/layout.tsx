@@ -4,13 +4,15 @@ import { ModeProvider } from "@/context/ModeContext";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
+/** Titoli e sottotitoli — un solo font display con pesi 700/800. */
 const syne = Syne({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["700", "800"],
   variable: "--font-syne",
   display: "swap",
 });
 
+/** Testo corrente — leggibilità e accessibilità. */
 const atkinson = Atkinson_Hyperlegible({
   subsets: ["latin"],
   weight: ["400", "700"],

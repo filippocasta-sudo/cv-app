@@ -181,8 +181,10 @@
   --color-kind-cert: var(--kind-cert);
   --color-kind-cert-soft: var(--kind-cert-soft);
 
-  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  /* Syne → titoli e sottotitoli (h1–h6, .font-heading). Atkinson → testo corrente. */
+  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading);
 
   --shadow-neumorphic: 8px 8px 16px var(--neu-shadow-dark), -8px -8px 16px var(--neu-shadow-light);
   --shadow-neumorphic-sm: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light);
@@ -287,9 +289,15 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Titoli fuori dagli heading semantici (es. label uppercase in <p>). */
+  .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
   }
 
   :focus-visible {

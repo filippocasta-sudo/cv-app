@@ -34,13 +34,13 @@ function SkillAccordionItem({
         aria-expanded={open}
         className="no-print flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
       >
-        <span className={`font-display text-sm font-bold ${titleClass}`}>{group.name}</span>
+        <span className={`font-heading text-sm font-bold ${titleClass}`}>{group.name}</span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <ChevronDown className="size-4 text-foreground-muted" aria-hidden />
         </motion.span>
       </button>
 
-      <h3 className={`hidden px-4 pt-4 font-display text-sm font-bold print:block ${titleClass}`}>
+      <h3 className={`hidden px-4 pt-4 font-heading text-sm font-bold print:block ${titleClass}`}>
         {group.name}
       </h3>
 

@@ -84,7 +84,7 @@ function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | 
           key={group.id}
           className="print-avoid-break border-b border-foreground-faint/10 pb-3.5 last:border-0 last:pb-0"
         >
-          <p className={`font-display text-[15px] font-bold ${titleClass}`}>{group.name}</p>
+          <p className={`font-heading text-[15px] font-bold ${titleClass}`}>{group.name}</p>
           <p className="mt-1 text-[13px] leading-relaxed text-foreground-muted">{group.summary}</p>
           {group.details.length > 0 && (
             <div className="mt-1.5">
@@ -131,7 +131,7 @@ export function Sidebar({
           {primaryCerts.map((cert) => (
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
-                <p className="font-display text-[15px] font-bold">{cert.name}</p>
+                <p className="font-heading text-[15px] font-bold">{cert.name}</p>
                 <span className="shrink-0 rounded-lg bg-cert-soft px-2 py-0.5 text-xs font-bold text-cert-strong shadow-neumorphic-inset">
                   {cert.year}
                 </span>
@@ -246,7 +246,7 @@ export function Sidebar({
               <BadgeEuro className="size-3.5" aria-hidden />
               {compensation.label}
             </p>
-            <p className="mt-1.5 font-display text-2xl font-extrabold gradient-text-accent">
+            <p className="mt-1.5 font-heading text-2xl font-extrabold gradient-text-accent">
               {compensation.range}
             </p>
             <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">

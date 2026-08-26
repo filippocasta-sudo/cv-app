@@ -69,7 +69,7 @@ function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "mint"
       <ul className="space-y-3">
         {groups.map((group) => (
           <li key={group.id}>
-            <p className={`font-display text-sm font-bold ${titleClass}`}>{group.name}</p>
+            <p className={`font-heading text-sm font-bold ${titleClass}`}>{group.name}</p>
             <p className="mt-0.5 text-[12px] leading-relaxed text-foreground-muted sm:text-[13px]">
               {group.summary}
             </p>
@@ -81,7 +81,7 @@ function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "mint"
           <ul className="space-y-3 pt-1">
             {groups.map((group) => (
               <li key={group.id}>
-                <p className={`font-display text-sm font-bold ${titleClass}`}>{group.name}</p>
+                <p className={`font-heading text-sm font-bold ${titleClass}`}>{group.name}</p>
                 {group.details.length > 0 && (
                   <ul className={`mt-1.5 space-y-1 border-l-2 ${borderClass} pl-3`}>
                     {group.details.map((detail) => (

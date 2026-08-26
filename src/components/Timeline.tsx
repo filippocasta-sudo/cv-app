@@ -125,7 +125,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 </span>
               </span>
             )}
-            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
+            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-bold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
               {entry.period}
             </span>
           </div>
@@ -247,7 +247,7 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
         <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-coral to-indigo text-white shadow-neumorphic-sm ring-4 ring-background sm:size-11">
           <Cake className="size-5" aria-hidden />
         </span>
-        <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-extrabold text-foreground tabular-nums shadow-neumorphic-inset">
+        <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-bold text-foreground tabular-nums shadow-neumorphic-inset">
           {birthDate}
         </span>
         <span className="mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
