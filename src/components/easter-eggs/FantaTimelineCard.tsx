@@ -5,6 +5,9 @@ import { ChevronDown, Shirt, Target } from "lucide-react";
 import { useState } from "react";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
+import { ProjectEdgeLink } from "@/components/ui/ProjectEdgeLink";
+
+const FANTA_INSTAGRAM_URL = "https://www.instagram.com/legafantatregnago/";
 
 /** Easter-egg timeline node — visual only, not part of CV data. */
 export function FantaTimelineCard() {
@@ -30,8 +33,9 @@ export function FantaTimelineCard() {
         <Shirt className="size-4" />
       </motion.span>
 
-      <div className={`neu-card overflow-hidden ${open ? "shadow-neumorphic-lg" : ""}`}>
-        <div className="p-4 sm:p-5">
+      <div className={`relative neu-card overflow-hidden ${open ? "shadow-neumorphic-lg" : ""}`}>
+        <ProjectEdgeLink href={FANTA_INSTAGRAM_URL} label={t("fanta.linkLabel")} />
+        <div className="p-4 pr-11 sm:p-5 sm:pr-12">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-coral-soft px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-coral uppercase shadow-neumorphic-inset">
               {t("timeline.kindProject")}
@@ -78,7 +82,7 @@ export function FantaTimelineCard() {
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="overflow-hidden"
             >
-              <div className="rounded-2xl neu-surface-inset mx-4 mb-4 p-3.5 sm:mx-5 sm:mb-5">
+              <div className="rounded-2xl neu-surface-inset mx-4 mb-4 p-3.5 pr-11 sm:mx-5 sm:mb-5 sm:pr-12">
                 <p className="text-[13px] leading-relaxed text-foreground-muted italic">
                   &ldquo;{t("fanta.lore")}&rdquo;
                 </p>
