@@ -25,11 +25,11 @@ export function FantaTimelineCard() {
       <motion.span
         animate={{ y: [0, -4, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-0 grid size-8 place-items-center rounded-2xl bg-gradient-to-br from-coral to-magenta text-white shadow-neumorphic-sm ring-4 ring-background sm:size-9"
+        className="absolute left-0 grid size-8 place-items-center rounded-2xl bg-gradient-to-br from-coral to-indigo text-white shadow-neumorphic-sm ring-4 ring-background sm:size-9"
         aria-hidden
       >
         <Shirt className="size-4" />
-        <span className="absolute -top-1 -right-1 grid size-4 place-items-center rounded-full bg-amber text-[9px] font-extrabold text-foreground">
+        <span className="absolute -top-1 -right-1 grid size-4 place-items-center rounded-full bg-coral text-[9px] font-extrabold text-white">
           10
         </span>
       </motion.span>

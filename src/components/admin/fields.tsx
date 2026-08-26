@@ -3,7 +3,7 @@
 import { Plus, Trash2 } from "lucide-react";
 
 const inputClass =
-  "w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm shadow-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-mint/25";
+  "w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm shadow-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-indigo/25";
 
 export function TextField({
   label,
@@ -106,7 +106,7 @@ export function CheckboxField({
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="size-4 accent-[var(--mint)]"
+        className="size-4 accent-[var(--indigo)]"
       />
       <span className="font-semibold text-foreground-muted">{label}</span>
     </label>
@@ -138,7 +138,7 @@ export function StringListField({
         <button
           type="button"
           onClick={() => onChange([...items, ""])}
-          className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-semibold text-mint transition hover:bg-mint-soft"
+          className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-xs font-semibold text-indigo transition hover:bg-indigo-soft"
         >
           <Plus className="size-3.5" aria-hidden />
           Aggiungi
@@ -224,7 +224,7 @@ export function AddButton({ label, onClick }: { label: string; onClick: () => vo
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-mint/50 bg-mint-soft/40 px-4 py-3 text-sm font-bold text-mint-strong transition hover:border-mint hover:bg-mint-soft"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-indigo/50 bg-indigo-soft/40 px-4 py-3 text-sm font-bold text-indigo-strong transition hover:border-indigo hover:bg-indigo-soft"
     >
       <Plus className="size-4" aria-hidden />
       {label}

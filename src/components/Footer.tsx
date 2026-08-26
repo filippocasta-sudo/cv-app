@@ -104,7 +104,7 @@ function ContactForm({ email }: { email: string }) {
         />
       </label>
 
-      {status === "error" && <p className="text-sm text-amber-soft">{error}</p>}
+      {status === "error" && <p className="text-sm text-coral-soft">{error}</p>}
 
       <button
         type="submit"
@@ -165,7 +165,7 @@ export function Footer({
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
       />
 
-      <div className="footer-contact-band gradient-surface-indigo-magenta relative flex flex-1 flex-col border-t border-white/15 py-12 sm:py-14">
+      <div className="footer-contact-band gradient-surface-indigo-deep relative flex flex-1 flex-col border-t border-white/15 py-12 sm:py-14">
         <div className="relative mx-auto grid w-full max-w-6xl flex-1 gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
           <div>
             <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export function Footer({
                 className="group/coffee relative hidden sm:inline-flex"
                 title={t("footer.pizzaTip")}
               >
-                <Coffee className="size-4 text-amber-soft" aria-hidden />
+                <Coffee className="size-4 text-coral-soft" aria-hidden />
                 <Pizza className="absolute -right-2 -bottom-1 size-3 text-white opacity-0 transition group-hover/coffee:opacity-100" />
               </span>
             </div>

@@ -110,7 +110,7 @@ export function Header({ socials }: { socials: SocialLink[] }) {
                     <motion.span
                       layoutId="locale-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-mint to-cyan shadow-neumorphic-sm"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo to-coral shadow-neumorphic-sm"
                     />
                   )}
                   <span
@@ -159,7 +159,7 @@ export function Header({ socials }: { socials: SocialLink[] }) {
             type="button"
             onClick={toggleTheme}
             title={theme === "dark" ? t("header.themeLight") : t("header.themeDark")}
-            className="neu-interactive grid size-8 place-items-center rounded-xl text-foreground-muted hover:text-amber sm:size-9 sm:rounded-2xl"
+            className="neu-interactive grid size-8 place-items-center rounded-xl text-foreground-muted hover:text-coral sm:size-9 sm:rounded-2xl"
           >
             {theme === "dark" ? (
               <Sun className="size-4" aria-hidden />

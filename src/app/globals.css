@@ -15,55 +15,58 @@
   --neu-shadow-dark: #c5d0e0;
   --neu-shadow-light: #ffffff;
 
-  --coral: #ff5e7e;
-  --coral-soft: #ffe8ed;
-  --coral-strong: #e84a6a;
-
-  --mint: #00d294;
-  --mint-soft: #d9faf0;
-  --mint-strong: #00a876;
-
+  /* Accent palette — indigo (primary) + coral (warm highlight). */
   --indigo: #6c5ce7;
   --indigo-soft: #ebe8fc;
   --indigo-strong: #5546d4;
 
-  --amber: #ffb92b;
-  --amber-soft: #fff4dc;
-  --amber-strong: #e5a318;
+  --coral: #ff5e7e;
+  --coral-soft: #ffe8ed;
+  --coral-strong: #e84a6a;
 
-  --cyan: #00e5ff;
-  --magenta: #ff3d9a;
-  --lime: #b8ff3c;
+  /* Legacy aliases — keep existing Tailwind class names mapped to the two hues. */
+  --mint: var(--indigo);
+  --mint-soft: var(--indigo-soft);
+  --mint-strong: var(--indigo-strong);
+  --amber: var(--coral);
+  --amber-soft: var(--coral-soft);
+  --amber-strong: var(--coral-strong);
+  --cyan: var(--indigo-strong);
+  --magenta: var(--coral-strong);
+  --lime: var(--coral);
+  --sage: var(--indigo);
+  --sage-soft: var(--indigo-soft);
+  --sage-strong: var(--indigo-strong);
 
-  --sage: var(--mint);
-  --sage-soft: var(--mint-soft);
-  --sage-strong: var(--mint-strong);
-
-  --kind-work: var(--mint);
-  --kind-work-soft: var(--mint-soft);
+  --kind-work: var(--indigo);
+  --kind-work-soft: var(--indigo-soft);
   --kind-education: var(--indigo);
   --kind-education-soft: var(--indigo-soft);
-  --kind-project: var(--amber);
-  --kind-project-soft: var(--amber-soft);
+  --kind-project: var(--coral);
+  --kind-project-soft: var(--coral-soft);
 
   --ring: var(--indigo);
 
-  --gradient-cta: linear-gradient(135deg, #ff5e7e 0%, #ff8a6b 50%, #ffb92b 100%);
-  --gradient-skill: linear-gradient(135deg, #00d294 0%, #00e5c8 100%);
-  --gradient-tech: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(255, 94, 126, 0.12) 0%, rgba(108, 92, 231, 0.1) 50%, rgba(0, 210, 148, 0.08) 100%);
+  --gradient-cta: linear-gradient(135deg, var(--coral) 0%, var(--indigo) 100%);
+  --gradient-skill: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-strong) 100%);
+  --gradient-tech: linear-gradient(135deg, var(--indigo) 0%, var(--coral) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    rgba(255, 94, 126, 0.1) 0%,
+    rgba(108, 92, 231, 0.1) 100%
+  );
 }
 
 /* Admin panel: visible field borders (public site keeps transparent borders for neumorphism). */
 [data-admin] {
   --admin-border: #b8c4d4;
-  --admin-border-focus: var(--mint);
+  --admin-border-focus: var(--indigo);
   --admin-input-bg: #f0f4fa;
 }
 
 .dark [data-admin] {
   --admin-border: #4a5568;
-  --admin-border-focus: var(--cyan);
+  --admin-border-focus: var(--indigo-strong);
   --admin-input-bg: #252a38;
 }
 
@@ -84,39 +87,40 @@
   --coral-soft: #2d1f28;
   --coral-strong: #ff8aa3;
 
-  --mint: #00f0a8;
-  --mint-soft: #152a24;
-  --mint-strong: #5dffd0;
-
   --indigo: #8b7cf7;
   --indigo-soft: #221f38;
   --indigo-strong: #a99bfa;
 
-  --amber: #ffc94d;
-  --amber-soft: #2a2418;
-  --amber-strong: #ffe08a;
+  --mint: var(--indigo);
+  --mint-soft: var(--indigo-soft);
+  --mint-strong: var(--indigo-strong);
+  --amber: var(--coral);
+  --amber-soft: var(--coral-soft);
+  --amber-strong: var(--coral-strong);
+  --cyan: var(--indigo-strong);
+  --magenta: var(--coral-strong);
+  --lime: var(--coral);
+  --sage: var(--indigo);
+  --sage-soft: var(--indigo-soft);
+  --sage-strong: var(--indigo-strong);
 
-  --cyan: #4df0ff;
-  --magenta: #ff6bb8;
-  --lime: #c8ff5a;
-
-  --sage: var(--mint);
-  --sage-soft: var(--mint-soft);
-  --sage-strong: var(--mint-strong);
-
-  --kind-work: var(--mint);
-  --kind-work-soft: var(--mint-soft);
+  --kind-work: var(--indigo);
+  --kind-work-soft: var(--indigo-soft);
   --kind-education: var(--indigo);
   --kind-education-soft: var(--indigo-soft);
-  --kind-project: var(--amber);
-  --kind-project-soft: var(--amber-soft);
+  --kind-project: var(--coral);
+  --kind-project-soft: var(--coral-soft);
 
-  --ring: var(--cyan);
+  --ring: var(--indigo);
 
-  --gradient-cta: linear-gradient(135deg, #ff5e7e 0%, #ff3d9a 50%, #6c5ce7 100%);
-  --gradient-skill: linear-gradient(135deg, #00f0a8 0%, #00e5ff 100%);
-  --gradient-tech: linear-gradient(135deg, #8b7cf7 0%, #ff3d9a 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(255, 94, 126, 0.15) 0%, rgba(139, 124, 247, 0.12) 50%, rgba(0, 240, 168, 0.1) 100%);
+  --gradient-cta: linear-gradient(135deg, var(--coral) 0%, var(--indigo) 100%);
+  --gradient-skill: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-strong) 100%);
+  --gradient-tech: linear-gradient(135deg, var(--indigo) 0%, var(--coral) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    rgba(255, 107, 138, 0.12) 0%,
+    rgba(139, 124, 247, 0.12) 100%
+  );
 }
 
 @theme inline {
@@ -198,6 +202,13 @@
 
 @utility gradient-text-coral {
   background: var(--gradient-cta);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gradient-text-accent {
+  background: var(--gradient-skill);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -318,24 +329,6 @@
   color: #fff;
 }
 
-.gradient-surface-mint-cyan {
-  background: linear-gradient(
-    145deg,
-    color-mix(in srgb, var(--mint) 90%, #008f63 10%) 0%,
-    color-mix(in srgb, var(--cyan) 86%, #0097b3 14%) 100%
-  );
-  color: #fff;
-}
-
-.gradient-surface-indigo-magenta {
-  background: linear-gradient(
-    165deg,
-    color-mix(in srgb, var(--indigo) 92%, #4538b8 8%) 0%,
-    color-mix(in srgb, var(--magenta) 88%, #c42d72 12%) 100%
-  );
-  color: #fff;
-}
-
 .dark .gradient-surface-coral-indigo {
   background: linear-gradient(
     145deg,
@@ -344,36 +337,53 @@
   );
 }
 
-.dark .gradient-surface-mint-cyan {
+.gradient-surface-indigo-coral {
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--mint) 72%, #0f2a22 28%) 0%,
-    color-mix(in srgb, var(--cyan) 68%, #0a2830 32%) 100%
+    color-mix(in srgb, var(--indigo) 92%, #4538b8 8%) 0%,
+    color-mix(in srgb, var(--coral) 90%, #c43d58 10%) 100%
+  );
+  color: #fff;
+}
+
+.gradient-surface-indigo-deep {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--indigo) 92%, #4538b8 8%) 0%,
+    color-mix(in srgb, var(--indigo-strong) 88%, #2a2060 12%) 100%
+  );
+  color: #fff;
+}
+
+.dark .gradient-surface-indigo-coral {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--indigo) 76%, #1a1638 24%) 0%,
+    color-mix(in srgb, var(--coral) 74%, #1e222d 26%) 100%
   );
 }
 
-.dark .gradient-surface-indigo-magenta {
+.dark .gradient-surface-indigo-deep {
   background: linear-gradient(
     165deg,
     color-mix(in srgb, var(--indigo) 74%, #151828 26%) 0%,
-    color-mix(in srgb, var(--magenta) 70%, #281428 30%) 100%
+    color-mix(in srgb, var(--indigo-strong) 70%, #151828 30%) 100%
   );
 }
 
-/* Neumorphic shadows look like white halos on saturated gradients — use flat glass instead. */
 .neu-card.gradient-surface-coral-indigo,
-.neu-card.gradient-surface-mint-cyan {
+.neu-card.gradient-surface-indigo-coral {
   box-shadow: none;
 }
 
 .neu-card.gradient-surface-coral-indigo:hover,
-.neu-card.gradient-surface-mint-cyan:hover {
+.neu-card.gradient-surface-indigo-coral:hover {
   box-shadow: none;
 }
 
 .gradient-surface-coral-indigo .neu-interactive,
-.gradient-surface-mint-cyan .neu-interactive,
-.gradient-surface-indigo-magenta .neu-interactive,
+.gradient-surface-indigo-coral .neu-interactive,
+.gradient-surface-indigo-deep .neu-interactive,
 .footer-contact-band .neu-interactive {
   background-color: transparent;
   box-shadow: none;
@@ -382,10 +392,10 @@
 
 .gradient-surface-coral-indigo .neu-interactive:hover,
 .gradient-surface-coral-indigo .neu-interactive:active,
-.gradient-surface-mint-cyan .neu-interactive:hover,
-.gradient-surface-mint-cyan .neu-interactive:active,
-.gradient-surface-indigo-magenta .neu-interactive:hover,
-.gradient-surface-indigo-magenta .neu-interactive:active,
+.gradient-surface-indigo-coral .neu-interactive:hover,
+.gradient-surface-indigo-coral .neu-interactive:active,
+.gradient-surface-indigo-deep .neu-interactive:hover,
+.gradient-surface-indigo-deep .neu-interactive:active,
 .footer-contact-band .neu-interactive:hover,
 .footer-contact-band .neu-interactive:active {
   box-shadow: none;

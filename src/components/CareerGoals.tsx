@@ -10,7 +10,7 @@ export function CareerGoals({ goals }: { goals: CareerGoalsData }) {
 
   const columns = [
     { icon: Compass, title: "Tipo di progetti", items: goals.projectTypes, accent: "text-indigo" },
-    { icon: Building2, title: "Contesto ideale", items: goals.idealContext, accent: "text-mint" },
+    { icon: Building2, title: "Contesto ideale", items: goals.idealContext, accent: "text-indigo" },
   ];
 
   return (

@@ -34,15 +34,15 @@ const KIND_STYLES: Record<
   work: {
     labelKey: "timeline.kindWork",
     icon: Briefcase,
-    dot: "bg-gradient-to-br from-mint to-cyan text-white",
-    chip: "bg-mint-soft text-mint shadow-neumorphic-inset",
-    rail: "from-mint/50",
-    accent: "text-mint",
+    dot: "bg-gradient-to-br from-indigo to-indigo-strong text-white",
+    chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
+    rail: "from-indigo/50",
+    accent: "text-indigo",
   },
   education: {
     labelKey: "timeline.kindEducation",
     icon: GraduationCap,
-    dot: "bg-gradient-to-br from-indigo to-magenta text-white",
+    dot: "bg-gradient-to-br from-indigo-strong to-indigo text-white",
     chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
     rail: "from-indigo/50",
     accent: "text-indigo",
@@ -50,10 +50,10 @@ const KIND_STYLES: Record<
   project: {
     labelKey: "timeline.kindProject",
     icon: Rocket,
-    dot: "bg-gradient-to-br from-amber to-coral text-white",
-    chip: "bg-amber-soft text-amber shadow-neumorphic-inset",
-    rail: "from-amber/50",
-    accent: "text-amber",
+    dot: "bg-gradient-to-br from-coral to-coral-strong text-white",
+    chip: "bg-coral-soft text-coral shadow-neumorphic-inset",
+    rail: "from-coral/50",
+    accent: "text-coral",
   },
 };
 
@@ -103,13 +103,13 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               {t(config.labelKey)}
             </span>
             {entry.current && (
-              <span className="rounded-full bg-gradient-to-r from-coral to-magenta px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-neumorphic-sm">
+              <span className="rounded-full bg-gradient-to-r from-coral to-indigo px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-neumorphic-sm">
                 {t("timeline.inProgress")}
               </span>
             )}
             {isPizza && !formal && (
               <span className="group/pizza relative inline-flex" title={pizzaTip}>
-                <span className="neu-interactive grid size-7 place-items-center rounded-xl text-amber">
+                <span className="neu-interactive grid size-7 place-items-center rounded-xl text-coral">
                   <Pizza className="size-3.5" aria-hidden />
                 </span>
                 <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden w-max max-w-[200px] -translate-x-1/2 rounded-lg px-2 py-1 text-[10px] font-semibold text-foreground shadow-neumorphic-sm neu-surface-inset group-hover/pizza:block">
@@ -117,7 +117,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 </span>
               </span>
             )}
-            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-mint">
+            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
               {entry.period}
             </span>
           </div>
@@ -333,7 +333,7 @@ export function Timeline({
 
       <div className="relative">
         <span
-          className="absolute top-2 bottom-2 left-4 w-0.5 rounded-full bg-gradient-to-b from-coral via-indigo to-mint opacity-40 sm:left-[18px]"
+          className="absolute top-2 bottom-2 left-4 w-0.5 rounded-full bg-gradient-to-b from-coral via-indigo to-indigo-strong opacity-40 sm:left-[18px]"
           aria-hidden
         />
         <ul className="space-y-5">

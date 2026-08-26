@@ -35,7 +35,7 @@ function AccordionPanel({
       transition={{ duration: 0.4, delay: positive ? 0.05 : 0.1 }}
       className={`print-avoid-break neu-card overflow-hidden rounded-3xl ${
         positive
-          ? "bg-gradient-to-br from-mint-soft/70 via-surface to-surface"
+          ? "bg-gradient-to-br from-indigo-soft/70 via-surface to-surface"
           : "bg-gradient-to-br from-surface-muted/80 via-surface to-surface"
       }`}
     >
@@ -50,7 +50,7 @@ function AccordionPanel({
             <span
               className={`grid size-7 place-items-center rounded-xl shadow-neumorphic-sm ${
                 positive
-                  ? "bg-gradient-to-br from-mint to-cyan text-white"
+                  ? "bg-gradient-to-br from-indigo to-indigo-strong text-white"
                   : "neu-surface-inset text-foreground-muted"
               }`}
             >
@@ -59,7 +59,7 @@ function AccordionPanel({
             <span>
               <span
                 className={`block font-display text-sm font-extrabold sm:text-base ${
-                  positive ? "text-mint-strong" : "text-foreground"
+                  positive ? "text-indigo-strong" : "text-foreground"
                 }`}
               >
                 {title}
@@ -80,7 +80,7 @@ function AccordionPanel({
       {formal && (
         <h3
           className={`px-4 pt-4 font-display text-sm font-extrabold sm:px-5 sm:text-base ${
-            positive ? "text-mint-strong" : "text-foreground"
+            positive ? "text-indigo-strong" : "text-foreground"
           }`}
         >
           {title}
