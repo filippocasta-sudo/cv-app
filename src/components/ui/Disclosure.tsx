@@ -38,7 +38,7 @@ export function Disclosure({
           className={
             emphasis
               ? onGradient
-                ? "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl border border-white/20 bg-white/15 px-4 py-2.5 text-left text-sm font-bold text-white hover:bg-white/25"
+                ? "no-print group inline-flex w-full items-center justify-between gap-3 rounded-2xl border border-white/30 bg-white/15 px-4 py-2.5 text-left text-sm font-bold text-white transition hover:border-white/45 hover:bg-white/25"
                 : "no-print neu-interactive group inline-flex w-full items-center justify-between gap-3 rounded-2xl px-4 py-2.5 text-left text-sm font-bold text-coral"
               : onGradient
                 ? "no-print group inline-flex w-full items-center justify-between gap-3 rounded-xl px-2 py-1.5 text-left text-sm font-semibold text-white/90 transition hover:text-white"
