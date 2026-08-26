@@ -15,7 +15,7 @@
   --neu-shadow-dark: #c5d0e0;
   --neu-shadow-light: #ffffff;
 
-  /* Accent palette — indigo (primary), coral (warm), mint (detail highlights). */
+  /* Accent palette — indigo (primary), coral (warm), mint (detail highlights), cert (certifications). */
   --indigo: #6c5ce7;
   --indigo-soft: #ebe8fc;
   --indigo-strong: #5546d4;
@@ -27,6 +27,10 @@
   --mint: #00d294;
   --mint-soft: #d9faf0;
   --mint-strong: #00a876;
+
+  --cert: #e8a317;
+  --cert-soft: #fef4dc;
+  --cert-strong: #c88a08;
 
   /* Legacy aliases */
   --amber: var(--coral);
@@ -45,6 +49,8 @@
   --kind-education-soft: var(--indigo-soft);
   --kind-project: var(--coral);
   --kind-project-soft: var(--coral-soft);
+  --kind-cert: var(--cert);
+  --kind-cert-soft: var(--cert-soft);
 
   --ring: var(--indigo);
 
@@ -97,6 +103,10 @@
   --mint-soft: #152a24;
   --mint-strong: #5dffd0;
 
+  --cert: #ffc857;
+  --cert-soft: #2a2418;
+  --cert-strong: #ffda7a;
+
   --amber: var(--coral);
   --amber-soft: var(--coral-soft);
   --amber-strong: var(--coral-strong);
@@ -113,6 +123,8 @@
   --kind-education-soft: var(--indigo-soft);
   --kind-project: var(--coral);
   --kind-project-soft: var(--coral-soft);
+  --kind-cert: var(--cert);
+  --kind-cert-soft: var(--cert-soft);
 
   --ring: var(--indigo);
 
@@ -143,6 +155,9 @@
   --color-mint: var(--mint);
   --color-mint-soft: var(--mint-soft);
   --color-mint-strong: var(--mint-strong);
+  --color-cert: var(--cert);
+  --color-cert-soft: var(--cert-soft);
+  --color-cert-strong: var(--cert-strong);
   --color-indigo: var(--indigo);
   --color-indigo-soft: var(--indigo-soft);
   --color-indigo-strong: var(--indigo-strong);
@@ -163,6 +178,8 @@
   --color-kind-education-soft: var(--kind-education-soft);
   --color-kind-project: var(--kind-project);
   --color-kind-project-soft: var(--kind-project-soft);
+  --color-kind-cert: var(--kind-cert);
+  --color-kind-cert-soft: var(--kind-cert-soft);
 
   --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
@@ -359,6 +376,15 @@
   color: #fff;
 }
 
+.gradient-surface-cert-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--cert) 92%, #c88a08 8%) 0%,
+    color-mix(in srgb, var(--indigo) 90%, #4538b8 10%) 100%
+  );
+  color: #fff;
+}
+
 .gradient-surface-indigo-deep {
   background: linear-gradient(
     165deg,
@@ -384,6 +410,14 @@
   );
 }
 
+.dark .gradient-surface-cert-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--cert) 74%, #2a2418 26%) 0%,
+    color-mix(in srgb, var(--indigo) 76%, #1a1638 24%) 100%
+  );
+}
+
 .dark .gradient-surface-indigo-deep {
   background: linear-gradient(
     165deg,
@@ -394,19 +428,22 @@
 
 .neu-card.gradient-surface-coral-indigo,
 .neu-card.gradient-surface-indigo-coral,
-.neu-card.gradient-surface-mint-indigo {
+.neu-card.gradient-surface-mint-indigo,
+.neu-card.gradient-surface-cert-indigo {
   box-shadow: none;
 }
 
 .neu-card.gradient-surface-coral-indigo:hover,
 .neu-card.gradient-surface-indigo-coral:hover,
-.neu-card.gradient-surface-mint-indigo:hover {
+.neu-card.gradient-surface-mint-indigo:hover,
+.neu-card.gradient-surface-cert-indigo:hover {
   box-shadow: none;
 }
 
 .gradient-surface-coral-indigo .neu-interactive,
 .gradient-surface-indigo-coral .neu-interactive,
 .gradient-surface-mint-indigo .neu-interactive,
+.gradient-surface-cert-indigo .neu-interactive,
 .footer-contact-band .neu-interactive {
   background-color: transparent;
   box-shadow: none;
@@ -419,6 +456,8 @@
 .gradient-surface-indigo-coral .neu-interactive:active,
 .gradient-surface-mint-indigo .neu-interactive:hover,
 .gradient-surface-mint-indigo .neu-interactive:active,
+.gradient-surface-cert-indigo .neu-interactive:hover,
+.gradient-surface-cert-indigo .neu-interactive:active,
 .footer-contact-band .neu-interactive:hover,
 .footer-contact-band .neu-interactive:active {
   box-shadow: none;

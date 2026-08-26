@@ -24,7 +24,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
         className="print-avoid-break neu-card rounded-3xl p-5"
       >
         <h3 className="mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase">
-          <span className="neu-interactive grid size-8 place-items-center rounded-xl text-coral">
+          <span className="neu-interactive grid size-8 place-items-center rounded-xl text-cert">
             <Award className="size-4" aria-hidden />
           </span>
           {t("profile.certsTitle")}
@@ -34,7 +34,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
                 <p className="font-display text-[15px] font-bold">{cert.name}</p>
-                <span className="shrink-0 rounded-lg bg-coral-soft px-2 py-0.5 text-xs font-bold text-coral shadow-neumorphic-inset">
+                <span className="shrink-0 rounded-lg bg-cert-soft px-2 py-0.5 text-xs font-bold text-cert-strong shadow-neumorphic-inset">
                   {cert.year}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
               label={`${t("profile.pastCerts")} (${secondaryCerts.length})`}
               openLabel={t("profile.hidePastCerts")}
             >
-              <ul className="space-y-2.5 border-l-2 border-coral/30 pl-3">
+              <ul className="space-y-2.5 border-l-2 border-cert/30 pl-3">
                 {secondaryCerts.map((cert) => (
                   <li key={cert.id}>
                     <p className="text-sm font-semibold">{cert.name}</p>
