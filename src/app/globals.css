@@ -538,4 +538,42 @@
   .easter-egg-layer {
     display: none !important;
   }
+
+  .formal-screen {
+    display: none !important;
+  }
+
+  .ats-print-cv {
+    display: block !important;
+  }
+
+  .ats-heading {
+    font-size: 12pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ats-list {
+    list-style: disc;
+    padding-left: 1.1rem;
+  }
+
+  .gradient-text-coral,
+  .gradient-text-accent {
+    color: #000000 !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+  }
+
+  .gradient-surface-coral-indigo,
+  .gradient-surface-indigo-coral,
+  .gradient-surface-mint-indigo,
+  .gradient-surface-cert-indigo,
+  .gradient-surface-indigo-deep,
+  .footer-contact-band {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
 }
