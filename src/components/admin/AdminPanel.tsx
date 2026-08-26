@@ -41,7 +41,7 @@ const TABS = [
   { key: "goals", label: "Cosa vorrei fare" },
   { key: "skills", label: "Competenze" },
   { key: "certifications", label: "Certificazioni" },
-  { key: "capabilities", label: "Cosa so fare / Cosa NON vorrei fare" },
+  { key: "capabilities", label: "Cosa so fare / Cosa non fa per me" },
   { key: "timeline", label: "Timeline" },
   { key: "extra", label: "RAL e link" },
 ] as const;
@@ -160,7 +160,7 @@ export function AdminPanel({
             CV pubblico
           </Link>
 
-          <span className="font-display text-sm font-extrabold">Pannello admin</span>
+          <span className="font-heading text-sm font-extrabold">Pannello admin</span>
 
           <div
             role="group"
@@ -363,9 +363,9 @@ export function AdminPanel({
                   />
                 </section>
                 <section>
-                  <h2 className="mb-3 text-lg">Cosa NON vorrei fare</h2>
+                  <h2 className="mb-3 text-lg">Cosa non fa per me</h2>
                   <CapabilitiesEditor
-                    label="Cosa NON vorrei fare"
+                    label="Cosa non fa per me"
                     prefix="cannot"
                     items={bundle.cannotDo}
                     translationMode={translationMode}

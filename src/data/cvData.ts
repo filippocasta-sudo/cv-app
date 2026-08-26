@@ -417,6 +417,7 @@ export const cvData: CvData = {
       organization: "Progetto personale",
       period: "2026",
       sortKey: 202601,
+      link: "/",
       impact:
         "Costruito questo CV come applicazione Next.js con pannello di amministrazione, per aggiornare i contenuti senza toccare il codice.",
       context: [
@@ -480,26 +481,6 @@ export const cvData: CvData = {
       formalSummary:
         "Volontariato nel progetto Vivi Tregnago (Covid-19): gestione digitale e realizzazione piattaforma web per promozione e consegne a domicilio delle attività locali.",
       tags: ["Volontariato", "Covid-19", "Progetto civico"],
-    },
-    {
-      id: "tl-automation",
-      kind: "project",
-      title: "Automazioni di reportistica AMS",
-      organization: "Progetto personale applicato al lavoro",
-      period: "2023",
-      sortKey: 202301,
-      impact:
-        "Ridotto il tempo di preparazione del reporting mensile di servizio da mezza giornata a pochi minuti.",
-      context: [
-        "Script Python ed export SQL per aggregare i dati dei ticket",
-        "Modelli Excel con pivot e controlli automatici sulla coerenza dei dati",
-        "Standardizzazione del formato di reporting verso il management",
-      ],
-      learned: [
-        "Automatizzare un report obbliga a definire cosa si sta misurando davvero",
-        "Il tempo risparmiato ogni mese va reinvestito nell'analisi, non in altri report",
-      ],
-      tags: ["Python", "SQL", "Excel"],
     },
     {
       id: "tl-univr",

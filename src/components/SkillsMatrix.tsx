@@ -26,14 +26,14 @@ function CapabilityColumn({
   return (
     <div className="print-avoid-break">
       <h3
-        className={`mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase ${
+        className={`font-heading mb-4 inline-flex items-center gap-2 text-sm font-extrabold tracking-wide uppercase ${
           positive ? "text-mint" : "text-foreground-faint"
         }`}
       >
         <span
           className={`grid size-6 place-items-center rounded-xl shadow-neumorphic-sm ${
             positive
-              ? "bg-gradient-to-br from-mint to-cyan text-white"
+              ? "bg-gradient-to-br from-mint to-mint-strong text-white"
               : "neu-surface-inset text-foreground-muted"
           }`}
         >
@@ -56,7 +56,7 @@ function CapabilityColumn({
             }`}
           >
             <p
-              className={`font-display text-[15px] font-bold ${positive ? "text-mint-strong" : ""}`}
+              className={`font-heading text-[15px] font-bold ${positive ? "text-mint-strong" : ""}`}
             >
               {item.label}
             </p>

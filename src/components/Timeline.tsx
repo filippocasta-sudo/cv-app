@@ -7,18 +7,22 @@ import {
   ChevronDown,
   GraduationCap,
   Lightbulb,
-  ExternalLink,
   Pizza,
   Rocket,
   Target,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { FantaTimelineCard } from "@/components/easter-eggs/FantaTimelineCard";
+import {
+  CertificationTimelineCard,
+  certificationSortKey,
+} from "@/components/CertificationTimelineCard";
 import { Section } from "@/components/ui/Section";
+import { ProjectEdgeLink } from "@/components/ui/ProjectEdgeLink";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
 import type { UiKey } from "@/lib/i18n/ui";
-import type { TimelineEntry, TimelineKind } from "@/lib/types";
+import type { Certification, TimelineEntry, TimelineKind } from "@/lib/types";
 
 const KIND_STYLES: Record<
   TimelineKind,
@@ -34,7 +38,7 @@ const KIND_STYLES: Record<
   work: {
     labelKey: "timeline.kindWork",
     icon: Briefcase,
-    dot: "bg-gradient-to-br from-mint to-cyan text-white",
+    dot: "bg-gradient-to-br from-mint to-mint-strong text-white",
     chip: "bg-mint-soft text-mint shadow-neumorphic-inset",
     rail: "from-mint/50",
     accent: "text-mint",
@@ -42,7 +46,7 @@ const KIND_STYLES: Record<
   education: {
     labelKey: "timeline.kindEducation",
     icon: GraduationCap,
-    dot: "bg-gradient-to-br from-indigo to-magenta text-white",
+    dot: "bg-gradient-to-br from-indigo-strong to-indigo text-white",
     chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
     rail: "from-indigo/50",
     accent: "text-indigo",
@@ -50,10 +54,10 @@ const KIND_STYLES: Record<
   project: {
     labelKey: "timeline.kindProject",
     icon: Rocket,
-    dot: "bg-gradient-to-br from-amber to-coral text-white",
-    chip: "bg-amber-soft text-amber shadow-neumorphic-inset",
-    rail: "from-amber/50",
-    accent: "text-amber",
+    dot: "bg-gradient-to-br from-coral to-coral-strong text-white",
+    chip: "bg-coral-soft text-coral shadow-neumorphic-inset",
+    rail: "from-coral/50",
+    accent: "text-coral",
   },
 };
 
@@ -70,13 +74,14 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
   const [open, setOpen] = useState(false);
   const config = KIND_STYLES[entry.kind];
   const Icon = config.icon;
-  const expanded = formal || open;
+  const expanded = open;
   const isEducation = entry.kind === "education";
   const hasDetails = isEducation
     ? entry.context.length > 0
     : entry.context.length > 0 || entry.learned.length > 0;
   const isPizza = entry.id === "tl-ristorazione";
   const pizzaTip = t("timeline.pizzaTip");
+  const hasProjectLink = entry.kind === "project" && Boolean(entry.link);
 
   return (
     <motion.li
@@ -94,8 +99,11 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
         <Icon className="size-4" />
       </motion.span>
 
-      <div className={`neu-card overflow-hidden ${expanded ? "shadow-neumorphic-lg" : ""}`}>
-        <div className="p-4 sm:p-5">
+      <div className={`relative neu-card overflow-hidden ${expanded ? "shadow-neumorphic-lg" : ""}`}>
+        {hasProjectLink && entry.link && (
+          <ProjectEdgeLink href={entry.link} label={t("timeline.projectLink")} />
+        )}
+        <div className={`p-4 sm:p-5 ${hasProjectLink ? "pr-11 sm:pr-12" : ""}`}>
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase ${config.chip}`}
@@ -103,13 +111,13 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               {t(config.labelKey)}
             </span>
             {entry.current && (
-              <span className="rounded-full bg-gradient-to-r from-coral to-magenta px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-neumorphic-sm">
+              <span className="rounded-full bg-gradient-to-r from-coral to-indigo px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-neumorphic-sm">
                 {t("timeline.inProgress")}
               </span>
             )}
             {isPizza && !formal && (
               <span className="group/pizza relative inline-flex" title={pizzaTip}>
-                <span className="neu-interactive grid size-7 place-items-center rounded-xl text-amber">
+                <span className="neu-interactive grid size-7 place-items-center rounded-xl text-coral">
                   <Pizza className="size-3.5" aria-hidden />
                 </span>
                 <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden w-max max-w-[200px] -translate-x-1/2 rounded-lg px-2 py-1 text-[10px] font-semibold text-foreground shadow-neumorphic-sm neu-surface-inset group-hover/pizza:block">
@@ -117,30 +125,18 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
                 </span>
               </span>
             )}
-            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-extrabold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-mint">
+            <span className="ml-auto rounded-lg bg-gradient-to-r from-indigo/15 to-coral/15 px-2.5 py-1 text-xs font-bold text-indigo tabular-nums shadow-neumorphic-inset dark:from-indigo/25 dark:to-coral/20 dark:text-indigo-strong">
               {entry.period}
             </span>
           </div>
 
-          <h3 className="mt-2.5 text-lg leading-snug">{entry.title}</h3>
-          <p className="mt-0.5 text-sm font-semibold text-foreground-muted">
+          <h3 className="font-heading mt-2.5 text-lg leading-snug font-bold">{entry.title}</h3>
+          <p className="font-heading mt-0.5 text-sm font-semibold text-foreground-muted">
             {entry.organization}
             {entry.location && (
               <span className="font-normal text-foreground-faint"> · {entry.location}</span>
             )}
           </p>
-
-          {entry.kind === "project" && entry.link && (
-            <a
-              href={entry.link}
-              target="_blank"
-              rel="noreferrer"
-              className={`no-print mt-2 inline-flex items-center gap-1.5 text-sm font-bold transition hover:opacity-80 ${config.accent}`}
-            >
-              <ExternalLink className="size-3.5" aria-hidden />
-              {t("timeline.projectLink")}
-            </a>
-          )}
 
           <p className="mt-3 flex gap-2 text-sm leading-relaxed">
             <Target className={`mt-0.5 size-4 shrink-0 ${config.accent}`} aria-hidden />
@@ -160,7 +156,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
             </ul>
           )}
 
-          {hasDetails && !formal && (
+          {hasDetails && (
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
@@ -188,10 +184,12 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="print-block overflow-hidden"
             >
-              <div className="space-y-4 border-t border-foreground-faint/10 px-4 py-4 sm:px-5">
+              <div
+                className={`space-y-4 border-t border-foreground-faint/10 px-4 py-4 sm:px-5 ${hasProjectLink ? "pr-11 sm:pr-12" : ""}`}
+              >
                 {entry.context.length > 0 && (
                   <div>
-                    <p className="mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
+                    <p className="font-heading mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       {t(isEducation ? "timeline.whatIStudied" : "timeline.whatIDid")}
                     </p>
                     <ul className="space-y-1.5">
@@ -213,7 +211,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
 
                 {!isEducation && entry.learned.length > 0 && (
                   <div className="rounded-2xl neu-surface-inset p-3.5">
-                    <p className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
+                    <p className="font-heading mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       <Lightbulb className="size-3.5" aria-hidden />
                       {t("timeline.whatILearned")}
                     </p>
@@ -249,10 +247,10 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
         <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-coral to-indigo text-white shadow-neumorphic-sm ring-4 ring-background sm:size-11">
           <Cake className="size-5" aria-hidden />
         </span>
-        <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-extrabold text-foreground tabular-nums shadow-neumorphic-inset">
+        <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-bold text-foreground tabular-nums shadow-neumorphic-inset">
           {birthDate}
         </span>
-        <span className="mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
+        <span className="font-heading mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
           {t("timeline.birthDate")}
         </span>
       </div>
@@ -262,10 +260,12 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
 
 export function Timeline({
   entries,
+  certifications = [],
   classicOnly = false,
   birthDate,
 }: {
   entries: TimelineEntry[];
+  certifications?: Certification[];
   classicOnly?: boolean;
   birthDate?: string;
 }) {
@@ -286,14 +286,35 @@ export function Timeline({
     [ordered, filter, classic],
   );
 
+  type TimelineRow =
+    | { type: "entry"; sortKey: number; entry: TimelineEntry }
+    | { type: "cert"; sortKey: number; cert: Certification };
+
+  const timelineRows = useMemo(() => {
+    const rows: TimelineRow[] = visible.map((entry) => ({
+      type: "entry",
+      sortKey: entry.sortKey,
+      entry,
+    }));
+
+    if (filter === "all" || filter === "education" || classic) {
+      for (const cert of certifications) {
+        rows.push({ type: "cert", sortKey: certificationSortKey(cert.year), cert });
+      }
+    }
+
+    return rows.sort((a, b) => b.sortKey - a.sortKey);
+  }, [visible, certifications, filter, classic]);
+
   const counts = useMemo(
     () => ({
-      all: ordered.length,
+      all: ordered.length + certifications.length,
       work: ordered.filter((entry) => entry.kind === "work").length,
-      education: ordered.filter((entry) => entry.kind === "education").length,
+      education:
+        ordered.filter((entry) => entry.kind === "education").length + certifications.length,
       project: ordered.filter((entry) => entry.kind === "project").length,
     }),
-    [ordered],
+    [ordered, certifications.length],
   );
 
   return (
@@ -338,9 +359,13 @@ export function Timeline({
         />
         <ul className="space-y-5">
           <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((entry) => (
-              <TimelineCard key={entry.id} entry={entry} />
-            ))}
+            {timelineRows.map((row) =>
+              row.type === "entry" ? (
+                <TimelineCard key={row.entry.id} entry={row.entry} />
+              ) : (
+                <CertificationTimelineCard key={row.cert.id} cert={row.cert} />
+              ),
+            )}
           </AnimatePresence>
           {!classic && (filter === "all" || filter === "project") && <FantaTimelineCard />}
           {birthDate && <BirthDateMarker birthDate={birthDate} />}

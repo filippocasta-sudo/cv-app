@@ -68,7 +68,7 @@ export function LoginForm({ configured }: { configured: boolean }) {
                 autoFocus
                 autoComplete="current-password"
                 onChange={(event) => setPassword(event.target.value)}
-                className="w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-mint/25"
+                className="w-full rounded-lg border-2 border-[var(--admin-border)] bg-[var(--admin-input-bg)] px-3 py-2 text-sm outline-none transition placeholder:text-foreground-faint/80 focus:border-[var(--admin-border-focus)] focus:ring-2 focus:ring-indigo/25"
               />
             </label>
 

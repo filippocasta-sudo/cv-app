@@ -32,7 +32,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
             >
               <span className="relative flex size-2">
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-coral opacity-60" />
-                <span className="relative inline-flex size-2 rounded-full bg-gradient-to-r from-coral to-magenta" />
+                <span className="relative inline-flex size-2 rounded-full bg-gradient-to-r from-coral to-indigo" />
               </span>
               {personal.statusBadge}
             </motion.span>
@@ -58,7 +58,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
 
           <ContactInfoBox personal={personal} />
 
-          <p className="mt-4 font-display text-base font-bold gradient-text-mint sm:text-lg">
+          <p className="mt-4 font-heading text-base font-bold gradient-text-accent sm:text-lg">
             {personal.roles.join(" · ")}
           </p>
         </motion.div>

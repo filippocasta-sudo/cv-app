@@ -12,3 +12,25 @@ export function LinkedInIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function FlagItaly({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 3 2" aria-hidden focusable="false" className={className}>
+      <rect width="1" height="2" fill="#009246" />
+      <rect x="1" width="1" height="2" fill="#ffffff" />
+      <rect x="2" width="1" height="2" fill="#ce2b37" />
+    </svg>
+  );
+}
+
+export function FlagUk({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 60 30" aria-hidden focusable="false" className={className}>
+      <rect width="60" height="30" fill="#012169" />
+      <path d="M0 0 60 30M60 0 0 30" stroke="#ffffff" strokeWidth="6" />
+      <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="4" />
+      <path d="M30 0V30M0 15H60" stroke="#ffffff" strokeWidth="10" />
+      <path d="M30 0V30M0 15H60" stroke="#c8102e" strokeWidth="6" />
+    </svg>
+  );
+}

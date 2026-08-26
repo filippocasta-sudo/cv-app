@@ -1,16 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible, Syne } from "next/font/google";
+import { Atkinson_Hyperlegible, Plus_Jakarta_Sans } from "next/font/google";
 import { ModeProvider } from "@/context/ModeContext";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const syne = Syne({
+/** Titoli e sottotitoli — geometrico e leggibile, abbina bene Atkinson. */
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["600", "700", "800"],
-  variable: "--font-syne",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
+/** Testo corrente — leggibilità e accessibilità. */
 const atkinson = Atkinson_Hyperlegible({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -54,11 +56,15 @@ const themeBootstrap = `(function(){try{var s=localStorage.getItem('cv-theme');v
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it" suppressHydrationWarning>
+    <html
+      lang="it"
+      className={`${plusJakarta.variable} ${atkinson.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body className={`${syne.variable} ${atkinson.variable}`}>
+      <body className="font-body antialiased">
         <ModeProvider>{children}</ModeProvider>
       </body>
     </html>
