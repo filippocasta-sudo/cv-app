@@ -7,7 +7,6 @@ import {
   ChevronDown,
   GraduationCap,
   Lightbulb,
-  ExternalLink,
   Pizza,
   Rocket,
   Target,
@@ -19,6 +18,7 @@ import {
   certificationSortKey,
 } from "@/components/CertificationTimelineCard";
 import { Section } from "@/components/ui/Section";
+import { ProjectEdgeLink } from "@/components/ui/ProjectEdgeLink";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
 import type { UiKey } from "@/lib/i18n/ui";
@@ -81,6 +81,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
     : entry.context.length > 0 || entry.learned.length > 0;
   const isPizza = entry.id === "tl-ristorazione";
   const pizzaTip = t("timeline.pizzaTip");
+  const hasProjectLink = entry.kind === "project" && Boolean(entry.link);
 
   return (
     <motion.li
@@ -98,8 +99,11 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
         <Icon className="size-4" />
       </motion.span>
 
-      <div className={`neu-card overflow-hidden ${expanded ? "shadow-neumorphic-lg" : ""}`}>
-        <div className="p-4 sm:p-5">
+      <div className={`relative neu-card overflow-hidden ${expanded ? "shadow-neumorphic-lg" : ""}`}>
+        {hasProjectLink && entry.link && (
+          <ProjectEdgeLink href={entry.link} label={t("timeline.projectLink")} />
+        )}
+        <div className={`p-4 sm:p-5 ${hasProjectLink ? "pr-11 sm:pr-12" : ""}`}>
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase ${config.chip}`}
@@ -133,18 +137,6 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               <span className="font-normal text-foreground-faint"> · {entry.location}</span>
             )}
           </p>
-
-          {entry.kind === "project" && entry.link && (
-            <a
-              href={entry.link}
-              target="_blank"
-              rel="noreferrer"
-              className={`no-print mt-2 inline-flex items-center gap-1.5 text-sm font-bold transition hover:opacity-80 ${config.accent}`}
-            >
-              <ExternalLink className="size-3.5" aria-hidden />
-              {t("timeline.projectLink")}
-            </a>
-          )}
 
           <p className="mt-3 flex gap-2 text-sm leading-relaxed">
             <Target className={`mt-0.5 size-4 shrink-0 ${config.accent}`} aria-hidden />
@@ -192,7 +184,9 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
               className="print-block overflow-hidden"
             >
-              <div className="space-y-4 border-t border-foreground-faint/10 px-4 py-4 sm:px-5">
+              <div
+                className={`space-y-4 border-t border-foreground-faint/10 px-4 py-4 sm:px-5 ${hasProjectLink ? "pr-11 sm:pr-12" : ""}`}
+              >
                 {entry.context.length > 0 && (
                   <div>
                     <p className="mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
