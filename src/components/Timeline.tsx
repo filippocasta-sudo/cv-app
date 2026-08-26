@@ -74,7 +74,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
   const [open, setOpen] = useState(false);
   const config = KIND_STYLES[entry.kind];
   const Icon = config.icon;
-  const expanded = formal || open;
+  const expanded = open;
   const isEducation = entry.kind === "education";
   const hasDetails = isEducation
     ? entry.context.length > 0
@@ -156,7 +156,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
             </ul>
           )}
 
-          {hasDetails && !formal && (
+          {hasDetails && (
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}

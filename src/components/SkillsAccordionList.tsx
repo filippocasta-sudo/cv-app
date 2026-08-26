@@ -14,11 +14,9 @@ function SkillAccordionItem({
   group: SkillGroup;
   accent: "mint" | "indigo";
 }) {
-  const { formal } = useMode();
   const { t } = useI18n();
-  const [open, setOpen] = useState(formal);
-  const [detailsOpen, setDetailsOpen] = useState(formal);
-  const expanded = open;
+  const [open, setOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const titleClass = accent === "mint" ? "text-mint-strong" : "text-indigo-strong";
   const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
   const tint =
@@ -45,7 +43,7 @@ function SkillAccordionItem({
       </h3>
 
       <AnimatePresence initial={false}>
-        {expanded && (
+        {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -73,8 +71,8 @@ function SkillAccordionItem({
                     </motion.span>
                   </button>
 
-                  {(formal || detailsOpen) && (
-                    <ul className={`mt-2 space-y-1.5 border-l-2 ${borderClass} pl-3`}>
+                  {detailsOpen && (
+                    <ul className={`mt-2 space-y-1.5 border-l-2 ${borderClass} pl-3 print-block`}>
                       {group.details.map((detail) => (
                         <li
                           key={detail}
@@ -107,7 +105,7 @@ export function HardSkillsColumn({ groups }: { groups: SkillGroup[] }) {
       </h2>
       <ul className="space-y-3 py-1">
         {groups.map((group) => (
-          <li key={`${group.id}-${formal ? "classic" : "modern"}`} className="px-0.5">
+          <li key={group.id} className="px-0.5">
             <SkillAccordionItem group={group} accent="mint" />
           </li>
         ))}
@@ -128,7 +126,7 @@ export function SoftSkillsColumn({ groups }: { groups: SkillGroup[] }) {
       </h2>
       <ul className="space-y-3 py-1">
         {groups.map((group) => (
-          <li key={`${group.id}-${formal ? "classic" : "modern"}`} className="px-0.5">
+          <li key={group.id} className="px-0.5">
             <SkillAccordionItem group={group} accent="indigo" />
           </li>
         ))}

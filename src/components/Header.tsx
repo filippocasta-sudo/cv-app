@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Info, Mail, Moon, Printer, Sun } from "lucide-react";
+import { Info, Mail, Moon, Sun } from "lucide-react";
 import { useRef, useState, type PointerEvent } from "react";
 import {
   ModeToggleHint,
@@ -179,18 +179,6 @@ export function Header({ socials }: { socials: SocialLink[] }) {
               ))}
             </ul>
           </nav>
-
-          {formal && (
-            <button
-              type="button"
-              onClick={() => window.print()}
-              title={t("header.print")}
-              className="neu-interactive grid size-8 place-items-center rounded-xl text-foreground-muted hover:text-indigo sm:size-9 sm:rounded-2xl"
-            >
-              <Printer className="size-4" aria-hidden />
-              <span className="sr-only">{t("header.printSr")}</span>
-            </button>
-          )}
 
           <button
             type="button"
