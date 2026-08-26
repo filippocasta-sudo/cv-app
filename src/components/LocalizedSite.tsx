@@ -11,8 +11,11 @@ export function LocalizedSite({ cv }: { cv: CvData }) {
 
   return (
     <div className="relative z-10 flex min-h-dvh flex-col">
-      <div className="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
-        <Header socials={localized.socials} />
+      <div className="flex flex-1 flex-col">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+          <Header socials={localized.socials} />
+        </div>
+
         <HomeMain cv={localized as CvData} />
       </div>
 

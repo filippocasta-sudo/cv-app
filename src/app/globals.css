@@ -407,7 +407,6 @@
 .gradient-surface-coral-indigo .neu-interactive,
 .gradient-surface-indigo-coral .neu-interactive,
 .gradient-surface-mint-indigo .neu-interactive,
-.gradient-surface-indigo-deep .neu-interactive,
 .footer-contact-band .neu-interactive {
   background-color: transparent;
   box-shadow: none;
@@ -420,8 +419,6 @@
 .gradient-surface-indigo-coral .neu-interactive:active,
 .gradient-surface-mint-indigo .neu-interactive:hover,
 .gradient-surface-mint-indigo .neu-interactive:active,
-.gradient-surface-indigo-deep .neu-interactive:hover,
-.gradient-surface-indigo-deep .neu-interactive:active,
 .footer-contact-band .neu-interactive:hover,
 .footer-contact-band .neu-interactive:active {
   box-shadow: none;

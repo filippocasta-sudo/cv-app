@@ -77,7 +77,7 @@ function ContactForm({ email }: { email: string }) {
             required
             minLength={2}
             autoComplete="name"
-            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
+            className="w-full rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
         <label className="block">
@@ -87,7 +87,7 @@ function ContactForm({ email }: { email: string }) {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
+            className="w-full rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
           />
         </label>
       </div>
@@ -100,7 +100,7 @@ function ContactForm({ email }: { email: string }) {
           minLength={10}
           rows={4}
           placeholder={t("footer.placeholder")}
-          className="w-full resize-y rounded-xl border border-white/30 bg-white px-3 py-2.5 text-sm text-foreground outline-none transition focus:ring-2 focus:ring-white/50"
+          className="w-full resize-y rounded-xl bg-white/90 px-3 py-2.5 text-sm text-foreground shadow-neumorphic-inset outline-none transition focus:ring-2 focus:ring-white/50"
         />
       </label>
 
@@ -109,7 +109,7 @@ function ContactForm({ email }: { email: string }) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-bold text-indigo-strong transition hover:bg-white/90 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-2.5 text-sm font-bold text-indigo-strong shadow-neumorphic-sm transition hover:bg-white/90 disabled:opacity-60"
       >
         {status === "sending" ? (
           <Loader2 className="size-4 animate-spin" aria-hidden />
@@ -159,13 +159,13 @@ export function Footer({
   }
 
   return (
-    <footer id="contatti" className="relative mt-20 flex flex-1 flex-col scroll-mt-24">
+    <footer id="contatti" className="relative mt-20 flex w-full flex-1 flex-col scroll-mt-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
       />
 
-      <div className="footer-contact-band gradient-surface-indigo-deep relative flex flex-1 flex-col border-t border-white/15 py-12 sm:py-14">
+      <div className="footer-contact-band gradient-surface-indigo-coral relative flex w-full flex-1 flex-col border-t border-white/15 py-12 sm:py-14">
         <div className="relative mx-auto grid w-full max-w-6xl flex-1 gap-8 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10">
           <div>
             <div className="flex items-center gap-2">
