@@ -105,9 +105,9 @@ export function HardSkillsColumn({ groups }: { groups: SkillGroup[] }) {
         <Wrench className="size-3.5" aria-hidden />
         {formal ? t("skills.hardFormal") : t("skills.hardModern")}
       </h2>
-      <ul className="space-y-3">
+      <ul className="space-y-3 py-1">
         {groups.map((group) => (
-          <li key={`${group.id}-${formal ? "classic" : "modern"}`}>
+          <li key={`${group.id}-${formal ? "classic" : "modern"}`} className="px-0.5">
             <SkillAccordionItem group={group} accent="mint" />
           </li>
         ))}
@@ -126,9 +126,9 @@ export function SoftSkillsColumn({ groups }: { groups: SkillGroup[] }) {
         <Sparkles className="size-3.5" aria-hidden />
         {formal ? t("skills.softFormal") : t("skills.softModern")}
       </h2>
-      <ul className="space-y-3">
+      <ul className="space-y-3 py-1">
         {groups.map((group) => (
-          <li key={`${group.id}-${formal ? "classic" : "modern"}`}>
+          <li key={`${group.id}-${formal ? "classic" : "modern"}`} className="px-0.5">
             <SkillAccordionItem group={group} accent="indigo" />
           </li>
         ))}
