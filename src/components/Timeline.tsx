@@ -14,11 +14,15 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { FantaTimelineCard } from "@/components/easter-eggs/FantaTimelineCard";
+import {
+  CertificationTimelineCard,
+  certificationSortKey,
+} from "@/components/CertificationTimelineCard";
 import { Section } from "@/components/ui/Section";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
 import type { UiKey } from "@/lib/i18n/ui";
-import type { TimelineEntry, TimelineKind } from "@/lib/types";
+import type { Certification, TimelineEntry, TimelineKind } from "@/lib/types";
 
 const KIND_STYLES: Record<
   TimelineKind,
@@ -262,10 +266,12 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
 
 export function Timeline({
   entries,
+  certifications = [],
   classicOnly = false,
   birthDate,
 }: {
   entries: TimelineEntry[];
+  certifications?: Certification[];
   classicOnly?: boolean;
   birthDate?: string;
 }) {
@@ -286,14 +292,34 @@ export function Timeline({
     [ordered, filter, classic],
   );
 
+  type TimelineRow =
+    | { type: "entry"; sortKey: number; entry: TimelineEntry }
+    | { type: "cert"; sortKey: number; cert: Certification };
+
+  const timelineRows = useMemo(() => {
+    const rows: TimelineRow[] = visible.map((entry) => ({
+      type: "entry",
+      sortKey: entry.sortKey,
+      entry,
+    }));
+
+    if (filter === "all" || classic) {
+      for (const cert of certifications) {
+        rows.push({ type: "cert", sortKey: certificationSortKey(cert.year), cert });
+      }
+    }
+
+    return rows.sort((a, b) => b.sortKey - a.sortKey);
+  }, [visible, certifications, filter, classic]);
+
   const counts = useMemo(
     () => ({
-      all: ordered.length,
+      all: ordered.length + certifications.length,
       work: ordered.filter((entry) => entry.kind === "work").length,
       education: ordered.filter((entry) => entry.kind === "education").length,
       project: ordered.filter((entry) => entry.kind === "project").length,
     }),
-    [ordered],
+    [ordered, certifications.length],
   );
 
   return (
@@ -338,9 +364,13 @@ export function Timeline({
         />
         <ul className="space-y-5">
           <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((entry) => (
-              <TimelineCard key={entry.id} entry={entry} />
-            ))}
+            {timelineRows.map((row) =>
+              row.type === "entry" ? (
+                <TimelineCard key={row.entry.id} entry={row.entry} />
+              ) : (
+                <CertificationTimelineCard key={row.cert.id} cert={row.cert} />
+              ),
+            )}
           </AnimatePresence>
           {!classic && (filter === "all" || filter === "project") && <FantaTimelineCard />}
           {birthDate && <BirthDateMarker birthDate={birthDate} />}
