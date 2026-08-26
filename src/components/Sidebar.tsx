@@ -34,7 +34,7 @@ interface SidebarProps {
 const PANEL_ACCENTS = {
   hard: { icon: "text-mint", ring: "from-mint/20" },
   soft: { icon: "text-indigo", ring: "from-indigo/20" },
-  cert: { icon: "text-coral", ring: "from-coral/20" },
+  cert: { icon: "text-cert", ring: "from-cert/20" },
   info: { icon: "text-coral", ring: "from-coral/20" },
 } as const;
 
@@ -132,7 +132,7 @@ export function Sidebar({
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
                 <p className="font-display text-[15px] font-bold">{cert.name}</p>
-                <span className="shrink-0 rounded-lg bg-coral-soft px-2 py-0.5 text-xs font-bold text-coral shadow-neumorphic-inset">
+                <span className="shrink-0 rounded-lg bg-cert-soft px-2 py-0.5 text-xs font-bold text-cert-strong shadow-neumorphic-inset">
                   {cert.year}
                 </span>
               </div>
@@ -152,7 +152,7 @@ export function Sidebar({
               label={`Corsi e attestati passati (${secondaryCerts.length})`}
               openLabel="Nascondi corsi passati"
             >
-              <ul className="space-y-2.5 border-l-2 border-coral/30 pl-3">
+              <ul className="space-y-2.5 border-l-2 border-cert/30 pl-3">
                 {secondaryCerts.map((cert) => (
                   <li key={cert.id}>
                     <p className="text-sm font-semibold">{cert.name}</p>

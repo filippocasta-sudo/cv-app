@@ -297,7 +297,7 @@ export function Timeline({
       entry,
     }));
 
-    if (filter === "all" || classic) {
+    if (filter === "all" || filter === "education" || classic) {
       for (const cert of certifications) {
         rows.push({ type: "cert", sortKey: certificationSortKey(cert.year), cert });
       }
@@ -310,7 +310,8 @@ export function Timeline({
     () => ({
       all: ordered.length + certifications.length,
       work: ordered.filter((entry) => entry.kind === "work").length,
-      education: ordered.filter((entry) => entry.kind === "education").length,
+      education:
+        ordered.filter((entry) => entry.kind === "education").length + certifications.length,
       project: ordered.filter((entry) => entry.kind === "project").length,
     }),
     [ordered, certifications.length],
