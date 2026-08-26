@@ -130,8 +130,8 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
             </span>
           </div>
 
-          <h3 className="mt-2.5 text-lg leading-snug">{entry.title}</h3>
-          <p className="mt-0.5 text-sm font-semibold text-foreground-muted">
+          <h3 className="font-heading mt-2.5 text-lg leading-snug font-bold">{entry.title}</h3>
+          <p className="font-heading mt-0.5 text-sm font-semibold text-foreground-muted">
             {entry.organization}
             {entry.location && (
               <span className="font-normal text-foreground-faint"> · {entry.location}</span>
@@ -189,7 +189,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
               >
                 {entry.context.length > 0 && (
                   <div>
-                    <p className="mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
+                    <p className="font-heading mb-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       {t(isEducation ? "timeline.whatIStudied" : "timeline.whatIDid")}
                     </p>
                     <ul className="space-y-1.5">
@@ -211,7 +211,7 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
 
                 {!isEducation && entry.learned.length > 0 && (
                   <div className="rounded-2xl neu-surface-inset p-3.5">
-                    <p className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
+                    <p className="font-heading mb-1.5 inline-flex items-center gap-1.5 text-xs font-bold tracking-[0.14em] text-foreground-faint uppercase">
                       <Lightbulb className="size-3.5" aria-hidden />
                       {t("timeline.whatILearned")}
                     </p>
@@ -250,7 +250,7 @@ function BirthDateMarker({ birthDate }: { birthDate: string }) {
         <span className="mt-2.5 rounded-full bg-gradient-to-r from-coral/15 to-indigo/15 px-3.5 py-1 text-sm font-bold text-foreground tabular-nums shadow-neumorphic-inset">
           {birthDate}
         </span>
-        <span className="mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
+        <span className="font-heading mt-1 text-[11px] font-bold tracking-[0.12em] text-foreground-faint uppercase">
           {t("timeline.birthDate")}
         </span>
       </div>

@@ -55,7 +55,7 @@ export function CertificationTimelineCard({ cert }: { cert: Certification }) {
         </div>
 
         <h3
-          className={`mt-2 text-sm leading-snug font-bold sm:text-[15px] ${
+          className={`font-heading mt-2 text-sm leading-snug font-bold sm:text-[15px] ${
             cert.primary ? "text-white" : "text-foreground"
           }`}
         >

@@ -45,8 +45,8 @@ export function FantaTimelineCard() {
             </span>
           </div>
 
-          <h3 className="mt-2.5 text-lg leading-snug">{t("fanta.title")}</h3>
-          <p className="mt-0.5 text-sm font-semibold text-foreground-muted">
+          <h3 className="font-heading mt-2.5 text-lg leading-snug font-bold">{t("fanta.title")}</h3>
+          <p className="font-heading mt-0.5 text-sm font-semibold text-foreground-muted">
             {t("fanta.subtitle")}
             <span className="font-normal text-foreground-faint"> · Tregnago (VR)</span>
           </p>

@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible, Syne } from "next/font/google";
+import { Atkinson_Hyperlegible, Plus_Jakarta_Sans } from "next/font/google";
 import { ModeProvider } from "@/context/ModeContext";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-/** Titoli e sottotitoli — un solo font display con pesi 700/800. */
-const syne = Syne({
+/** Titoli e sottotitoli — geometrico e leggibile, abbina bene Atkinson. */
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-syne",
+  weight: ["600", "700", "800"],
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body className={`${syne.variable} ${atkinson.variable}`}>
+      <body className={`${plusJakarta.variable} ${atkinson.variable}`}>
         <ModeProvider>{children}</ModeProvider>
       </body>
     </html>

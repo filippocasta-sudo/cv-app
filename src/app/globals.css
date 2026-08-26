@@ -181,8 +181,8 @@
   --color-kind-cert: var(--kind-cert);
   --color-kind-cert-soft: var(--kind-cert-soft);
 
-  /* Syne → titoli e sottotitoli (h1–h6, .font-heading). Atkinson → testo corrente. */
-  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  /* Plus Jakarta Sans → titoli e sottotitoli. Atkinson Hyperlegible → testo corrente. */
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-heading);
 
