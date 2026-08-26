@@ -21,12 +21,11 @@ function AccordionPanel({
   items: Capability[];
   tone: "positive" | "negative";
 }) {
-  const { formal } = useMode();
   const { t } = useI18n();
-  const [open, setOpen] = useState(formal);
+  const [open, setOpen] = useState(false);
   const positive = tone === "positive";
   const Icon = positive ? Check : X;
-  const expanded = formal || open;
+  const expanded = open;
 
   return (
     <motion.article
@@ -39,13 +38,12 @@ function AccordionPanel({
           : "bg-gradient-to-br from-surface-muted/80 via-surface to-surface"
       }`}
     >
-      {!formal && (
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          className="no-print flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
-        >
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        className="no-print flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
+      >
           <span className="inline-flex items-center gap-2.5">
             <span
               className={`grid size-7 place-items-center rounded-xl shadow-neumorphic-sm ${
@@ -75,17 +73,14 @@ function AccordionPanel({
             <ChevronDown className="size-5 text-foreground-muted" aria-hidden />
           </motion.span>
         </button>
-      )}
 
-      {formal && (
-        <h3
-          className={`px-4 pt-4 font-display text-sm font-extrabold sm:px-5 sm:text-base ${
-            positive ? "text-mint-strong" : "text-foreground"
-          }`}
-        >
-          {title}
-        </h3>
-      )}
+      <h3
+        className={`hidden px-4 pt-4 font-display text-sm font-extrabold print:block sm:px-5 sm:text-base ${
+          positive ? "text-mint-strong" : "text-foreground"
+        }`}
+      >
+        {title}
+      </h3>
 
       <AnimatePresence initial={false}>
         {expanded && (
