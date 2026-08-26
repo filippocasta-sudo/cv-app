@@ -27,7 +27,7 @@ export function HomeMain({ cv }: { cv: CvData }) {
     <main>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Hero personal={cv.personal} />
-        <GoalsPanel goals={cv.goals} />
+        {!formal && <GoalsPanel goals={cv.goals} />}
       </div>
 
       {/* Full viewport width: hard skills | timeline + certs | soft skills */}
@@ -59,9 +59,11 @@ export function HomeMain({ cv }: { cv: CvData }) {
         </div>
       </section>
 
-      <div className="mx-auto mt-14 w-full max-w-6xl px-4 sm:px-6">
-        <CapabilitiesAccordion canDo={cv.canDo} cannotDo={cv.cannotDo} layout="grid" />
-      </div>
+      {!formal && (
+        <div className="mx-auto mt-14 w-full max-w-6xl px-4 sm:px-6">
+          <CapabilitiesAccordion canDo={cv.canDo} cannotDo={cv.cannotDo} layout="grid" />
+        </div>
+      )}
     </main>
   );
 }
