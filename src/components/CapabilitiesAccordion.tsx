@@ -80,7 +80,7 @@ function AccordionPanel({
       {formal && (
         <h3
           className={`px-4 pt-4 font-display text-sm font-extrabold sm:px-5 sm:text-base ${
-            positive ? "text-indigo-strong" : "text-foreground"
+            positive ? "text-mint-strong" : "text-foreground"
           }`}
         >
           {title}
