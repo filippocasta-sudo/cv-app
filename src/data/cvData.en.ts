@@ -416,6 +416,7 @@ export const cvDataEn: CvDataLocaleBundle = {
       organization: "Personal project",
       period: "2026",
       sortKey: 202601,
+      link: "/",
       impact:
         "Built this CV as a Next.js application with an admin panel, to update content without touching code.",
       context: [
@@ -479,26 +480,6 @@ export const cvDataEn: CvDataLocaleBundle = {
       formalSummary:
         "Volunteering on the Vivi Tregnago project (Covid-19): digital management and web platform for promotion and home delivery of local businesses.",
       tags: ["Volunteering", "Covid-19", "Civic project"],
-    },
-    {
-      id: "tl-automation",
-      kind: "project",
-      title: "AMS reporting automations",
-      organization: "Personal project applied at work",
-      period: "2023",
-      sortKey: 202301,
-      impact:
-        "Reduced monthly service reporting preparation time from half a day to a few minutes.",
-      context: [
-        "Python scripts and SQL exports to aggregate ticket data",
-        "Excel models with pivot tables and automatic data consistency checks",
-        "Standardisation of reporting format for management",
-      ],
-      learned: [
-        "Automating a report forces you to define what you are actually measuring",
-        "Time saved each month should be reinvested in analysis, not in more reports",
-      ],
-      tags: ["Python", "SQL", "Excel"],
     },
     {
       id: "tl-univr",
