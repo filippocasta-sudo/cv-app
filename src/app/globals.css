@@ -404,6 +404,16 @@
   box-shadow: none;
 }
 
+/* Skill accordions sit on tinted band backgrounds — flat border, no neumorphic halo. */
+.skill-accordion-card {
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  box-shadow: none;
+}
+
+.dark .skill-accordion-card {
+  border-color: color-mix(in srgb, var(--foreground) 14%, transparent);
+}
+
 .gradient-surface-coral-indigo .neu-interactive,
 .gradient-surface-indigo-coral .neu-interactive,
 .gradient-surface-mint-indigo .neu-interactive,

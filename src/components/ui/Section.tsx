@@ -26,7 +26,7 @@ export function Section({
             {eyebrow}
           </p>
         )}
-        <h2 className="text-2xl sm:text-3xl">{title}</h2>
+        <h2 className="text-balance text-2xl break-words sm:text-3xl">{title}</h2>
         {description && (
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-foreground-muted">
             {description}
