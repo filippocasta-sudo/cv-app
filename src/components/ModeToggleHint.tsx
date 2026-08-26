@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, type PointerEvent } from "react";
 import { useI18n } from "@/lib/i18n";
 
 export const MODE_HINT_KEY = "cv-mode-hint-seen";
@@ -54,8 +54,8 @@ export function dismissModeHintStore() {
   for (const listener of hintListeners) listener();
 }
 
-/** False on the server and after the user dismisses the first-visit hint. */
-export function useModeHintVisible(): boolean {
+/** True until the user dismisses the first-visit hint. */
+export function useModeHintFirstVisit(): boolean {
   const seen = useSyncExternalStore(subscribeHint, getHintSnapshot, getHintServerSnapshot);
   return !seen;
 }
@@ -63,9 +63,13 @@ export function useModeHintVisible(): boolean {
 export function ModeToggleHint({
   visible,
   onDismiss,
+  onPointerEnter,
+  onPointerLeave,
 }: {
   visible: boolean;
   onDismiss: () => void;
+  onPointerEnter?: () => void;
+  onPointerLeave?: (event: PointerEvent<HTMLDivElement>) => void;
 }) {
   const { t } = useI18n();
 
@@ -80,6 +84,8 @@ export function ModeToggleHint({
           role="dialog"
           aria-labelledby="mode-hint-title"
           aria-describedby="mode-hint-body"
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
           className="absolute top-[calc(100%+0.65rem)] left-0 z-50 w-[min(18.5rem,calc(100vw-2rem))]"
         >
           <div
@@ -95,7 +101,7 @@ export function ModeToggleHint({
               <button
                 type="button"
                 onClick={onDismiss}
-                aria-label={t("header.modeHintDismiss")}
+                aria-label={t("header.modeHintClose")}
                 className="neu-interactive -mr-1 -mt-1 grid size-7 shrink-0 place-items-center rounded-xl text-foreground-muted hover:text-coral"
               >
                 <X className="size-3.5" aria-hidden />
