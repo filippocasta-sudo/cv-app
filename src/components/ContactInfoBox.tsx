@@ -69,7 +69,7 @@ export function ContactInfoBox({ personal }: { personal: PersonalInfo }) {
           {personal.languages.map((language) => (
             <li key={language.name} className="flex gap-2 text-[13px]">
               <span className="text-white/90">{language.name}</span>
-              <span className="font-bold text-white">{language.level}</span>
+              <span className="font-bold text-mint-soft">{language.level}</span>
             </li>
           ))}
         </ul>

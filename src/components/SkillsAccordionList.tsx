@@ -12,19 +12,27 @@ function SkillAccordionItem({
   accent,
 }: {
   group: SkillGroup;
-  accent: "mint" | "indigo";
+  accent: "indigo" | "coral" | "mint";
 }) {
   const { formal } = useMode();
   const { t } = useI18n();
   const [open, setOpen] = useState(formal);
   const [detailsOpen, setDetailsOpen] = useState(formal);
   const expanded = open;
-  const titleClass = accent === "mint" ? "text-mint-strong" : "text-indigo-strong";
-  const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
+  const titleClass =
+    accent === "mint"
+      ? "text-mint-strong"
+      : accent === "coral"
+        ? "text-coral-strong"
+        : "text-indigo-strong";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
   const tint =
     accent === "mint"
       ? "bg-gradient-to-br from-mint-soft/60 via-surface to-surface"
-      : "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface";
+      : accent === "coral"
+        ? "bg-gradient-to-br from-coral-soft/60 via-surface to-surface"
+        : "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface";
 
   return (
     <article className={`neu-card overflow-hidden rounded-2xl ${tint}`}>

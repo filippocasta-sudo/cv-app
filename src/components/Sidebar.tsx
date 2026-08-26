@@ -34,7 +34,7 @@ interface SidebarProps {
 const PANEL_ACCENTS = {
   hard: { icon: "text-mint", ring: "from-mint/20" },
   soft: { icon: "text-indigo", ring: "from-indigo/20" },
-  cert: { icon: "text-amber", ring: "from-amber/20" },
+  cert: { icon: "text-coral", ring: "from-coral/20" },
   info: { icon: "text-coral", ring: "from-coral/20" },
 } as const;
 
@@ -71,9 +71,11 @@ function Panel({
   );
 }
 
-function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" }) {
-  const titleClass = accent === "mint" ? "text-mint" : "text-indigo";
-  const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
+function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" | "coral" }) {
+  const titleClass =
+    accent === "mint" ? "text-mint" : accent === "coral" ? "text-coral" : "text-indigo";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
 
   return (
     <ul className="space-y-3.5">
@@ -130,7 +132,7 @@ export function Sidebar({
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
                 <p className="font-display text-[15px] font-bold">{cert.name}</p>
-                <span className="shrink-0 rounded-lg bg-amber-soft px-2 py-0.5 text-xs font-bold text-amber shadow-neumorphic-inset">
+                <span className="shrink-0 rounded-lg bg-coral-soft px-2 py-0.5 text-xs font-bold text-coral shadow-neumorphic-inset">
                   {cert.year}
                 </span>
               </div>
@@ -150,7 +152,7 @@ export function Sidebar({
               label={`Corsi e attestati passati (${secondaryCerts.length})`}
               openLabel="Nascondi corsi passati"
             >
-              <ul className="space-y-2.5 border-l-2 border-amber/30 pl-3">
+              <ul className="space-y-2.5 border-l-2 border-coral/30 pl-3">
                 {secondaryCerts.map((cert) => (
                   <li key={cert.id}>
                     <p className="text-sm font-semibold">{cert.name}</p>
@@ -244,7 +246,7 @@ export function Sidebar({
               <BadgeEuro className="size-3.5" aria-hidden />
               {compensation.label}
             </p>
-            <p className="mt-1.5 font-display text-2xl font-extrabold gradient-text-mint">
+            <p className="mt-1.5 font-display text-2xl font-extrabold gradient-text-accent">
               {compensation.range}
             </p>
             <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">

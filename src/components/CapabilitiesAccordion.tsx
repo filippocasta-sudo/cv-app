@@ -50,7 +50,7 @@ function AccordionPanel({
             <span
               className={`grid size-7 place-items-center rounded-xl shadow-neumorphic-sm ${
                 positive
-                  ? "bg-gradient-to-br from-mint to-cyan text-white"
+                  ? "bg-gradient-to-br from-mint to-mint-strong text-white"
                   : "neu-surface-inset text-foreground-muted"
               }`}
             >

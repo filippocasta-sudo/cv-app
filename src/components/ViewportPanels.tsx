@@ -54,9 +54,15 @@ function TintedPanel({
   );
 }
 
-function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" }) {
-  const titleClass = accent === "mint" ? "text-mint-strong" : "text-indigo-strong";
-  const borderClass = accent === "mint" ? "border-mint/30" : "border-indigo/30";
+function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" | "coral" }) {
+  const titleClass =
+    accent === "mint"
+      ? "text-mint-strong"
+      : accent === "coral"
+        ? "text-coral-strong"
+        : "text-indigo-strong";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
 
   return (
     <>
