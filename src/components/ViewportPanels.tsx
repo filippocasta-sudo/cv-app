@@ -21,15 +21,17 @@ function TintedPanel({
 }: {
   title: string;
   icon: ReactNode;
-  tint: "indigo" | "coral";
+  tint: "mint" | "indigo" | "coral";
   children: ReactNode;
 }) {
   const tintClass = {
+    mint: "from-mint-soft/90 via-mint-soft/40 to-surface",
     indigo: "from-indigo-soft/90 via-indigo-soft/40 to-surface",
     coral: "from-coral-soft/90 via-coral-soft/40 to-surface",
   }[tint];
 
   const iconClass = {
+    mint: "text-mint",
     indigo: "text-indigo",
     coral: "text-coral",
   }[tint];
@@ -52,9 +54,15 @@ function TintedPanel({
   );
 }
 
-function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "indigo" | "coral" }) {
-  const titleClass = accent === "indigo" ? "text-indigo-strong" : "text-coral-strong";
-  const borderClass = accent === "indigo" ? "border-indigo/30" : "border-coral/30";
+function SkillPreview({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" | "coral" }) {
+  const titleClass =
+    accent === "mint"
+      ? "text-mint-strong"
+      : accent === "coral"
+        ? "text-coral-strong"
+        : "text-indigo-strong";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
 
   return (
     <>
@@ -107,9 +115,9 @@ export function ViewportPanels({ hardSkills, softSkills, goals }: ViewportPanels
       <TintedPanel
         title={formal ? "Competenze tecniche" : "Hard skills"}
         icon={<Wrench className="size-3.5" aria-hidden />}
-        tint="indigo"
+        tint="mint"
       >
-        <SkillPreview groups={hardSkills} accent="indigo" />
+        <SkillPreview groups={hardSkills} accent="mint" />
       </TintedPanel>
 
       <TintedPanel
@@ -158,7 +166,7 @@ export function ViewportPanels({ hardSkills, softSkills, goals }: ViewportPanels
                 </ul>
               </div>
               <div>
-                <p className="text-[11px] font-bold tracking-wide text-indigo uppercase">
+                <p className="text-[11px] font-bold tracking-wide text-mint uppercase">
                   Contesto ideale
                 </p>
                 <ul className="mt-1.5 space-y-1.5">

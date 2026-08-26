@@ -19,7 +19,7 @@ export function GoalsPanel({ goals }: { goals: CareerGoals }) {
       viewport={{ once: true, margin: "-40px" }}
       className="print-avoid-break scroll-mt-28 mt-5"
     >
-      <article className="neu-card gradient-surface-indigo-coral rounded-3xl p-5 sm:p-6">
+      <article className="neu-card gradient-surface-mint-indigo rounded-3xl p-5 sm:p-6">
         <h2 className="inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-white uppercase">
           <Target className="size-3.5" aria-hidden />
           {formal ? t("goals.titleFormal") : t("goals.titleModern")}

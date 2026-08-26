@@ -110,7 +110,7 @@ export function Header({ socials }: { socials: SocialLink[] }) {
                     <motion.span
                       layoutId="locale-pill"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo to-coral shadow-neumorphic-sm"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-mint to-mint-strong shadow-neumorphic-sm"
                     />
                   )}
                   <span

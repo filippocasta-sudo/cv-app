@@ -7,13 +7,14 @@ interface TooltipBadgeProps {
   icon: ReactNode;
   tooltip: string;
   label: string;
-  accent?: "coral" | "indigo";
+  accent?: "coral" | "indigo" | "mint";
   floating?: boolean;
 }
 
 const ACCENT_RING: Record<NonNullable<TooltipBadgeProps["accent"]>, string> = {
   coral: "ring-coral/30 hover:ring-coral/60",
   indigo: "ring-indigo/30 hover:ring-indigo/60",
+  mint: "ring-mint/30 hover:ring-mint/60",
 };
 
 export function TooltipBadge({

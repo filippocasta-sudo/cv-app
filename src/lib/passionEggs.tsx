@@ -2,7 +2,7 @@ import { Pizza, Shirt, Swords } from "lucide-react";
 import type { ReactNode } from "react";
 import type { UiKey } from "@/lib/i18n/ui";
 
-export type PassionEggAccent = "coral" | "indigo";
+export type PassionEggAccent = "coral" | "indigo" | "mint";
 
 export interface PassionEgg {
   icon: ReactNode;
@@ -22,10 +22,10 @@ export function getPassionEggs(t: (key: UiKey) => string): PassionEgg[] {
       floating: true,
     },
     {
-      icon: <Swords className="size-4 text-indigo" strokeWidth={2.2} />,
+      icon: <Swords className="size-4 text-mint" strokeWidth={2.2} />,
       label: t("egg.starwars.label"),
       tooltip: t("egg.starwars.tooltip"),
-      accent: "indigo",
+      accent: "mint",
       floating: false,
     },
     {

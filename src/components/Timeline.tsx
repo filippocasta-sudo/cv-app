@@ -34,10 +34,10 @@ const KIND_STYLES: Record<
   work: {
     labelKey: "timeline.kindWork",
     icon: Briefcase,
-    dot: "bg-gradient-to-br from-indigo to-indigo-strong text-white",
-    chip: "bg-indigo-soft text-indigo shadow-neumorphic-inset",
-    rail: "from-indigo/50",
-    accent: "text-indigo",
+    dot: "bg-gradient-to-br from-mint to-mint-strong text-white",
+    chip: "bg-mint-soft text-mint shadow-neumorphic-inset",
+    rail: "from-mint/50",
+    accent: "text-mint",
   },
   education: {
     labelKey: "timeline.kindEducation",
@@ -333,7 +333,7 @@ export function Timeline({
 
       <div className="relative">
         <span
-          className="absolute top-2 bottom-2 left-4 w-0.5 rounded-full bg-gradient-to-b from-coral via-indigo to-indigo-strong opacity-40 sm:left-[18px]"
+          className="absolute top-2 bottom-2 left-4 w-0.5 rounded-full bg-gradient-to-b from-coral via-indigo to-mint opacity-40 sm:left-[18px]"
           aria-hidden
         />
         <ul className="space-y-5">

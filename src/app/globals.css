@@ -15,7 +15,7 @@
   --neu-shadow-dark: #c5d0e0;
   --neu-shadow-light: #ffffff;
 
-  /* Accent palette — indigo (primary) + coral (warm highlight). */
+  /* Accent palette — indigo (primary), coral (warm), mint (detail highlights). */
   --indigo: #6c5ce7;
   --indigo-soft: #ebe8fc;
   --indigo-strong: #5546d4;
@@ -24,22 +24,23 @@
   --coral-soft: #ffe8ed;
   --coral-strong: #e84a6a;
 
-  /* Legacy aliases — keep existing Tailwind class names mapped to the two hues. */
-  --mint: var(--indigo);
-  --mint-soft: var(--indigo-soft);
-  --mint-strong: var(--indigo-strong);
+  --mint: #00d294;
+  --mint-soft: #d9faf0;
+  --mint-strong: #00a876;
+
+  /* Legacy aliases */
   --amber: var(--coral);
   --amber-soft: var(--coral-soft);
   --amber-strong: var(--coral-strong);
-  --cyan: var(--indigo-strong);
+  --cyan: var(--mint-strong);
   --magenta: var(--coral-strong);
-  --lime: var(--coral);
-  --sage: var(--indigo);
-  --sage-soft: var(--indigo-soft);
-  --sage-strong: var(--indigo-strong);
+  --lime: var(--mint);
+  --sage: var(--mint);
+  --sage-soft: var(--mint-soft);
+  --sage-strong: var(--mint-strong);
 
-  --kind-work: var(--indigo);
-  --kind-work-soft: var(--indigo-soft);
+  --kind-work: var(--mint);
+  --kind-work-soft: var(--mint-soft);
   --kind-education: var(--indigo);
   --kind-education-soft: var(--indigo-soft);
   --kind-project: var(--coral);
@@ -48,12 +49,13 @@
   --ring: var(--indigo);
 
   --gradient-cta: linear-gradient(135deg, var(--coral) 0%, var(--indigo) 100%);
-  --gradient-skill: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-strong) 100%);
+  --gradient-skill: linear-gradient(135deg, var(--mint) 0%, var(--mint-strong) 100%);
   --gradient-tech: linear-gradient(135deg, var(--indigo) 0%, var(--coral) 100%);
   --gradient-hero: linear-gradient(
     135deg,
     rgba(255, 94, 126, 0.1) 0%,
-    rgba(108, 92, 231, 0.1) 100%
+    rgba(108, 92, 231, 0.1) 55%,
+    rgba(0, 210, 148, 0.08) 100%
   );
 }
 
@@ -91,21 +93,22 @@
   --indigo-soft: #221f38;
   --indigo-strong: #a99bfa;
 
-  --mint: var(--indigo);
-  --mint-soft: var(--indigo-soft);
-  --mint-strong: var(--indigo-strong);
+  --mint: #00f0a8;
+  --mint-soft: #152a24;
+  --mint-strong: #5dffd0;
+
   --amber: var(--coral);
   --amber-soft: var(--coral-soft);
   --amber-strong: var(--coral-strong);
-  --cyan: var(--indigo-strong);
+  --cyan: var(--mint-strong);
   --magenta: var(--coral-strong);
-  --lime: var(--coral);
-  --sage: var(--indigo);
-  --sage-soft: var(--indigo-soft);
-  --sage-strong: var(--indigo-strong);
+  --lime: var(--mint);
+  --sage: var(--mint);
+  --sage-soft: var(--mint-soft);
+  --sage-strong: var(--mint-strong);
 
-  --kind-work: var(--indigo);
-  --kind-work-soft: var(--indigo-soft);
+  --kind-work: var(--mint);
+  --kind-work-soft: var(--mint-soft);
   --kind-education: var(--indigo);
   --kind-education-soft: var(--indigo-soft);
   --kind-project: var(--coral);
@@ -114,12 +117,13 @@
   --ring: var(--indigo);
 
   --gradient-cta: linear-gradient(135deg, var(--coral) 0%, var(--indigo) 100%);
-  --gradient-skill: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-strong) 100%);
+  --gradient-skill: linear-gradient(135deg, var(--mint) 0%, var(--mint-strong) 100%);
   --gradient-tech: linear-gradient(135deg, var(--indigo) 0%, var(--coral) 100%);
   --gradient-hero: linear-gradient(
     135deg,
     rgba(255, 107, 138, 0.12) 0%,
-    rgba(139, 124, 247, 0.12) 100%
+    rgba(139, 124, 247, 0.12) 55%,
+    rgba(0, 240, 168, 0.1) 100%
   );
 }
 
@@ -346,6 +350,15 @@
   color: #fff;
 }
 
+.gradient-surface-mint-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--mint) 90%, #008f63 10%) 0%,
+    color-mix(in srgb, var(--indigo) 90%, #4538b8 10%) 100%
+  );
+  color: #fff;
+}
+
 .gradient-surface-indigo-deep {
   background: linear-gradient(
     165deg,
@@ -363,6 +376,14 @@
   );
 }
 
+.dark .gradient-surface-mint-indigo {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--mint) 72%, #0f2a22 28%) 0%,
+    color-mix(in srgb, var(--indigo) 76%, #1a1638 24%) 100%
+  );
+}
+
 .dark .gradient-surface-indigo-deep {
   background: linear-gradient(
     165deg,
@@ -372,17 +393,20 @@
 }
 
 .neu-card.gradient-surface-coral-indigo,
-.neu-card.gradient-surface-indigo-coral {
+.neu-card.gradient-surface-indigo-coral,
+.neu-card.gradient-surface-mint-indigo {
   box-shadow: none;
 }
 
 .neu-card.gradient-surface-coral-indigo:hover,
-.neu-card.gradient-surface-indigo-coral:hover {
+.neu-card.gradient-surface-indigo-coral:hover,
+.neu-card.gradient-surface-mint-indigo:hover {
   box-shadow: none;
 }
 
 .gradient-surface-coral-indigo .neu-interactive,
 .gradient-surface-indigo-coral .neu-interactive,
+.gradient-surface-mint-indigo .neu-interactive,
 .gradient-surface-indigo-deep .neu-interactive,
 .footer-contact-band .neu-interactive {
   background-color: transparent;
@@ -394,6 +418,8 @@
 .gradient-surface-coral-indigo .neu-interactive:active,
 .gradient-surface-indigo-coral .neu-interactive:hover,
 .gradient-surface-indigo-coral .neu-interactive:active,
+.gradient-surface-mint-indigo .neu-interactive:hover,
+.gradient-surface-mint-indigo .neu-interactive:active,
 .gradient-surface-indigo-deep .neu-interactive:hover,
 .gradient-surface-indigo-deep .neu-interactive:active,
 .footer-contact-band .neu-interactive:hover,

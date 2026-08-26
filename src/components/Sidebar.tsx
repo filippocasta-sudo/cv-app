@@ -32,7 +32,7 @@ interface SidebarProps {
 }
 
 const PANEL_ACCENTS = {
-  hard: { icon: "text-indigo", ring: "from-indigo/20" },
+  hard: { icon: "text-mint", ring: "from-mint/20" },
   soft: { icon: "text-indigo", ring: "from-indigo/20" },
   cert: { icon: "text-coral", ring: "from-coral/20" },
   info: { icon: "text-coral", ring: "from-coral/20" },
@@ -71,9 +71,11 @@ function Panel({
   );
 }
 
-function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "indigo" | "coral" }) {
-  const titleClass = accent === "indigo" ? "text-indigo" : "text-coral";
-  const borderClass = accent === "indigo" ? "border-indigo/30" : "border-coral/30";
+function SkillList({ groups, accent }: { groups: SkillGroup[]; accent: "mint" | "indigo" | "coral" }) {
+  const titleClass =
+    accent === "mint" ? "text-mint" : accent === "coral" ? "text-coral" : "text-indigo";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
 
   return (
     <ul className="space-y-3.5">
@@ -117,7 +119,7 @@ export function Sidebar({
   return (
     <aside id="competenze" className="scroll-mt-24 space-y-5">
       <Panel icon={<Wrench className="size-4" aria-hidden />} title="Hard skills" accent="hard">
-        <SkillList groups={hardSkills} accent="indigo" />
+        <SkillList groups={hardSkills} accent="mint" />
       </Panel>
 
       <Panel icon={<Sparkles className="size-4" aria-hidden />} title="Soft skills" accent="soft">
@@ -220,7 +222,7 @@ export function Sidebar({
             {personal.languages.map((language) => (
               <li key={language.name} className="flex justify-between gap-3 text-[13px]">
                 <span>{language.name}</span>
-                <span className="font-bold text-indigo">{language.level}</span>
+                <span className="font-bold text-mint">{language.level}</span>
               </li>
             ))}
           </ul>

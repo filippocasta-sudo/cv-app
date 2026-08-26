@@ -12,19 +12,27 @@ function SkillAccordionItem({
   accent,
 }: {
   group: SkillGroup;
-  accent: "indigo" | "coral";
+  accent: "indigo" | "coral" | "mint";
 }) {
   const { formal } = useMode();
   const { t } = useI18n();
   const [open, setOpen] = useState(formal);
   const [detailsOpen, setDetailsOpen] = useState(formal);
   const expanded = open;
-  const titleClass = accent === "indigo" ? "text-indigo-strong" : "text-coral-strong";
-  const borderClass = accent === "indigo" ? "border-indigo/30" : "border-coral/30";
+  const titleClass =
+    accent === "mint"
+      ? "text-mint-strong"
+      : accent === "coral"
+        ? "text-coral-strong"
+        : "text-indigo-strong";
+  const borderClass =
+    accent === "mint" ? "border-mint/30" : accent === "coral" ? "border-coral/30" : "border-indigo/30";
   const tint =
-    accent === "indigo"
-      ? "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface"
-      : "bg-gradient-to-br from-coral-soft/60 via-surface to-surface";
+    accent === "mint"
+      ? "bg-gradient-to-br from-mint-soft/60 via-surface to-surface"
+      : accent === "coral"
+        ? "bg-gradient-to-br from-coral-soft/60 via-surface to-surface"
+        : "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface";
 
   return (
     <article className={`neu-card overflow-hidden rounded-2xl ${tint}`}>
@@ -107,14 +115,14 @@ export function SkillsAccordionList({ hardSkills, softSkills }: SkillsAccordionL
   return (
     <section id="competenze" aria-label={t("skills.aria")} className="scroll-mt-28 mt-5 grid gap-6 lg:grid-cols-2 lg:gap-8">
       <div>
-        <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
+        <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
           <Wrench className="size-3.5" aria-hidden />
           {formal ? t("skills.hardFormal") : t("skills.hardModern")}
         </h2>
         <ul className="space-y-3">
           {hardSkills.map((group) => (
             <li key={`${group.id}-${formal ? "classic" : "modern"}`}>
-              <SkillAccordionItem group={group} accent="indigo" />
+              <SkillAccordionItem group={group} accent="mint" />
             </li>
           ))}
         </ul>

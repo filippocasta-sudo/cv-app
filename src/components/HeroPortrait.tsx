@@ -55,7 +55,7 @@ export function HeroPortrait({
         animate={{ rotate: [0, 360] }}
         transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
       >
-        <div className="absolute size-[90%] rounded-[40%_60%_55%_45%] bg-gradient-to-br from-indigo/40 via-indigo-strong/25 to-coral/30 blur-[1px]" />
+        <div className="absolute size-[90%] rounded-[40%_60%_55%_45%] bg-gradient-to-br from-indigo/35 via-mint/25 to-coral/25 blur-[1px]" />
       </motion.div>
 
       <motion.div
@@ -71,7 +71,7 @@ export function HeroPortrait({
         aria-hidden
         animate={{ scale: [1, 1.05, 1], y: [0, -6, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute size-[70%] rounded-[48%_52%_58%_42%] bg-gradient-to-b from-indigo/20 to-coral/15"
+        className="absolute size-[70%] rounded-[48%_52%_58%_42%] bg-gradient-to-b from-mint/20 to-indigo/15"
       />
 
       <motion.div
