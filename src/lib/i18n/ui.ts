@@ -12,7 +12,11 @@ export const UI = {
     "header.modeHintInstitutional":
       "è la versione classica del CV con tutte le mie esperienze didattiche e professionali.",
     "header.modeHintDismiss": "Ho capito",
+    "header.modeHintClose": "Chiudi spiegazione",
+    "header.modeHintTrigger": "Informazioni su Diretto e Istituzionale",
     "header.language": "Lingua del sito",
+    "header.localeIt": "Italiano",
+    "header.localeEn": "English",
     "header.contactsNav": "Profili e contatti",
     "header.print": "Stampa o esporta in PDF",
     "header.printSr": "Stampa il CV",
@@ -129,7 +133,11 @@ export const UI = {
     "header.modeHintInstitutional":
       "is the classic CV with all my educational and professional experience.",
     "header.modeHintDismiss": "Got it",
+    "header.modeHintClose": "Close explanation",
+    "header.modeHintTrigger": "About Direct and Institutional modes",
     "header.language": "Site language",
+    "header.localeIt": "Italian",
+    "header.localeEn": "English",
     "header.contactsNav": "Profiles and contacts",
     "header.print": "Print or export as PDF",
     "header.printSr": "Print CV",
