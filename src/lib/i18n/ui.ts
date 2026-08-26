@@ -113,6 +113,7 @@ export const UI = {
       "Gestisco regolamenti, aste e litigi post-giornata con la stessa energia di un change advisory board — ma con più emoticon.",
     "fanta.collapse": "Chiudi lore",
     "fanta.expand": "Sblocca dettagli tattici",
+    "fanta.linkLabel": "Instagram",
     "fanta.lore":
       "League Commissioner & Coach a tempo perso — fondata nel 2009, ancora in piedi nonostante VAR immaginario e transfer market discutibili.",
 
@@ -234,6 +235,7 @@ export const UI = {
       "I manage rules, auctions and post-match drama with the same energy as a change advisory board — but with more emoji.",
     "fanta.collapse": "Close lore",
     "fanta.expand": "Unlock tactical details",
+    "fanta.linkLabel": "Instagram",
     "fanta.lore":
       "Part-time League Commissioner & Coach — founded in 2009, still standing despite imaginary VAR and questionable transfer windows.",
 
