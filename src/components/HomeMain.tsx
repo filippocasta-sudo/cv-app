@@ -12,7 +12,7 @@ export function HomeMain({ cv }: { cv: CvData }) {
   const { formal } = useMode();
 
   return (
-    <main className="flex-1">
+    <main>
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Hero personal={cv.personal} />
         {!formal && <GoalsPanel goals={cv.goals} />}

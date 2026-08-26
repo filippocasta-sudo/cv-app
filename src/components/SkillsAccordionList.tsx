@@ -27,7 +27,7 @@ function SkillAccordionItem({
       : "bg-gradient-to-br from-indigo-soft/60 via-surface to-surface";
 
   return (
-    <article className={`skill-accordion-card overflow-hidden rounded-2xl ${tint}`}>
+    <article className={`neu-card overflow-hidden rounded-2xl ${tint}`}>
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}

@@ -404,21 +404,9 @@
   box-shadow: none;
 }
 
-/* Skill accordions sit on tinted band backgrounds — flat border, no neumorphic halo. */
-.skill-accordion-card {
-  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
-  box-shadow: none;
-}
-
-.dark .skill-accordion-card {
-  border-color: color-mix(in srgb, var(--foreground) 14%, transparent);
-}
-
 .gradient-surface-coral-indigo .neu-interactive,
 .gradient-surface-indigo-coral .neu-interactive,
-.gradient-surface-mint-indigo .neu-interactive,
-.gradient-surface-indigo-deep .neu-interactive,
-.footer-contact-band .neu-interactive {
+.gradient-surface-mint-indigo .neu-interactive {
   background-color: transparent;
   box-shadow: none;
   transform: none;
@@ -429,11 +417,7 @@
 .gradient-surface-indigo-coral .neu-interactive:hover,
 .gradient-surface-indigo-coral .neu-interactive:active,
 .gradient-surface-mint-indigo .neu-interactive:hover,
-.gradient-surface-mint-indigo .neu-interactive:active,
-.gradient-surface-indigo-deep .neu-interactive:hover,
-.gradient-surface-indigo-deep .neu-interactive:active,
-.footer-contact-band .neu-interactive:hover,
-.footer-contact-band .neu-interactive:active {
+.gradient-surface-mint-indigo .neu-interactive:active {
   box-shadow: none;
   transform: none;
 }
