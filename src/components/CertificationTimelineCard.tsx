@@ -22,7 +22,7 @@ export function CertificationTimelineCard({ cert }: { cert: Certification }) {
       className="print-avoid-break relative pl-11 sm:pl-14"
     >
       <span
-        className="absolute left-0 grid size-7 place-items-center rounded-xl bg-gradient-to-br from-coral to-coral-strong text-white shadow-neumorphic-sm ring-4 ring-background sm:size-8"
+        className="absolute left-0 grid size-7 place-items-center rounded-xl bg-gradient-to-br from-cert to-cert-strong text-white shadow-neumorphic-sm ring-4 ring-background sm:size-8"
         aria-hidden
       >
         <Award className="size-3.5" />
@@ -31,14 +31,14 @@ export function CertificationTimelineCard({ cert }: { cert: Certification }) {
       <article
         className={`overflow-hidden rounded-2xl p-3.5 sm:p-4 ${
           cert.primary
-            ? "gradient-surface-indigo-coral shadow-neumorphic-sm"
-            : "bg-gradient-to-br from-indigo-soft/80 via-surface to-coral-soft/50 shadow-neumorphic-sm"
+            ? "gradient-surface-cert-indigo shadow-neumorphic-sm"
+            : "bg-gradient-to-br from-cert-soft/90 via-surface to-indigo-soft/40 shadow-neumorphic-sm"
         }`}
       >
         <div className="flex flex-wrap items-start justify-between gap-2">
           <span
             className={`rounded-full px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase ${
-              cert.primary ? "bg-white/20 text-white" : "bg-coral-soft text-coral"
+              cert.primary ? "bg-white/20 text-white" : "bg-cert-soft text-cert-strong"
             }`}
           >
             {t("timeline.kindCert")}
