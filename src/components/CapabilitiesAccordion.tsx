@@ -44,38 +44,38 @@ function AccordionPanel({
         aria-expanded={open}
         className="no-print flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left sm:px-5"
       >
-          <span className="inline-flex items-center gap-2.5">
+        <span className="inline-flex items-center gap-2.5">
+          <span
+            className={`grid size-7 place-items-center rounded-xl shadow-neumorphic-sm ${
+              positive
+                ? "bg-gradient-to-br from-mint to-mint-strong text-white"
+                : "neu-surface-inset text-foreground-muted"
+            }`}
+          >
+            <Icon className="size-3.5" strokeWidth={3} aria-hidden />
+          </span>
+          <span>
             <span
-              className={`grid size-7 place-items-center rounded-xl shadow-neumorphic-sm ${
-                positive
-                  ? "bg-gradient-to-br from-mint to-mint-strong text-white"
-                  : "neu-surface-inset text-foreground-muted"
+              className={`block font-heading text-sm font-extrabold sm:text-base ${
+                positive ? "text-mint-strong" : "text-foreground"
               }`}
             >
-              <Icon className="size-3.5" strokeWidth={3} aria-hidden />
+              {title}
             </span>
-            <span>
-              <span
-                className={`block font-display text-sm font-extrabold sm:text-base ${
-                  positive ? "text-mint-strong" : "text-foreground"
-                }`}
-              >
-                {title}
-              </span>
-              <span className="text-xs text-foreground-faint">
-                {items.length}{" "}
-                {items.length === 1 ? t("capabilities.point") : t("capabilities.points")}
-                {!open && t("capabilities.clickDetails")}
-              </span>
+            <span className="text-xs text-foreground-faint">
+              {items.length}{" "}
+              {items.length === 1 ? t("capabilities.point") : t("capabilities.points")}
+              {!open && t("capabilities.clickDetails")}
             </span>
           </span>
-          <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronDown className="size-5 text-foreground-muted" aria-hidden />
-          </motion.span>
-        </button>
+        </span>
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="size-5 text-foreground-muted" aria-hidden />
+        </motion.span>
+      </button>
 
       <h3
-        className={`hidden px-4 pt-4 font-display text-sm font-extrabold print:block sm:px-5 sm:text-base ${
+        className={`hidden px-4 pt-4 font-heading text-sm font-extrabold print:block sm:px-5 sm:text-base ${
           positive ? "text-mint-strong" : "text-foreground"
         }`}
       >
@@ -100,7 +100,7 @@ function AccordionPanel({
                   transition={{ delay: index * 0.03 }}
                   className="rounded-2xl neu-surface-inset p-3"
                 >
-                  <p className="font-display text-[14px] font-bold">{item.label}</p>
+                  <p className="font-heading text-[14px] font-bold">{item.label}</p>
                   <p className="mt-1 text-[12px] leading-relaxed text-foreground-muted sm:text-[13px]">
                     {item.detail}
                   </p>

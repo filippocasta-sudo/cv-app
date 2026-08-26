@@ -44,7 +44,7 @@ export function CertificationTimelineCard({ cert }: { cert: Certification }) {
             {t("timeline.kindCert")}
           </span>
           <span
-            className={`shrink-0 rounded-lg px-2 py-0.5 text-xs font-extrabold tabular-nums ${
+            className={`shrink-0 rounded-lg px-2 py-0.5 text-xs font-bold tabular-nums ${
               cert.primary
                 ? "bg-white/20 text-white"
                 : "bg-surface/80 text-foreground shadow-neumorphic-inset"
@@ -55,7 +55,7 @@ export function CertificationTimelineCard({ cert }: { cert: Certification }) {
         </div>
 
         <h3
-          className={`mt-2 text-sm leading-snug font-bold sm:text-[15px] ${
+          className={`font-heading mt-2 text-sm leading-snug font-bold sm:text-[15px] ${
             cert.primary ? "text-white" : "text-foreground"
           }`}
         >

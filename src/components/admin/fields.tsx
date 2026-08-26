@@ -200,7 +200,7 @@ export function EditorCard({
     <div className="rounded-xl border-2 border-[var(--admin-border)] bg-surface p-4 shadow-sm">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <p className="font-display text-sm font-bold">{title || "Senza titolo"}</p>
+          <p className="font-heading text-sm font-bold">{title || "Senza titolo"}</p>
           {subtitle && <p className="text-xs text-foreground-faint">{subtitle}</p>}
         </div>
         {onRemove && (

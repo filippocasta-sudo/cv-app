@@ -95,7 +95,7 @@ export function ModeToggleHint({
 
           <div className="relative rounded-2xl border border-indigo/10 bg-surface p-3.5 shadow-neumorphic dark:border-indigo/20">
             <div className="flex items-start justify-between gap-2">
-              <p id="mode-hint-title" className="text-xs font-extrabold tracking-wide text-indigo uppercase">
+              <p id="mode-hint-title" className="font-heading text-xs font-extrabold tracking-wide text-indigo uppercase">
                 {t("header.modeHintTitle")}
               </p>
               <button

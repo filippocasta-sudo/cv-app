@@ -33,7 +33,7 @@ export function ProfileDetails({ certifications }: ProfileDetailsProps) {
           {primaryCerts.map((cert) => (
             <li key={cert.id} className="print-avoid-break">
               <div className="flex items-baseline justify-between gap-3">
-                <p className="font-display text-[15px] font-bold">{cert.name}</p>
+                <p className="font-heading text-[15px] font-bold">{cert.name}</p>
                 <span className="shrink-0 rounded-lg bg-cert-soft px-2 py-0.5 text-xs font-bold text-cert-strong shadow-neumorphic-inset">
                   {cert.year}
                 </span>

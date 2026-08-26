@@ -14,7 +14,7 @@ contenuti.
 | framer-motion | Micro-animazioni di accordion e transizioni di stato |
 | lucide-react | Set di icone |
 
-Tipografia: **Syne** per titoli e headings, **Atkinson Hyperlegible** per i testi.
+Tipografia: **Plus Jakarta Sans** (600/700/800) per titoli e sottotitoli, **Atkinson Hyperlegible** (400/700) per tutti i testi correnti.
 
 ## Avvio in locale
 

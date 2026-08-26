@@ -160,7 +160,7 @@ export function AdminPanel({
             CV pubblico
           </Link>
 
-          <span className="font-display text-sm font-extrabold">Pannello admin</span>
+          <span className="font-heading text-sm font-extrabold">Pannello admin</span>
 
           <div
             role="group"

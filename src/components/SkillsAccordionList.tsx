@@ -32,13 +32,13 @@ function SkillAccordionItem({
         aria-expanded={open}
         className="no-print flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
       >
-        <span className={`font-display text-sm font-bold ${titleClass}`}>{group.name}</span>
+        <span className={`font-heading text-sm font-bold ${titleClass}`}>{group.name}</span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <ChevronDown className="size-4 text-foreground-muted" aria-hidden />
         </motion.span>
       </button>
 
-      <h3 className={`hidden px-4 pt-4 font-display text-sm font-bold print:block ${titleClass}`}>
+      <h3 className={`hidden px-4 pt-4 font-heading text-sm font-bold print:block ${titleClass}`}>
         {group.name}
       </h3>
 
@@ -99,7 +99,7 @@ export function HardSkillsColumn({ groups }: { groups: SkillGroup[] }) {
 
   return (
     <aside id="competenze-hard" aria-label={t("skills.hardModern")} className="scroll-mt-28">
-      <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
+      <h2 className="font-heading mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
         <Wrench className="size-3.5" aria-hidden />
         {formal ? t("skills.hardFormal") : t("skills.hardModern")}
       </h2>
@@ -120,7 +120,7 @@ export function SoftSkillsColumn({ groups }: { groups: SkillGroup[] }) {
 
   return (
     <aside id="competenze-soft" aria-label={t("skills.softModern")} className="scroll-mt-28">
-      <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
+      <h2 className="font-heading mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
         <Sparkles className="size-3.5" aria-hidden />
         {formal ? t("skills.softFormal") : t("skills.softModern")}
       </h2>

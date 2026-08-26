@@ -181,14 +181,25 @@
   --color-kind-cert: var(--kind-cert);
   --color-kind-cert-soft: var(--kind-cert-soft);
 
-  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  /* Plus Jakarta Sans → titoli e sottotitoli. Atkinson Hyperlegible → testo corrente. */
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading);
 
   --shadow-neumorphic: 8px 8px 16px var(--neu-shadow-dark), -8px -8px 16px var(--neu-shadow-light);
   --shadow-neumorphic-sm: 4px 4px 10px var(--neu-shadow-dark), -4px -4px 10px var(--neu-shadow-light);
   --shadow-neumorphic-lg: 12px 12px 24px var(--neu-shadow-dark), -12px -12px 24px var(--neu-shadow-light);
   --shadow-neumorphic-inset: inset 6px 6px 12px var(--neu-shadow-dark), inset -6px -6px 12px var(--neu-shadow-light);
   --shadow-neumorphic-pressed: inset 4px 4px 8px var(--neu-shadow-dark), inset -4px -4px 8px var(--neu-shadow-light);
+}
+
+@utility font-heading {
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+@utility font-body {
+  font-family: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
 }
 
 @utility shadow-neumorphic {
@@ -276,7 +287,7 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-body);
+    font-family: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -287,9 +298,9 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   :focus-visible {

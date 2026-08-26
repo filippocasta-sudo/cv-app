@@ -58,7 +58,7 @@ export function Hero({ personal }: { personal: PersonalInfo }) {
 
           <ContactInfoBox personal={personal} />
 
-          <p className="mt-4 font-display text-base font-bold gradient-text-accent sm:text-lg">
+          <p className="mt-4 font-heading text-base font-bold gradient-text-accent sm:text-lg">
             {personal.roles.join(" · ")}
           </p>
         </motion.div>
