@@ -2,12 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Mail, Moon, Printer, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
 import { LinkedInIcon } from "@/components/ui/icons";
 import {
   ModeToggleHint,
-  persistModeHintSeen,
-  readModeHintSeen,
+  dismissModeHintStore,
+  useModeHintVisible,
 } from "@/components/ModeToggleHint";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
@@ -34,15 +33,10 @@ function socialIcon(label: string) {
 export function Header({ socials }: { socials: SocialLink[] }) {
   const { theme, toggleTheme, formal, toggleFormal, locale, setLocale } = useMode();
   const { t } = useI18n();
-  const [modeHintVisible, setModeHintVisible] = useState(false);
-
-  useEffect(() => {
-    if (!readModeHintSeen()) setModeHintVisible(true);
-  }, []);
+  const modeHintVisible = useModeHintVisible();
 
   function dismissModeHint() {
-    persistModeHintSeen();
-    setModeHintVisible(false);
+    dismissModeHintStore();
   }
 
   return (

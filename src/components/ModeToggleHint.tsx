@@ -2,7 +2,63 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useSyncExternalStore } from "react";
 import { useI18n } from "@/lib/i18n";
+
+export const MODE_HINT_KEY = "cv-mode-hint-seen";
+
+export function readModeHintSeen(): boolean {
+  try {
+    return window.localStorage.getItem(MODE_HINT_KEY) === "true";
+  } catch {
+    return false;
+  }
+}
+
+export function persistModeHintSeen() {
+  try {
+    window.localStorage.setItem(MODE_HINT_KEY, "true");
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+let hintSeen = false;
+let hintHydrated = false;
+const hintListeners = new Set<() => void>();
+
+function ensureHintHydrated() {
+  if (hintHydrated) return;
+  hintHydrated = true;
+  hintSeen = readModeHintSeen();
+}
+
+function subscribeHint(listener: () => void) {
+  ensureHintHydrated();
+  hintListeners.add(listener);
+  return () => hintListeners.delete(listener);
+}
+
+function getHintSnapshot(): boolean {
+  ensureHintHydrated();
+  return hintSeen;
+}
+
+function getHintServerSnapshot(): boolean {
+  return true;
+}
+
+export function dismissModeHintStore() {
+  persistModeHintSeen();
+  hintSeen = true;
+  for (const listener of hintListeners) listener();
+}
+
+/** False on the server and after the user dismisses the first-visit hint. */
+export function useModeHintVisible(): boolean {
+  const seen = useSyncExternalStore(subscribeHint, getHintSnapshot, getHintServerSnapshot);
+  return !seen;
+}
 
 export function ModeToggleHint({
   visible,
@@ -69,22 +125,4 @@ export function ModeToggleHint({
       )}
     </AnimatePresence>
   );
-}
-
-export const MODE_HINT_KEY = "cv-mode-hint-seen";
-
-export function readModeHintSeen(): boolean {
-  try {
-    return window.localStorage.getItem(MODE_HINT_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
-
-export function persistModeHintSeen() {
-  try {
-    window.localStorage.setItem(MODE_HINT_KEY, "true");
-  } catch {
-    /* storage unavailable */
-  }
 }
