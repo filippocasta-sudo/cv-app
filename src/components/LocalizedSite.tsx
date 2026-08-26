@@ -17,7 +17,7 @@ export function LocalizedSite({ cv }: { cv: CvData }) {
     <div className="relative z-10 flex min-h-dvh flex-col">
       {formal && <AtsPrintCv cv={localized as CvData} />}
 
-      <div className={formal ? "formal-screen flex flex-1 flex-col pb-24" : "flex flex-1 flex-col"}>
+      <div className={formal ? "formal-screen flex flex-1 flex-col" : "flex flex-1 flex-col"}>
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
           <Header socials={localized.socials} />
         </div>
