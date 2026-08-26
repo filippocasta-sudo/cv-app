@@ -101,7 +101,7 @@ export function HardSkillsColumn({ groups }: { groups: SkillGroup[] }) {
 
   return (
     <aside id="competenze-hard" aria-label={t("skills.hardModern")} className="scroll-mt-28">
-      <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
+      <h2 className="font-heading mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-mint uppercase">
         <Wrench className="size-3.5" aria-hidden />
         {formal ? t("skills.hardFormal") : t("skills.hardModern")}
       </h2>
@@ -122,7 +122,7 @@ export function SoftSkillsColumn({ groups }: { groups: SkillGroup[] }) {
 
   return (
     <aside id="competenze-soft" aria-label={t("skills.softModern")} className="scroll-mt-28">
-      <h2 className="mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
+      <h2 className="font-heading mb-3 inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.16em] text-indigo uppercase">
         <Sparkles className="size-3.5" aria-hidden />
         {formal ? t("skills.softFormal") : t("skills.softModern")}
       </h2>

@@ -56,11 +56,15 @@ const themeBootstrap = `(function(){try{var s=localStorage.getItem('cv-theme');v
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it" suppressHydrationWarning>
+    <html
+      lang="it"
+      className={`${plusJakarta.variable} ${atkinson.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body className={`${plusJakarta.variable} ${atkinson.variable}`}>
+      <body className="font-body antialiased">
         <ModeProvider>{children}</ModeProvider>
       </body>
     </html>
