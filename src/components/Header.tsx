@@ -3,6 +3,11 @@
 import { motion } from "framer-motion";
 import { Mail, Moon, Printer, Sun } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/icons";
+import {
+  ModeToggleHint,
+  dismissModeHintStore,
+  useModeHintVisible,
+} from "@/components/ModeToggleHint";
 import { useMode } from "@/context/ModeContext";
 import { useI18n } from "@/lib/i18n";
 import type { SocialLink } from "@/lib/types";
@@ -28,6 +33,11 @@ function socialIcon(label: string) {
 export function Header({ socials }: { socials: SocialLink[] }) {
   const { theme, toggleTheme, formal, toggleFormal, locale, setLocale } = useMode();
   const { t } = useI18n();
+  const modeHintVisible = useModeHintVisible();
+
+  function dismissModeHint() {
+    dismissModeHintStore();
+  }
 
   return (
     <header className="no-print sticky top-3 z-50">
@@ -38,39 +48,44 @@ export function Header({ socials }: { socials: SocialLink[] }) {
         className="neu-card flex flex-wrap items-center justify-between gap-3 rounded-3xl px-3 py-2.5 sm:px-4 sm:py-3"
       >
         <div className="flex flex-wrap items-center gap-2">
-          <div
-            role="group"
-            aria-label={t("header.presentationStyle")}
-            className="flex rounded-2xl p-1 shadow-neumorphic-inset"
-          >
-            {MODES.map((mode) => {
-              const active = (mode.key === "formal") === formal;
-              return (
-                <button
-                  key={mode.key}
-                  type="button"
-                  onClick={() => {
-                    if (!active) toggleFormal();
-                  }}
-                  aria-pressed={active}
-                  title={t(mode.labelKey)}
-                  className="relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition sm:px-3 sm:text-[13px]"
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="mode-pill"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-coral to-indigo shadow-neumorphic-sm"
-                    />
-                  )}
-                  <span
-                    className={`relative z-10 ${active ? "text-white" : "text-foreground-muted hover:text-foreground"}`}
+          <div className="relative">
+            <div
+              role="group"
+              aria-label={t("header.presentationStyle")}
+              className="flex rounded-2xl p-1 shadow-neumorphic-inset"
+            >
+              {MODES.map((mode) => {
+                const active = (mode.key === "formal") === formal;
+                return (
+                  <button
+                    key={mode.key}
+                    type="button"
+                    onClick={() => {
+                      dismissModeHint();
+                      if (!active) toggleFormal();
+                    }}
+                    aria-pressed={active}
+                    title={t(mode.labelKey)}
+                    className="relative rounded-xl px-2.5 py-1.5 text-xs font-semibold transition sm:px-3 sm:text-[13px]"
                   >
-                    {t(mode.labelKey)}
-                  </span>
-                </button>
-              );
-            })}
+                    {active && (
+                      <motion.span
+                        layoutId="mode-pill"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-coral to-indigo shadow-neumorphic-sm"
+                      />
+                    )}
+                    <span
+                      className={`relative z-10 ${active ? "text-white" : "text-foreground-muted hover:text-foreground"}`}
+                    >
+                      {t(mode.labelKey)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <ModeToggleHint visible={modeHintVisible} onDismiss={dismissModeHint} />
           </div>
 
           <div

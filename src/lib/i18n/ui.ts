@@ -4,9 +4,14 @@ export type UiKey = keyof (typeof UI)["it"];
 
 export const UI = {
   it: {
-    "header.modern": "Moderno",
-    "header.classic": "Classico",
+    "header.modern": "Diretto",
+    "header.classic": "Istituzionale",
     "header.presentationStyle": "Stile di presentazione del CV",
+    "header.modeHintTitle": "Due modi di leggermi",
+    "header.modeHintDirect": "è la versione più genuina e racconta di me.",
+    "header.modeHintInstitutional":
+      "è la versione classica del CV con tutte le mie esperienze didattiche e professionali.",
+    "header.modeHintDismiss": "Ho capito",
     "header.language": "Lingua del sito",
     "header.contactsNav": "Profili e contatti",
     "header.print": "Stampa o esporta in PDF",
@@ -116,9 +121,14 @@ export const UI = {
     "egg.pizza.tooltip": "Forno a legna & ottimizzazione processi sotto stress.",
   },
   en: {
-    "header.modern": "Modern",
-    "header.classic": "Classic",
+    "header.modern": "Direct",
+    "header.classic": "Institutional",
     "header.presentationStyle": "CV presentation style",
+    "header.modeHintTitle": "Two ways to read me",
+    "header.modeHintDirect": "is the more genuine version that tells my story.",
+    "header.modeHintInstitutional":
+      "is the classic CV with all my educational and professional experience.",
+    "header.modeHintDismiss": "Got it",
     "header.language": "Site language",
     "header.contactsNav": "Profiles and contacts",
     "header.print": "Print or export as PDF",

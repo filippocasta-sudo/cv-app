@@ -102,14 +102,14 @@ export function PersonalEditor({
             label="Introduzione schietta"
             value={personal.intro}
             rows={6}
-            placeholder="Testo completo visibile in homepage (versione Moderno). Puoi usare paragrafi separati da una riga vuota."
+            placeholder="Testo completo visibile in homepage (versione Diretto). Puoi usare paragrafi separati da una riga vuota."
             onChange={(intro) => patch({ intro })}
           />
           <TextAreaField
             label="Introduzione per CV formale"
             value={personal.formalIntro}
             rows={6}
-            placeholder="Testo completo visibile in homepage (versione Classico)."
+            placeholder="Testo completo visibile in homepage (versione Istituzionale)."
             onChange={(formalIntro) => patch({ formalIntro })}
           />
         </div>
